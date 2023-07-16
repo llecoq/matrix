@@ -5,7 +5,7 @@ An introduction to Linear Algebra (in Rust)
 
 ### Prerequisites :
 - [ ] Rust Book: Better understanding of Rust libraries / tree structure ?
-- [ ] Should it be test driven ?
+- [ ] Should it be test driven ? The subject seems to be asking for a main function to test it.
 - [ ] Understanding Rust traits
 - [ ] Better understanding of Matrices / Maths
 
