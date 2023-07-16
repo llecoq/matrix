@@ -11,6 +11,7 @@ An introduction to Linear Algebra (in Rust)
 
 ### Let's do it !
 - [ ] Choosing and building a clean tree structure
+- [ ] Define Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
 
 - [ ] Exercise 00 - Add, Subtract and Scale
 - [ ] Exercise 01 - Linear combination
