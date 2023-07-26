@@ -7,13 +7,6 @@ An introduction to Linear Algebra (in Rust)
 - [x] Rust Book: Better understanding of Rust libraries / tree structure ?
 
 matrix
-|-- src
-    |__ bin
-     |__ ex00.rs
-     |__ ex01.rs
-     |__ [...]
-
-matrix
 └── src
    ├── bin
    |    ├── ex00.rs 
