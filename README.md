@@ -4,8 +4,31 @@ An introduction to Linear Algebra (in Rust)
 ## Task list
 
 ### Prerequisites :
-- [ ] Rust Book: Better understanding of Rust libraries / tree structure ?
-- [ ] Should it be test driven ? The subject seems to be asking for a main function to test it.
+- [x] Rust Book: Better understanding of Rust libraries / tree structure ?
+
+matrix
+|-- src
+    |__ bin
+     |__ ex00.rs
+     |__ ex01.rs
+     |__ [...]
+
+matrix
+└── src
+   ├── bin
+   |    ├── ex00.rs 
+   │    ├── ex01.rs
+   │    └── [...]   // binaries files for testing 
+   ├── lib.rs
+   ├── add_sub_scale.rs
+   ├── linear_combination.rs
+   ├── linear_interpolation
+   │    └── [...]   // submodules if needed
+   ├── linear_interpolation.rs
+   └── [...]
+
+
+- [ ] Test driven in a main
 - [ ] Understanding Rust traits
 - [ ] Better understanding of Matrices / Maths
 
