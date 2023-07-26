@@ -4,7 +4,9 @@ An introduction to Linear Algebra (in Rust)
 ## Task list
 
 ### Prerequisites :
+- [ ] Building a notion
 - [x] Rust Book: Better understanding of Rust libraries / tree structure ?
+- [x] Choosing and building a clean tree structure
 
 matrix
 └── src
@@ -16,17 +18,17 @@ matrix
    ├── add_sub_scale.rs
    ├── linear_combination.rs
    ├── linear_interpolation
+   │    ├── submodule.rs
    │    └── [...]   // submodules if needed
    ├── linear_interpolation.rs
    └── [...]
 
 
-- [ ] Test driven in a main
-- [ ] Understanding Rust traits
-- [ ] Better understanding of Matrices / Maths
+- [ ] Test driven ? (Rust book)
+- [ ] Understanding Rust traits (Rust book + rustlings)
+- [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
-- [ ] Choosing and building a clean tree structure
 - [ ] Define Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
 
 - [ ] Exercise 00 - Add, Subtract and Scale
