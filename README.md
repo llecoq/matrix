@@ -8,6 +8,7 @@ An introduction to Linear Algebra (in Rust)
 - [x] Rust Book: Better understanding of Rust libraries / tree structure ?
 - [x] Choosing and building a clean tree structure
 
+```
 matrix
 └── src
    ├── bin
@@ -22,7 +23,7 @@ matrix
    │    └── [...]   // submodules if needed
    ├── linear_interpolation.rs
    └── [...]
-
+```
 
 - [ ] Test driven ? (Rust book)
 - [ ] Understanding Rust traits (Rust book + rustlings)
