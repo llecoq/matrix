@@ -1,3 +1,5 @@
+use crate::vector::Vector;
+
 pub struct Matrix<K> {
     vectors: Vec<Vector<K>>
 }

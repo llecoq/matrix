@@ -1,5 +1,5 @@
-use crate::Matrix;
-use crate::Vector;
+use crate::matrix::Matrix;
+use crate::vector::Vector;
 use crate::AddSubScl;
 
 /*
