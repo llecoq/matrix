@@ -2,8 +2,21 @@
 pub struct Matrix<K> {
     // 
 }
+
+impl Matrix<K> {
+    // fn get_shape {}
+    // print_matrix {}
+    // reshape_into_vector {}
+}
+
 pub struct Vector<K> {
     //
+}
+
+impl Vector<K> {
+    // fn get_size {}
+    // print_vector {}
+    // reshape_into_matrix {}
 }
 
 //---------------------------- TRAITS ?
