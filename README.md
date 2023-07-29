@@ -30,7 +30,7 @@ matrix
 - [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
-- [ ] Define Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
+- [x] Define Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
 
 - [ ] Exercise 00 - Add, Subtract and Scale
 - [ ] Exercise 01 - Linear combination
