@@ -1,8 +1,11 @@
-//---------------------------- TYPES
+/*
+** ------------------------------------------------------------ TYPES
+*/
 pub struct Matrix<K> {
     // 
 }
 
+//-------------------- Utility functions
 impl Matrix<K> {
     // fn get_shape {}
     // print_matrix {}
@@ -13,18 +16,25 @@ pub struct Vector<K> {
     //
 }
 
+//-------------------- Utility functions
 impl Vector<K> {
     // fn get_size {}
     // print_vector {}
     // reshape_into_matrix {}
 }
 
-//---------------------------- TRAITS ?
-// pub trait Add_sub_scl {
-//     fn add(&mut self, v: &Vector<K>);
-//     fn sub(&mut self, v: &Vector<K>);
-//     fn scl(&mut self, a: K);
-// }
+/*
+** ------------------------------------------------------------ TRAITS
+*/
+// T: type of structure (Vector or Matrix)
+// K: number type
+pub trait AddSubScl<T, K> {
+    fn add(&mut self, t: &T);
+    fn sub(&mut self, t: &T);
+    fn scl(&mut self, a: K);
+}
 
-//---------------------------- MODULES
+/*
+** ---------------------------------------------------------- MODULES
+*/
 mod add_sub_scl;
