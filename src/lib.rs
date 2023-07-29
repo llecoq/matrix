@@ -1,26 +1,28 @@
 /*
 ** ------------------------------------------------------------ TYPES
 */
-pub struct Matrix<K> {
-    // 
-}
-
-//-------------------- Utility functions
-impl Matrix<K> {
-    // fn get_shape {}
-    // print_matrix {}
-    // reshape_into_vector {}
-}
-
 pub struct Vector<K> {
-    //
+    x: K,
+    y: K,
+    z: K,
 }
 
 //-------------------- Utility functions
-impl Vector<K> {
+impl<K> Vector<K> {
     // fn get_size {}
     // print_vector {}
     // reshape_into_matrix {}
+}
+
+pub struct Matrix<K> {
+    vectors: Vec<Vector<K>>
+}
+
+//-------------------- Utility functions
+impl<K> Matrix<K> {
+    // fn get_shape {}
+    // print_matrix {}
+    // reshape_into_vector {}
 }
 
 /*
