@@ -6,6 +6,7 @@ An introduction to Linear Algebra (in Rust)
 ### Prerequisites :
 - [ ] Building a notion
 - [x] Rust Book: Better understanding of Rust libraries / tree structure ?
+- [ ] Trying to create a vector / matrix from bin/ex00 for better understanding of how should lib.rs work
 - [ ] Choosing and building a clean tree structure
 
 ```
