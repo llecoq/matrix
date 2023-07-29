@@ -2,7 +2,9 @@ use crate::Matrix;
 use crate::Vector;
 use crate::AddSubScl;
 
-// VECTOR
+/*
+** ------------------------------------------------------------ VECTOR
+*/
 impl<T, K> AddSubScl<T, K> for Vector<K> {
     fn add(&mut self, v: &Vector<K>) {
         
@@ -15,7 +17,9 @@ impl<T, K> AddSubScl<T, K> for Vector<K> {
     }
 }
 
-// MATRIX 
+/*
+** ------------------------------------------------------------ MATRIX
+*/
 impl<T, K> AddSubScl<T, K> for Matrix<K> {
     fn add(&mut self, v: &Matrix<K>){
 
