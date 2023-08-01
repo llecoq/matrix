@@ -2,6 +2,7 @@ use core::fmt;
 
 use crate::traits::AddSubScl;
 
+//----------------------------------------------------- Structure
 /// A basic vector structure.
 #[allow(dead_code)]
 pub struct Vector<K> {
@@ -9,25 +10,7 @@ pub struct Vector<K> {
     data: Vec<K>
 }
 
-// Implement fmt::Display trait to be able to print Vector<K>
-impl<K: fmt::Display> fmt::Display for Vector<K> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "[")?;
-
-        let mut iter = self.data.iter().peekable();
-        
-        while let Some(element) = iter.next() {
-            write!(f, "{}", element)?;
-            if iter.peek().is_some() {
-                write!(f, ", ")?;
-            }
-        }
-
-        write!(f, "]")
-    }
-} 
-
-//-------------------- Utility functions
+//--------------------------------------------- Utility functions
 #[allow(dead_code)]
 impl<K> Vector<K> 
 where
@@ -54,6 +37,28 @@ where
 
     }
 }
+
+
+//----------------------------------------- Traits Implementation
+// Implement fmt::Display trait to be able to print Vector<K>
+impl<K: fmt::Display> fmt::Display for Vector<K> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "[")?;
+
+        let mut iter = self.data.iter().peekable();
+        
+        while let Some(element) = iter.next() {
+            write!(f, "{}", element)?;
+            if iter.peek().is_some() {
+                write!(f, ", ")?;
+            }
+        }
+
+        write!(f, "]")
+    }
+} 
+
+// Add, Substract and Scale
 #[allow(unused_variables)]
 impl<K> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
@@ -67,7 +72,6 @@ where
     /// let mut u = Vector::from([2., 3.]);
     /// let v = Vector::from([5., 7.]);
     /// u.add(v);
-    /// assert_eq!();
     /// ```
     fn add(&mut self, v: &Vector<K>) {
         if self.size == v.size {
@@ -86,6 +90,8 @@ where
     }
 }
 
+
+//---------------------------------------------------- Unit test
 #[test]
 fn test_vector_utility_function() {
     let mut u = Vector::from(vec![2., 3.]);
