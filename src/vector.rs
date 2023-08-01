@@ -33,9 +33,11 @@ impl<K> Vector<K> {
 
     }
 }
-
 #[allow(unused_variables)]
-impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
+impl<K> AddSubScl<Vector<K>, K> for Vector<K> 
+where 
+    K: Clone + std::ops::Add<Output = K> 
+{
     /// Add a vector to another one
     /// 
     /// # Examples
@@ -47,7 +49,11 @@ impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
     /// assert_eq!();
     /// ```
     fn add(&mut self, v: &Vector<K>) {
-        
+        if self.size == v.size {
+            for (elem1, elem2) in self.data.iter_mut().zip(v.data.iter()) {
+                *elem1 = elem1.clone() + elem2.clone();
+            }
+        }
     }
     /// Substraction of a vector by another one.
     fn sub(&mut self, v: &Vector<K>) {
@@ -63,6 +69,6 @@ impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
 fn test_vector_utility_function() {
     let mut u = Vector::from(vec![2., 3.]);
     let v = Vector::from(vec![5., 7.]);
-    // u.add(v);
+    u.add(&v);
     // println!("{}", u);
 }

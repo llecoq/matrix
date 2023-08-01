@@ -1,3 +1,5 @@
+use num_traits::Float;
+
 use crate::vector::Vector;
 use crate::traits::AddSubScl;
 
@@ -19,7 +21,7 @@ impl<K> Matrix<K> {
 }
 
 #[allow(unused_variables)]
-impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
+impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> where K: Float {
 
     /// Add a matrix to another one
     fn add(&mut self, v: &Matrix<K>){
