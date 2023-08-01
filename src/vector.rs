@@ -70,5 +70,5 @@ fn test_vector_utility_function() {
     let mut u = Vector::from(vec![2., 3.]);
     let v = Vector::from(vec![5., 7.]);
     u.add(&v);
-    // println!("{}", u);
+    println!("{}", u);
 }
