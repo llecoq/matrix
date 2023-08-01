@@ -4,7 +4,9 @@ use crate::traits::AddSubScl;
 /// A basic matrix structure
 #[allow(dead_code)]
 pub struct Matrix<K> {
-    vectors: Vec<Vector<K>>
+    rows: usize,
+    colomns: usize,
+    data: Vec<Vector<K>>
 }
 
 //-------------------- Utility functions
@@ -16,6 +18,7 @@ impl<K> Matrix<K> {
     // fn reshape_into_vector {}
 }
 
+#[allow(unused_variables)]
 impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
 
     /// Add a matrix to another one

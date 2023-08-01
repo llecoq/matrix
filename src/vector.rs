@@ -3,21 +3,27 @@ use crate::traits::AddSubScl;
 /// A basic vector structure.
 #[allow(dead_code)]
 pub struct Vector<K> {
-    elements:   Vec<K>
+    size: usize,
+    data: Vec<K>
 }
 
 //-------------------- Utility functions
 #[allow(dead_code)]
 impl<K> Vector<K> {
 
+    /// Associated constructor
+    fn from(vec: Vec<K>) -> Vector<K> { 
+       Vector { size: vec.len(), data: vec }
+    }
+
     /// Return the size of the vector.
     fn get_size(self) -> usize {
-        self.elements.len()
+        self.data.len()
     }
 
     /// Print a vector.
     fn print_vector(self) {
-        // for element in &self.elements {
+        // for element in &self.data {
         //     println!("{:?}", element);
         // }
     }
@@ -28,6 +34,7 @@ impl<K> Vector<K> {
     }
 }
 
+#[allow(unused_variables)]
 impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
     /// Add a vector to another one
     /// 
@@ -50,4 +57,12 @@ impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
     fn scl(&mut self, a: K) {
 
     }
+}
+
+#[test]
+fn test_vector_utility_function() {
+    let mut u = Vector::from(vec![2., 3.]);
+    let v = Vector::from(vec![5., 7.]);
+    // u.add(v);
+    // println!("{}", u);
 }
