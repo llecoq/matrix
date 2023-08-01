@@ -30,4 +30,4 @@ pub use matrix::*;
 //----------------------- MODULES
 pub mod vector;
 pub mod matrix;
-mod traits;
+pub mod traits;
