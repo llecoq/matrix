@@ -26,6 +26,7 @@
 //---------------------- RE-EXPORT
 #[doc(inline)]
 pub use vector::*;
+#[doc(inline)]
 pub use matrix::*;
 
 //----------------------- MODULES
