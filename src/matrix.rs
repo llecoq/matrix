@@ -7,13 +7,13 @@ pub struct Matrix<K> {
 }
 
 //-------------------- Utility functions
-pub impl<K> Matrix<K> {
+impl<K> Matrix<K> {
     // fn get_shape {}
     // print_matrix {}
     // reshape_into_vector {}
 }
 
-pub impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
+impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
     fn add(&mut self, v: &Matrix<K>){
 
     }

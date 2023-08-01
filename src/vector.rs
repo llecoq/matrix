@@ -6,13 +6,13 @@ pub struct Vector<K> {
 }
 
 //-------------------- Utility functions
-pub impl<K> Vector<K> {
+impl<K> Vector<K> {
     // fn get_size {}
     // print_vector {}
     // reshape_into_matrix {}
 }
 
-pub impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
+impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
     fn add(&mut self, v: &Vector<K>) {
         
     }
