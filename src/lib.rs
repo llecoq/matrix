@@ -1,17 +1,33 @@
-/*
-** ---------------------------------------------------------- MODULES
-*/
-mod vector;
-mod matrix;
-mod add_sub_scl;
+/*!
+# Enter the matrix
 
-/*
-** ------------------------------------------------------------ TRAITS  should be moved ?
+**matrix** is a 42school project targeting to write a simple linear algebra library :
+
+* Add, Substract and Scale
+* Linear combination
+* Linear interpolation
+* Dot product
+* Norm
+* Cosine
+* Cross product
+* Linear map, Matrix multiplication
+* Trace
+* Transpose
+* Solving systems of linear equations
+* Reduced row-echelon form
+* Determinant
+* Inverse
+* Rank-nullity theorem
+* Rank
+* Projection matrix
+* Complex vector spaces
 */
-// T: type of structure (Vector or Matrix)
-// K: number type
-pub trait AddSubScl<T, K> {
-    fn add(&mut self, t: &T);
-    fn sub(&mut self, t: &T);
-    fn scl(&mut self, a: K);
-}
+//---------------------- RE-EXPORT
+#[doc(inline)]
+pub use vector::*;
+pub use matrix::*;
+
+//----------------------- MODULES
+pub mod vector;
+pub mod matrix;
+mod traits;

@@ -12,7 +12,7 @@ An introduction to Linear Algebra (in Rust)
 ```
 matrix
 └── src
-   ├── bin
+   ├── tests
    |    ├── ex00.rs 
    │    ├── ex01.rs
    │    └── [...]   // binaries files for testing 
