@@ -1,16 +1,33 @@
 use crate::traits::AddSubScl;
 
 /// A basic vector structure.
+#[allow(dead_code)]
 pub struct Vector<K> {
     elements:   Vec<K>
 }
 
 //-------------------- Utility functions
+#[allow(dead_code)]
 impl<K> Vector<K> {
-    // fn get_size {}
-    // print_vector {}
-    // reshape_into_matrix {}
+
+    /// Return the size of the vector.
+    fn get_size(self) -> usize {
+        self.elements.len()
+    }
+
+    /// Print a vector.
+    fn print_vector(self) {
+        // for element in &self.elements {
+        //     println!("{:?}", element);
+        // }
+    }
+
+    /// Reshape a vector into a matrix.
+    fn reshape_into_matrix(self) {
+
+    }
 }
+
 impl<K> AddSubScl<Vector<K>, K> for Vector<K> {
     /// Add a vector to another one
     /// 

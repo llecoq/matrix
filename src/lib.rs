@@ -22,6 +22,7 @@
 * Projection matrix
 * Complex vector spaces
 */
+
 //---------------------- RE-EXPORT
 #[doc(inline)]
 pub use vector::*;
