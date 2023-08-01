@@ -19,7 +19,7 @@ impl<K> Matrix<K> {
 }
 
 #[allow(unused_variables)]
-impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> where K: Float {
+impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
 
     /// Add a matrix to another one
     fn add(&mut self, v: &Matrix<K>){
