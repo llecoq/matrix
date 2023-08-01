@@ -15,6 +15,7 @@ impl<K: fmt::Display> fmt::Display for Vector<K> {
         write!(f, "[")?;
 
         let mut iter = self.data.iter().peekable();
+        
         while let Some(element) = iter.next() {
             write!(f, "{}", element)?;
             if iter.peek().is_some() {
@@ -28,7 +29,10 @@ impl<K: fmt::Display> fmt::Display for Vector<K> {
 
 //-------------------- Utility functions
 #[allow(dead_code)]
-impl<K> Vector<K> {
+impl<K> Vector<K> 
+where
+    K: std::fmt::Display,
+{
 
     /// Associated constructor
     fn from(vec: Vec<K>) -> Vector<K> { 
@@ -41,9 +45,9 @@ impl<K> Vector<K> {
     }
 
     /// Print a vector.
-    // fn print_vector(self) {
-    //     println!("{}", self.data);
-    // }
+    fn print_vector(self) {
+        println!("{}", self);
+    }
 
     /// Reshape a vector into a matrix.
     fn reshape_into_matrix(self) {
@@ -88,4 +92,5 @@ fn test_vector_utility_function() {
     let v = Vector::from(vec![5., 7.]);
     u.add(&v);
     println!("{}", u);
+    u.print_vector();
 }
