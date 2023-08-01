@@ -1,3 +1,5 @@
+use core::fmt;
+
 use crate::traits::AddSubScl;
 
 /// A basic vector structure.
@@ -6,6 +8,23 @@ pub struct Vector<K> {
     size: usize,
     data: Vec<K>
 }
+
+// Implement fmt::Display trait to be able to print Vector<K>
+impl<K: fmt::Display> fmt::Display for Vector<K> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "[")?;
+
+        let mut iter = self.data.iter().peekable();
+        while let Some(element) = iter.next() {
+            write!(f, "{}", element)?;
+            if iter.peek().is_some() {
+                write!(f, ", ")?;
+            }
+        }
+
+        write!(f, "]")
+    }
+} 
 
 //-------------------- Utility functions
 #[allow(dead_code)]
@@ -22,11 +41,9 @@ impl<K> Vector<K> {
     }
 
     /// Print a vector.
-    fn print_vector(self) {
-        // for element in &self.data {
-        //     println!("{:?}", element);
-        // }
-    }
+    // fn print_vector(self) {
+    //     println!("{}", self.data);
+    // }
 
     /// Reshape a vector into a matrix.
     fn reshape_into_matrix(self) {
