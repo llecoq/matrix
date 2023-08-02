@@ -27,7 +27,7 @@
 #[doc(inline)]
 pub use vector::*;
 #[doc(inline)]
-pub use matrix::*;
+pub use self::matrix::*;
 
 //----------------------- MODULES
 pub mod vector;

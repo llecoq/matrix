@@ -73,9 +73,17 @@ where
     /// # Examples
     /// 
     /// ```
-    /// let mut u = Vector::from([2., 3.]);
-    /// let v = Vector::from([5., 7.]);
-    /// u.add(v);
+    /// use matrix::Vector;
+    /// use crate::matrix::traits::AddSubScl;
+    /// 
+    /// let mut u = Vector::from(vec![2., 3.]);
+    /// let v = Vector::from(vec![5., 7.]);
+    /// 
+    /// u.add(&v);
+    /// println!("{}", u);
+    /// 
+    /// // [7.0]
+    /// // [10.0]
     /// ```
     fn add(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
