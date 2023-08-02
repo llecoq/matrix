@@ -1,6 +1,17 @@
 use crate::{Vector, traits::AddSubScl};
 use std::fmt::Write as _;
 
+//---------------------- Utility function
+fn  assert_vector_output<K>(vec: &Vector<K>, expected_output: &str)
+where
+    K: std::fmt::Display
+{
+    let mut output = String::new();
+    writeln!(&mut output, "{}", vec).unwrap();
+    assert_eq!(output, expected_output);
+}
+
+//---------------------------- Unit Tests
 #[test]
 fn  vector_utility_functions_tests() {
     // from()
@@ -10,10 +21,7 @@ fn  vector_utility_functions_tests() {
     assert_eq!(v.get_size(), 2);
     assert_eq!(v2.get_size(), 0);
     // print_vector()
-    let mut output = String::new();
-    writeln!(&mut output, "{}", v).unwrap();
-    assert_eq!(output, "[2.0]\n[6.3]\n");
-    output.clear();
+    assert_vector_output(&v, "[2.0]\n[6.3]\n");
     // reshape_into_matrix()
 
 }
@@ -23,16 +31,12 @@ fn  vector_add_tests() {
     let mut v: Vector<f32> = Vector::from(vec![2., 6.3]);
     let v2: Vector<f32> = Vector::from(vec![]);
     let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
-    let mut output = String::new();
 
     v.add(&v3);
-    writeln!(&mut output, "{}", v).unwrap();
-    assert_eq!(output, "[3.1]\n[8.3]\n");
+    assert_vector_output(&v, "[3.1]\n[8.3]\n");
 
-    v.add(&v2); // should not do anything. Later one, maybe handle error !
-    output.clear();
-    writeln!(&mut output, "{}", v).unwrap();
-    assert_eq!(output, "[3.1]\n[8.3]\n");
+    v.add(&v2); // should not do anything. Choosed not to use Result<> to make it lighter in use
+    assert_vector_output(&v, "[3.1]\n[8.3]\n");
 }
 
 #[test]
@@ -40,14 +44,22 @@ fn  vector_sub_tests() {
     let mut v: Vector<f32> = Vector::from(vec![2., 6.3]);
     let v2: Vector<f32> = Vector::from(vec![]);
     let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
-    let mut output = String::new();
 
     v.sub(&v3);
-    writeln!(&mut output, "{}", v).unwrap();
-    assert_eq!(output, "[0.9]\n[4.3]\n");
+    assert_vector_output(&v, "[0.9]\n[4.3]\n");
 
-    v.sub(&v2); // should not do anything. Later one, maybe handle error !
-    output.clear();
-    writeln!(&mut output, "{}", v).unwrap();
-    assert_eq!(output, "[0.9]\n[4.3]\n");
+    v.sub(&v2); // should not do anything. Choosed not to use Result<> to make it lighter in use
+    assert_vector_output(&v, "[0.9]\n[4.3]\n");
+}
+
+#[test]
+fn  vector_scl_tests() {
+    let mut u = Vector::from(vec![2., 3.]);
+
+    u.scl(2.);
+    assert_vector_output(&u, "[4.0]\n[6.0]\n");
+    u.scl(-1.);
+    assert_vector_output(&u, "[-4.0]\n[-6.0]\n");
+    u.scl(-0.);
+    assert_vector_output(&u, "[0.0]\n[0.0]\n");
 }

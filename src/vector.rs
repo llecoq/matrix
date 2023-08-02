@@ -66,7 +66,8 @@ where
     K:  Clone 
         + std::fmt::Display
         + std::ops::Sub<Output = K>
-        + std::ops::Add<Output = K> 
+        + std::ops::Add<Output = K>
+        + std::ops::Mul<Output = K>
 {
     /// Add a vector to another one
     /// 
@@ -87,8 +88,8 @@ where
     /// ```
     fn add(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
-            for (elem1, elem2) in self.data.iter_mut().zip(v.data.iter()) {
-                *elem1 = elem1.clone() + elem2.clone();
+            for (element_1, element_2) in self.data.iter_mut().zip(v.data.iter()) {
+                *element_1 = element_1.clone() + element_2.clone();
             }
         }
     }
@@ -96,14 +97,17 @@ where
     /// Substraction of a vector by another one.
     fn sub(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
-            for (elem1, elem2) in self.data.iter_mut().zip(v.data.iter()) {
-                *elem1 = elem1.clone() - elem2.clone();
+            for (element_1, element_2) in self.data.iter_mut().zip(v.data.iter()) {
+                *element_1 = element_1.clone() - element_2.clone();
             }
         }     
     }
 
     /// Scaling of a vector by a scalar.
     fn scl(&mut self, a: K) {
-
+        for element in self.data.iter_mut() {
+            *element = element.clone() * a.clone();
+        }
     }
+
 }
