@@ -4,36 +4,34 @@ use crate::traits::AddSubScl;
 
 //----------------------------------------------------- Structure
 /// A basic vector structure.
-#[allow(dead_code)]
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Vector<K> {
     data: Vec<K>
 }
 
 //--------------------------------------------- Utility functions
-#[allow(dead_code)]
 impl<K> Vector<K> 
 where
     K:  std::fmt::Display
 {
 
     /// Associated constructor
-    fn from(vec: Vec<K>) -> Vector<K> { 
+    pub fn from(vec: Vec<K>) -> Vector<K> { 
        Vector { data: vec }
     }
 
     /// Return the size of the vector.
-    fn get_size(&self) -> usize {
+    pub fn get_size(&self) -> usize {
         self.data.len()
     }
 
     /// Print a vector.
-    fn print_vector(&self) {
+    pub fn print_vector(&self) {
         println!("{}", self);
     }
 
     /// Reshape a vector into a matrix.
-    fn reshape_into_matrix(&self) {
+    pub fn reshape_into_matrix(&self) {
 
     }
 }
