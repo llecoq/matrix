@@ -86,6 +86,8 @@ where
     /// // [7.0]
     /// // [10.0]
     /// ```
+    /// 
+    /// Attention ! When trying to add a vector of different size, add does nothing.
     fn add(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
             for (element_1, element_2) in self.data.iter_mut().zip(v.data.iter()) {
@@ -95,6 +97,7 @@ where
     }
 
     /// Substraction of a vector by another one.
+    /// Attention ! When trying to substract a vector of different size, sub does nothing.
     fn sub(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
             for (element_1, element_2) in self.data.iter_mut().zip(v.data.iter()) {
