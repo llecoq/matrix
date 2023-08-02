@@ -5,8 +5,8 @@ use crate::traits::AddSubScl;
 //----------------------------------------------------- Structure
 /// A basic vector structure.
 #[allow(dead_code)]
+#[derive(Clone)]
 pub struct Vector<K> {
-    size: usize,
     data: Vec<K>
 }
 
@@ -14,26 +14,26 @@ pub struct Vector<K> {
 #[allow(dead_code)]
 impl<K> Vector<K> 
 where
-    K: std::fmt::Display,
+    K:  std::fmt::Display
 {
 
     /// Associated constructor
     fn from(vec: Vec<K>) -> Vector<K> { 
-       Vector { size: vec.len(), data: vec }
+       Vector { data: vec }
     }
 
     /// Return the size of the vector.
-    fn get_size(self) -> usize {
+    fn get_size(&self) -> usize {
         self.data.len()
     }
 
     /// Print a vector.
-    fn print_vector(self) {
+    fn print_vector(&self) {
         println!("{}", self);
     }
 
     /// Reshape a vector into a matrix.
-    fn reshape_into_matrix(self) {
+    fn reshape_into_matrix(&self) {
 
     }
 }
@@ -41,7 +41,10 @@ where
 
 //----------------------------------------- Traits Implementation
 // Implement fmt::Display trait to be able to print Vector<K>
-impl<K: fmt::Display> fmt::Display for Vector<K> {
+impl<K> fmt::Display for Vector<K> 
+where
+    K: fmt::Display
+{
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "[")?;
 
@@ -50,7 +53,7 @@ impl<K: fmt::Display> fmt::Display for Vector<K> {
             write!(f, "{:.1}", element)?;
 
             if let Some(_) = iter.peek() {
-                write!(f, ", ")?;
+                write!(f, "]\n[")?;
             }
         }
 
@@ -62,7 +65,9 @@ impl<K: fmt::Display> fmt::Display for Vector<K> {
 #[allow(unused_variables)]
 impl<K> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
-    K: Clone + std::ops::Add<Output = K> 
+    K:  Clone 
+        + std::fmt::Display
+        + std::ops::Add<Output = K> 
 {
     /// Add a vector to another one
     /// 
@@ -74,7 +79,7 @@ where
     /// u.add(v);
     /// ```
     fn add(&mut self, v: &Vector<K>) {
-        if self.size == v.size {
+        if self.get_size() == v.get_size() {
             for (elem1, elem2) in self.data.iter_mut().zip(v.data.iter()) {
                 *elem1 = elem1.clone() + elem2.clone();
             }
@@ -94,8 +99,10 @@ where
 //---------------------------------------------------- Unit test
 #[test]
 fn test_vector_utility_function() {
-    let mut u = Vector::from(vec![2., 3.]);
-    let v = Vector::from(vec![5., 7.]);
+    let mut u = Vector::from(vec![2., 3., 6.]);
+    let v = Vector::from(vec![5., 7.1, 2.]);
+    let x: Vector<f32> = Vector::from(vec![1.]);
     u.add(&v);
     println!("{}", u);
+    x.print_vector();
 }
