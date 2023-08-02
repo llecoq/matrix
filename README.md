@@ -4,30 +4,29 @@ An introduction to Linear Algebra (in Rust)
 ## Task list
 
 ### Prerequisites :
-- [ ] Building a notion
 - [x] Rust Book: Better understanding of Rust libraries / tree structure ?
-- [ ] Trying to create a vector / matrix from bin/ex00 for better understanding of how should lib.rs work
-- [ ] Choosing and building a clean tree structure
+- [x] Choosing and building a clean tree structure
 
 ```
 matrix
 └── src
+   ├── operations
+   │    ├── cosine.rs
+   │    ├── cross_product.rs
+   │    ├── dot_product.rs
+   │    └── [...]   // all the operations needed
    ├── tests
-   |    ├── ex00.rs 
-   │    ├── ex01.rs
-   │    └── [...]   // binaries files for testing 
+   |    ├── ex00_tests.rs 
+   │    ├── ex01_tests.rs
+   │    └── [...]   
    ├── lib.rs
-   ├── add_sub_scale.rs
-   ├── linear_combination.rs
-   ├── linear_interpolation
-   │    ├── submodule.rs
-   │    └── [...]   // submodules if needed
-   ├── linear_interpolation.rs
-   └── [...]
+   ├── matrix.rs  // main structures
+   ├── traits.rs
+   └── vector.rs
 ```
 
-- [ ] Test driven ? (Rust book)
-- [ ] Understanding Rust traits (Rust book + rustlings)
+- [x] Test driven ? (Rust book) => choosed to tests in a dedicated dir for better clarity
+- [x] Understanding Rust traits (Rust book + rustlings)
 - [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
