@@ -35,6 +35,7 @@ pub mod matrix;
 pub mod traits;
 
 //------------------------- TESTS
+#[cfg(test)]
 mod tests {
     mod ex00_tests; // Add, Substract and Scale
     mod ex01_tests; // Linear combination
