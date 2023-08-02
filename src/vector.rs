@@ -34,8 +34,8 @@ where
 //----------------------------------------- Traits Implementation
 impl<K> Vector<K> {
     /// Associated constructor
-    pub fn from(vec: Vec<K>) -> Vector<K> { 
-        Vector { data: vec }
+    pub fn from(vec_data: Vec<K>) -> Vector<K> { 
+        Vector { data: vec_data }
      }
 }
 

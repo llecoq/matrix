@@ -1,4 +1,4 @@
-use crate::{Vector, traits::AddSubScl};
+use crate::{Vector, traits::AddSubScl, Matrix};
 use std::fmt::Write as _;
 
 //--------------------------------------------------------------- Utility function
@@ -63,4 +63,14 @@ fn  vector_scl_tests() {
     assert_vector_output(&u, "[-4.0]\n[-6.0]\n");
     u.scl(-0.);
     assert_vector_output(&u, "[0.0]\n[0.0]\n");
+}
+
+#[test]
+fn  matrix_utility_functions_tests() {
+    // will maybe find a more elegant way to do it
+    // let mut u = Matrix::from(vec! [
+    //     vec![1.1, 2.],
+    //     vec![1.1, 2.]
+    // ]);
+
 }
