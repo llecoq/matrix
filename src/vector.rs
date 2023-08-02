@@ -60,7 +60,6 @@ where
 } 
 
 // Add, Substract and Scale
-#[allow(unused_variables)]
 impl<K> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
     K:  Clone 

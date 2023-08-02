@@ -1,7 +1,7 @@
 use crate::{Vector, traits::AddSubScl};
 use std::fmt::Write as _;
 
-//---------------------- Utility function
+//--------------------------------------------------------------- Utility function
 fn  assert_vector_output<K>(vec: &Vector<K>, expected_output: &str)
 where
     K: std::fmt::Display
@@ -11,7 +11,8 @@ where
     assert_eq!(output, expected_output);
 }
 
-//---------------------------- Unit Tests
+//---------------------------------------------------------------------- Unit Test
+// Vector
 #[test]
 fn  vector_utility_functions_tests() {
     // from()
