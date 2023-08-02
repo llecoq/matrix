@@ -14,12 +14,6 @@ impl<K> Vector<K>
 where
     K:  std::fmt::Display
 {
-
-    /// Associated constructor
-    pub fn from(vec: Vec<K>) -> Vector<K> { 
-       Vector { data: vec }
-    }
-
     /// Return the size of the vector.
     pub fn get_size(&self) -> usize {
         self.data.len()
@@ -38,6 +32,13 @@ where
 
 
 //----------------------------------------- Traits Implementation
+impl<K> Vector<K> {
+    /// Associated constructor
+    pub fn from(vec: Vec<K>) -> Vector<K> { 
+        Vector { data: vec }
+     }
+}
+
 // Implement fmt::Display trait to be able to print Vector<K>
 impl<K> fmt::Display for Vector<K> 
 where
