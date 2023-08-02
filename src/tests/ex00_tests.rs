@@ -1,4 +1,4 @@
-use crate::Vector;
+use crate::{Vector, traits::AddSubScl};
 use std::fmt::Write as _;
 
 #[test]
@@ -12,5 +12,25 @@ fn vector_utility_functions_tests() {
     // print_vector()
     let mut output = String::new();
     writeln!(&mut output, "{}", v).unwrap();
+    assert_eq!(output, "[2.0]\n[6.3]\n");
+    output.clear();
+    // reshape_into_matrix()
 
+}
+
+#[test]
+fn  vector_add_tests() {
+    let mut v: Vector<f32> = Vector::from(vec![2., 6.3]);
+    let v2: Vector<f32> = Vector::from(vec![]);
+    let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
+    let mut output = String::new();
+
+    v.add(&v3);
+    writeln!(&mut output, "{}", v).unwrap();
+    assert_eq!(output, "[3.1]\n[8.3]\n");
+
+    v.add(&v2); // should not do anything. Later one, maybe handle error !
+    output.clear();
+    writeln!(&mut output, "{}", v).unwrap();
+    assert_eq!(output, "[3.1]\n[8.3]\n");
 }
