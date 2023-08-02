@@ -83,24 +83,14 @@ where
             }
         }
     }
+
     /// Substraction of a vector by another one.
     fn sub(&mut self, v: &Vector<K>) {
 
     }
+
     /// Scaling of a vector by a scalar.
     fn scl(&mut self, a: K) {
 
     }
-}
-
-
-//---------------------------------------------------- Unit test
-#[test]
-fn test_vector_utility_function() {
-    let mut u = Vector::from(vec![2., 3., 6.]);
-    let v = Vector::from(vec![5., 7.1, 2.]);
-    let x: Vector<f32> = Vector::from(vec![1.]);
-    u.add(&v);
-    println!("{}", u);
-    x.print_vector();
 }
