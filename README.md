@@ -27,11 +27,11 @@ matrix
 
 - [x] Test driven ? (Rust book) => choosed to tests in a dedicated dir for better clarity
 - [x] Understanding Rust traits (Rust book + rustlings)
+- [x] Working on doc generation
+- [x] Defining Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
 - [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
-- [x] Define Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
-
 - [ ] Exercise 00 - Add, Subtract and Scale
 - [ ] Exercise 01 - Linear combination
 - [ ] Exercise 01 - Linear interpolation
