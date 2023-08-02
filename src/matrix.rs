@@ -20,20 +20,30 @@ impl<K> Matrix<K> {
 }
 
 //----------------------------------------- Traits Implementation
-// impl<K> Matrix<K> {
-//     pub fn from(input_vec: Vec<Vec<K>>) -> Matrix<K> {
-//         // iter through vec
-//         // check size of each vecs inside (need to be all the same)
-//         // create a Vector<K> with each vec
-//         // create new vec with the data
+impl<K> Matrix<K> {
+    pub fn from(input_vec: Vec<Vec<K>>) -> Matrix<K> {
+        let mut data_vec: Vec<Vector<K>> = Vec::new();
+        let first_column_size = input_vec.iter().len();
 
-//         Matrix {
-//             rows: 1,
-//             columns: 1,
-//             data: input_vec
-//         }
-//     }
-// }
+        let mut iter = input_vec.iter();
+        for element in input_vec {
+            match element.len() {
+                first_column_size => {
+                    // push into data_vec
+                }
+                _ => {
+                    // handle error, not all columns are same sizes
+                }
+            }
+        }
+
+        Matrix {
+            rows: 1,
+            columns: 1,
+            data: data_vec
+        }
+    }
+}
 
 #[allow(unused_variables)]
 impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {

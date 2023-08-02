@@ -67,10 +67,9 @@ fn  vector_scl_tests() {
 
 #[test]
 fn  matrix_utility_functions_tests() {
-    // will maybe find a more elegant way to do it
-    // let mut u = Matrix::from(vec! [
-    //     vec![1.1, 2.],
-    //     vec![1.1, 2.]
-    // ]);
+    let mut u = Matrix::from(vec! [
+        vec![1.1, 2.],
+        vec![1.1, 2.]
+    ]);
 
 }
