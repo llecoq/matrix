@@ -29,6 +29,7 @@ matrix
 - [x] Understanding Rust traits (Rust book + rustlings)
 - [x] Working on doc generation
 - [x] Defining Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
+- [ ] Handling errors
 - [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
