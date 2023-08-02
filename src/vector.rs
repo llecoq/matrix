@@ -65,6 +65,7 @@ impl<K> AddSubScl<Vector<K>, K> for Vector<K>
 where 
     K:  Clone 
         + std::fmt::Display
+        + std::ops::Sub<Output = K>
         + std::ops::Add<Output = K> 
 {
     /// Add a vector to another one
@@ -86,7 +87,11 @@ where
 
     /// Substraction of a vector by another one.
     fn sub(&mut self, v: &Vector<K>) {
-
+        if self.get_size() == v.get_size() {
+            for (elem1, elem2) in self.data.iter_mut().zip(v.data.iter()) {
+                *elem1 = elem1.clone() - elem2.clone();
+            }
+        }     
     }
 
     /// Scaling of a vector by a scalar.
