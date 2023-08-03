@@ -33,7 +33,7 @@ impl<K> Matrix<K> {
 #[allow(unused_variables)]
 impl<K> Matrix<K> {
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
-        match Self::input_matrix_is_valid(&input) {
+        match Self::input_format_is_valid(&input) {
             true => {
                 return Ok(Matrix {
                     rows: input.len(),
@@ -69,7 +69,7 @@ impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
 impl<K> Matrix<K> {
 
     // check that all the columns are the same size, and thus, that the matrix is valid
-    fn input_matrix_is_valid(input: &Vec<Vec<K>>) -> bool {
+    fn input_format_is_valid(input: &Vec<Vec<K>>) -> bool {
     let first_inner_len: usize = Self::first_column_size(input);
         input
             .iter()
