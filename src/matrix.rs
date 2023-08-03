@@ -32,9 +32,9 @@ impl<K> Matrix<K> {
         }    
 
         Matrix {
-            rows: 1,
-            columns: 1,
-            data: vec![Vector::from(vec![])]
+            rows: input.len(),
+            columns: Self::first_column_size(&input),
+            data: Self::build_matrix_data(&input)
         }
     }
 }
@@ -60,14 +60,25 @@ impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
 
 //--------------------------------------- Private utility functions
 impl<K> Matrix<K> {
-// check that all the columns are the same size, and thus, that the matrix is valid
+
+    // check that all the columns are the same size, and thus, that the matrix is valid
     fn input_matrix_is_valid(input: &Vec<Vec<K>>) -> bool {
-        let first_inner_len: usize = input
-        .first()
-        .map(Vec::len)
-        .unwrap_or(0);
-    input
-        .iter()
-        .all(|inner_vec| inner_vec.len() == first_inner_len)
+    let first_inner_len: usize = Self::first_column_size(input);
+        input
+            .iter()
+            .all(|inner_vec| inner_vec.len() == first_inner_len)
+    }
+
+    // return the first colomn size or 0
+    fn first_column_size(input: &Vec<Vec<K>>) -> usize {
+        input
+            .first()
+            .map(Vec::len)
+            .unwrap_or(0)
+    }
+
+    // build the matrix data up and return it
+    fn build_matrix_data(input: &Vec<Vec<K>>) -> Vec<Vector<K>> {
+        
     }
 }
