@@ -1,5 +1,6 @@
 use crate::vector::Vector;
 use crate::traits::AddSubScl;
+use thiserror::Error;
 
 //----------------------------------------------------- Structure
 /// A basic matrix structure
@@ -13,9 +14,10 @@ pub struct Matrix<K> {
 
 //---------------------------------------------------------- enum
 
+#[derive(Error, Debug)]
 pub enum MatrixError {
-    // #[error("Invalid matrix dimensions")]
-    InvalidMatrix
+    #[error("Invalid matrix format")]
+    InvalidFormat
 }
 
 //--------------------------------------------- Utility functions
@@ -39,7 +41,7 @@ impl<K> Matrix<K> {
                     data: Self::build_matrix_data(input)
                 })
             }
-            false => {return Err(MatrixError::InvalidMatrix)}
+            false => {return Err(MatrixError::InvalidFormat)}
         }
     }
 }
