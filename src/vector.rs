@@ -12,7 +12,7 @@ pub struct Vector<K> {
 //--------------------------------------------- Utility functions
 impl<K> Vector<K> 
 where
-    K:  std::fmt::Display
+    K:  fmt::Display
 {
     /// Return the size of the vector.
     pub fn get_size(&self) -> usize {
@@ -52,7 +52,7 @@ where
             write!(f, "{:.1}", element)?;
 
             if let Some(_) = iter.peek() {
-                write!(f, "]\n[")?;
+                write!(f, "][")?;
             }
         }
 
