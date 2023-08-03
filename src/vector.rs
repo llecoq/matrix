@@ -33,10 +33,10 @@ where
 
 //----------------------------------------- Traits Implementation
 impl<K> Vector<K> {
-    /// Associated constructor
+    /// Associated constructor `from`
     pub fn from(vec_data: Vec<K>) -> Vector<K> { 
         Vector { data: vec_data }
-     }
+    }
 }
 
 // Implement fmt::Display trait to be able to print Vector<K>
