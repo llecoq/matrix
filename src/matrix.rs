@@ -78,7 +78,8 @@ impl<K> Matrix<K> {
     }
 
     // build the matrix data up and return it
+    #[allow(unused_variables)]
     fn build_matrix_data(input: &Vec<Vec<K>>) -> Vec<Vector<K>> {
-        
+        vec![Vector::from(vec![])]
     }
 }
