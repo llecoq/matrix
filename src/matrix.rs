@@ -26,18 +26,9 @@ impl<K> Matrix<K> {
     where
         K: std::fmt::Debug
 {
-        let first_inner_len: usize = input
-            .first()
-            .map(Vec::len)
-            .unwrap_or(0);
-        // check that all the columns are all the same size, and thus, that the matrix is valid
-        let all_same_len: bool = input
-            .iter()
-            .all(|inner_vec| inner_vec.len() == first_inner_len);
-
-        match all_same_len {
-            true => {}
-            false => {}
+        match Self::input_matrix_is_valid(&input) {
+            true => {println!("true");}
+            false => {println!("false");}
         }    
 
         Matrix {
@@ -64,5 +55,19 @@ impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
     /// Scaling of a matrix by a scalar.
     fn scl(&mut self, a: K){
 
+    }
+}
+
+//--------------------------------------- Private utility functions
+impl<K> Matrix<K> {
+// check that all the columns are all the same size, and thus, that the matrix is valid
+    fn input_matrix_is_valid(input: &Vec<Vec<K>>) -> bool {
+        let first_inner_len: usize = input
+        .first()
+        .map(Vec::len)
+        .unwrap_or(0);
+    input
+        .iter()
+        .all(|inner_vec| inner_vec.len() == first_inner_len)
     }
 }
