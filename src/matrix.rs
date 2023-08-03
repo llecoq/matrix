@@ -14,7 +14,6 @@ pub struct Matrix<K> {
 //---------------------------------------------------------- enum
 
 pub enum MatrixError {
-    EmptyMatrix,
     InvalidMatrix
 }
 
