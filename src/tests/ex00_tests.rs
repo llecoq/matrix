@@ -1,4 +1,4 @@
-use crate::{Vector, traits::AddSubScl, Matrix};
+use crate::{Vector, traits::AddSubScl, Matrix, MatrixError};
 use std::fmt::Write as _;
 
 //--------------------------------------------------------------- Utility function
@@ -32,6 +32,20 @@ where
         .map(|vec| vector_to_string(vec))
         .collect::<Vec<String>>()
         .join("\n")
+}
+
+// match matrix output
+fn match_matrix_output<K>(matrix: Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
+where
+    K: std::fmt::Display
+{
+    match matrix {
+        Ok(matrix) => {
+            println!("{}", matrix);
+            assert_output(&matrix, matrix_to_string(&input).as_str());
+        }        
+        Err(error) => println!("{}", error)
+    };
 }
 
 //---------------------------------------------------------------------- Unit Test
@@ -99,14 +113,7 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2.]
     ];
     let matrix = Matrix::from(input.clone());
-    match matrix {
-        Ok(matrix) => {
-            println!("{}", matrix);
-            assert_output(&matrix, matrix_to_string(&input).as_str());
-        }        
-        Err(error) => println!("{}", error)
-    };
-
+    match_matrix_output(matrix, input);
 
     // Invalid matrix format
     let matrix = Matrix::from(vec! [
