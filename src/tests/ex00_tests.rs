@@ -69,25 +69,25 @@ fn  vector_scl_tests() {
 #[allow(unused_mut)]
 #[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
-    let mut u = Matrix::from(vec! [
+    let mut matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2.]
     ]);
-    let mut u = Matrix::from(vec! [
+    let mut matrix = Matrix::from(vec! [
         vec![1.1],
         vec![1.1, 2.]
     ]);
-    let mut u = Matrix::from(vec! [
+    let mut matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2., 2.]
     ]);
-    let mut u = Matrix::from(vec! [
+    let mut matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2.],
         vec![1.1, 2.],
         vec![1.1, 2.]
     ]);
-    let mut u = Matrix::from(vec! [
+    let mut matrix = Matrix::from(vec! [
         vec![],
         vec![()],
         vec![],

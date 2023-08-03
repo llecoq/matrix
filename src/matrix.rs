@@ -11,6 +11,13 @@ pub struct Matrix<K> {
     data: Vec<Vector<K>>
 }
 
+//---------------------------------------------------------- enum
+
+pub enum MatrixError {
+    EmptyMatrix,
+    InvalidMatrix
+}
+
 //--------------------------------------------- Utility functions
 #[allow(dead_code)]
 impl<K> Matrix<K> {
@@ -23,20 +30,21 @@ impl<K> Matrix<K> {
 //----------------------------------------- Traits Implementation
 #[allow(unused_variables)]
 impl<K> Matrix<K> {
-    pub fn from(input: Vec<Vec<K>>) -> Matrix<K> 
+    pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> 
     where
         K: std::fmt::Debug
-{
+    {
         match Self::input_matrix_is_valid(&input) {
-            true => {println!("true");}
-            false => {println!("false");}
+            true => {
+                return Ok(Matrix {
+                    rows: input.len(),
+                    columns: Self::first_column_size(&input),
+                    data: Self::build_matrix_data(input)
+                })
+            }
+            false => {return Err(MatrixError::InvalidMatrix)}
         }    
 
-        Matrix {
-            rows: input.len(),
-            columns: Self::first_column_size(&input),
-            data: Self::build_matrix_data(input)
-        }
     }
 }
 
@@ -78,14 +86,12 @@ impl<K> Matrix<K> {
             .unwrap_or(0)
     }
 
-    // build the matrix data up and return it
+    // build the matrix data up and returns it
     #[allow(unused_variables)]
     fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
-        let data: Vec<Vector<K>> = input
+        input
             .into_iter()
             .map(|element| Vector::from(element))
-            .collect();
-
-        data
+            .collect()
     }
 }
