@@ -6,7 +6,7 @@ use crate::traits::AddSubScl;
 //----------------------------------------------------- Structure
 /// A basic matrix structure
 #[allow(dead_code)]
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct Matrix<K> {
     rows: usize,
     columns: usize,
