@@ -14,6 +14,7 @@ pub struct Matrix<K> {
 //---------------------------------------------------------- enum
 
 pub enum MatrixError {
+    // #[error("Invalid matrix dimensions")]
     InvalidMatrix
 }
 
@@ -29,10 +30,7 @@ impl<K> Matrix<K> {
 //----------------------------------------- Traits Implementation
 #[allow(unused_variables)]
 impl<K> Matrix<K> {
-    pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> 
-    where
-        K: std::fmt::Debug
-    {
+    pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_matrix_is_valid(&input) {
             true => {
                 return Ok(Matrix {
@@ -42,8 +40,7 @@ impl<K> Matrix<K> {
                 })
             }
             false => {return Err(MatrixError::InvalidMatrix)}
-        }    
-
+        }
     }
 }
 
