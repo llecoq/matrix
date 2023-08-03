@@ -4,6 +4,7 @@ use crate::traits::AddSubScl;
 //----------------------------------------------------- Structure
 /// A basic matrix structure
 #[allow(dead_code)]
+#[derive(Debug)]
 pub struct Matrix<K> {
     rows: usize,
     columns: usize,
@@ -34,7 +35,7 @@ impl<K> Matrix<K> {
         Matrix {
             rows: input.len(),
             columns: Self::first_column_size(&input),
-            data: Self::build_matrix_data(&input)
+            data: Self::build_matrix_data(input)
         }
     }
 }
@@ -79,7 +80,12 @@ impl<K> Matrix<K> {
 
     // build the matrix data up and return it
     #[allow(unused_variables)]
-    fn build_matrix_data(input: &Vec<Vec<K>>) -> Vec<Vector<K>> {
-        vec![Vector::from(vec![])]
+    fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
+        let data: Vec<Vector<K>> = input
+            .into_iter()
+            .map(|element| Vector::from(element))
+            .collect();
+
+        data
     }
 }
