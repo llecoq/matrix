@@ -60,7 +60,7 @@ impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
 
 //--------------------------------------- Private utility functions
 impl<K> Matrix<K> {
-// check that all the columns are all the same size, and thus, that the matrix is valid
+// check that all the columns are the same size, and thus, that the matrix is valid
     fn input_matrix_is_valid(input: &Vec<Vec<K>>) -> bool {
         let first_inner_len: usize = input
         .first()
