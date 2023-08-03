@@ -2,7 +2,6 @@ use core::fmt;
 
 use crate::vector::Vector;
 use crate::traits::AddSubScl;
-use thiserror::Error;
 
 //----------------------------------------------------- Structure
 /// A basic matrix structure
@@ -14,14 +13,22 @@ pub struct Matrix<K> {
     data: Vec<Vector<K>>
 }
 
-//---------------------------------------------------------- enum
+//------------------------------------------------- Error handling
 
-#[derive(Error, Debug)]
+#[derive(Debug)]
 pub enum MatrixError {
-    #[error("Invalid matrix format")]
     InvalidFormat,
-    #[error("Empty matrix")]
     Empty
+}
+
+impl fmt::Display for MatrixError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match *self {
+            MatrixError::InvalidFormat => write!(f, "Invalid matrix format"),
+            MatrixError::Empty => write!(f, "Empty matrix")
+        }
+    }
+    
 }
 
 //--------------------------------------------- Utility functions
@@ -37,15 +44,13 @@ impl<K> Matrix<K> {
 impl<K> Matrix<K> {
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_format_is_valid(&input) {
-            Ok(0) => {return Err(MatrixError::Empty);}
-            Ok(_) => {
-                return Ok(Matrix {
-                    rows: input.len(),
-                    columns: Self::first_column_size(&input),
-                    data: Self::build_matrix_data(input)
-                })
-            }
-            Err(_) => {return Err(MatrixError::InvalidFormat)}
+            Ok(0) => return Err(MatrixError::Empty),
+            Ok(_) => return Ok(Matrix {
+                        rows: input.len(),
+                        columns: Self::first_column_size(&input),
+                        data: Self::build_matrix_data(input)
+                    }),
+            Err(_) => return Err(MatrixError::InvalidFormat)
         }
     }
 }

@@ -11,6 +11,8 @@ where
     assert_eq!(output, expected_output);
 }
 
+
+
 //---------------------------------------------------------------------- Unit Test
 // Vector
 #[test]
@@ -68,33 +70,37 @@ fn  vector_scl_tests() {
 #[test]
 #[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
+    // Valid
     let matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2.]
     ]);
     match matrix {
-        Ok(matrix) => {println!("{}", matrix)}
-        Err(error) => {println!("{}", error);}
+        Ok(matrix) => println!("{}", matrix),        
+        Err(error) => println!("{}", error)
     };
 
+    // Invalid matrix format
     let matrix = Matrix::from(vec! [
         vec![1.1],
         vec![1.1, 2.]
     ]);
     match matrix {
-        Ok(matrix) => {println!("{}", matrix)}
-        Err(error) => {println!("{}", error);}
+        Ok(matrix) => println!("{}", matrix),
+        Err(error) => println!("{}", error)
     };
 
+    // Invalid matrix format
     let matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2., 2.]
     ]);
     match matrix {
-        Ok(matrix) => {println!("{}", matrix)}
-        Err(error) => {println!("{}", error);}
+        Ok(matrix) => println!("{}", matrix),
+        Err(error) => println!("{}", error)
     };
 
+    // Valid
     let matrix = Matrix::from(vec! [
         vec![1.1, 2., 6.],
         vec![1.1, 2., 6.],
@@ -102,10 +108,11 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2., 6.]
     ]);
     match matrix {
-        Ok(matrix) => {println!("{}", matrix)}
-        Err(error) => {println!("{}", error);}
+        Ok(matrix) => println!("{}", matrix),
+        Err(error) => println!("{}", error)
     };
 
+    // Empty matrix
     let v: Vec<f32> = Vec::new();
     let matrix = Matrix::from(vec! [
         v,
@@ -114,8 +121,8 @@ fn  matrix_utility_functions_tests() {
         vec![]
     ]);
     match matrix {
-        Ok(matrix) => {println!("{}", matrix)}
-        Err(error) => {println!("{}", error);}
+        Ok(matrix) => println!("{}", matrix),
+        Err(error) => println!("{}", error)
     };
 
 }
