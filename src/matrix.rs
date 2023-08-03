@@ -1,3 +1,5 @@
+use core::fmt;
+
 use crate::vector::Vector;
 use crate::traits::AddSubScl;
 use thiserror::Error;
@@ -32,7 +34,6 @@ impl<K> Matrix<K> {
 }
 
 //----------------------------------------- Traits Implementation
-#[allow(unused_variables)]
 impl<K> Matrix<K> {
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_format_is_valid(&input) {
@@ -46,6 +47,24 @@ impl<K> Matrix<K> {
             }
             Err(_) => {return Err(MatrixError::InvalidFormat)}
         }
+    }
+}
+
+impl<K> fmt::Display for Matrix<K> 
+where
+    K: fmt::Display
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut iter = self.data.iter().peekable();
+
+        while let Some(vector) = iter.next() {
+            vector.fmt(f)?;
+
+            if let Some(_) = iter.peek() {
+                write!(f, "\n")?;
+            }
+        }
+        Ok(())
     }
 }
 
