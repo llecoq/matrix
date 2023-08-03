@@ -66,7 +66,6 @@ fn  vector_scl_tests() {
 }
 
 #[test]
-#[allow(unused_mut)]
 #[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
     let matrix = Matrix::from(vec! [
@@ -74,7 +73,7 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2.]
     ]);
     match matrix {
-        Ok(matrix) => {println!("Valid")}
+        Ok(matrix) => {println!("Valid matrix format")}
         Err(error) => {println!("{}", error);}
     };
 
@@ -82,20 +81,41 @@ fn  matrix_utility_functions_tests() {
         vec![1.1],
         vec![1.1, 2.]
     ]);
+    match matrix {
+        Ok(matrix) => {println!("Valid matrix format")}
+        Err(error) => {println!("{}", error);}
+    };
+
     let matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2., 2.]
     ]);
+    match matrix {
+        Ok(matrix) => {println!("Valid matrix format")}
+        Err(error) => {println!("{}", error);}
+    };
+
     let matrix = Matrix::from(vec! [
         vec![1.1, 2.],
         vec![1.1, 2.],
         vec![1.1, 2.],
         vec![1.1, 2.]
     ]);
+    match matrix {
+        Ok(matrix) => {println!("Valid matrix format")}
+        Err(error) => {println!("{}", error);}
+    };
+
+    let v: Vec<f32> = Vec::new();
     let matrix = Matrix::from(vec! [
+        v,
         vec![],
-        vec![()],
         vec![],
         vec![]
     ]);
+    match matrix {
+        Ok(matrix) => {println!("Valid matrix format")}
+        Err(error) => {println!("{}", error);}
+    };
+
 }

@@ -17,7 +17,9 @@ pub struct Matrix<K> {
 #[derive(Error, Debug)]
 pub enum MatrixError {
     #[error("Invalid matrix format")]
-    InvalidFormat
+    InvalidFormat,
+    #[error("Empty matrix")]
+    Empty
 }
 
 //--------------------------------------------- Utility functions
@@ -34,14 +36,15 @@ impl<K> Matrix<K> {
 impl<K> Matrix<K> {
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_format_is_valid(&input) {
-            true => {
+            Ok(0) => {return Err(MatrixError::Empty);}
+            Ok(_) => {
                 return Ok(Matrix {
                     rows: input.len(),
                     columns: Self::first_column_size(&input),
                     data: Self::build_matrix_data(input)
                 })
             }
-            false => {return Err(MatrixError::InvalidFormat)}
+            Err(_) => {return Err(MatrixError::InvalidFormat)}
         }
     }
 }
@@ -69,11 +72,14 @@ impl<K> AddSubScl<Matrix<K>, K> for Matrix<K> {
 impl<K> Matrix<K> {
 
     // check that all the columns are the same size, and thus, that the matrix is valid
-    fn input_format_is_valid(input: &Vec<Vec<K>>) -> bool {
+    fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
     let first_inner_len: usize = Self::first_column_size(input);
-        input
+        if input
             .iter()
-            .all(|inner_vec| inner_vec.len() == first_inner_len)
+            .all(|inner_vec| inner_vec.len() == first_inner_len) {
+                return Ok(first_inner_len);
+        }
+        Err(MatrixError::InvalidFormat)
     }
 
     // return the first colomn size or 0
