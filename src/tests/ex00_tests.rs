@@ -28,19 +28,11 @@ fn  matrix_to_string<K>(matrix: &Vec<Vec<K>>) -> String
 where
     K: std::fmt::Display
 {
-    let flat_matrix: Vec<&K> = matrix
-        .into_iter()
-        .flatten()
-        .collect();
-
-    flat_matrix
-        .iter()
-        .map(|data| data.to_string())
+    matrix.iter()
+        .map(|vec| vector_to_string(vec))
         .collect::<Vec<String>>()
-        .join("]")
+        .join("\n")
 }
-
-
 
 //---------------------------------------------------------------------- Unit Test
 // Vector
