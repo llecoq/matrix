@@ -20,27 +20,30 @@ impl<K> Matrix<K> {
 }
 
 //----------------------------------------- Traits Implementation
+#[allow(unused_variables)]
 impl<K> Matrix<K> {
-    pub fn from(input_vec: Vec<Vec<K>>) -> Matrix<K> {
-        let mut data_vec: Vec<Vector<K>> = Vec::new();
-        let first_column_size = input_vec.iter().len();
+    pub fn from(input: Vec<Vec<K>>) -> Matrix<K> 
+    where
+        K: std::fmt::Debug
+{
+        let first_inner_len: usize = input
+            .first()
+            .map(Vec::len)
+            .unwrap_or(0);
+        // check that all the columns are all the same size, and thus, that the matrix is valid
+        let all_same_len: bool = input
+            .iter()
+            .all(|inner_vec| inner_vec.len() == first_inner_len);
 
-        let mut iter = input_vec.iter();
-        for element in input_vec {
-            match element.len() {
-                first_column_size => {
-                    // push into data_vec
-                }
-                _ => {
-                    // handle error, not all columns are same sizes
-                }
-            }
-        }
+        match all_same_len {
+            true => {}
+            false => {}
+        }    
 
         Matrix {
             rows: 1,
             columns: 1,
-            data: data_vec
+            data: vec![Vector::from(vec![])]
         }
     }
 }
