@@ -11,6 +11,6 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
 /// A trait to be implemented for the f32 or Complex type
 pub trait FloatOrComplex {}
 
-// Implement the trait for the types needed
+// Implement the trait for f32 and Complex types
 impl<K: Num + Copy> FloatOrComplex for Complex<K> {}  // Complex numbers
 impl FloatOrComplex for f32 {}  // Float numbers
