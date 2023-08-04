@@ -1,4 +1,5 @@
 use rand::Rng;
+use core::fmt;
 use std::fmt::Write as _;
 
 use crate::{Vector, traits::{AddSubScl, FloatOrComplex}, Matrix, MatrixError};
@@ -7,7 +8,7 @@ use crate::{Vector, traits::{AddSubScl, FloatOrComplex}, Matrix, MatrixError};
 // assert vector and matrix output
 fn  assert_output<K>(struct_output: &K, expected_output: &str)
 where
-    K: std::fmt::Display
+    K: fmt::Display
 {
     let mut output = String::new();
     write!(&mut output, "{}", struct_output).unwrap();
@@ -17,7 +18,7 @@ where
 // format vector to string
 fn  vector_to_string<K>(vector: &Vec<K>) -> String
 where
-    K: std::fmt::Display
+    K: fmt::Display
 {
     vector.iter()
         .map(|vec| format!("[{:.1}]", vec))
@@ -28,7 +29,7 @@ where
 // flatten Vec<Vec<K>> input and returns a String
 fn  flatten_input<K>(input:Vec<Vec<K>>) -> String
 where
-    K: std::fmt::Display
+    K: fmt::Display
 {
     let mut flattened_input: String = String::new();
 
@@ -42,7 +43,7 @@ where
 // format matrix to string
 fn  matrix_to_string<K>(matrix: &Vec<Vec<K>>) -> String
 where
-    K: std::fmt::Display
+    K: fmt::Display
 {
     matrix.iter()
         .map(|vec| vector_to_string(vec))
@@ -53,7 +54,7 @@ where
 // match matrix output
 fn match_matrix_output<K>(matrix: &Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
 where
-    K:  std::fmt::Display
+    K:  fmt::Display
         + FloatOrComplex
 {
     match matrix {

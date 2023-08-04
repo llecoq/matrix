@@ -89,7 +89,7 @@ impl<K: FloatOrComplex> IntoIterator for Vector<K> {
 impl<K: FloatOrComplex> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
     K:  Clone 
-        + std::fmt::Display
+        + fmt::Display
         + std::ops::Sub<Output = K>
         + std::ops::Add<Output = K>
         + std::ops::Mul<Output = K>

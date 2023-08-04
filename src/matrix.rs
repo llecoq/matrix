@@ -147,16 +147,18 @@ impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K>
 where
     K:  Clone
         + fmt::Display
-    
+        + std::ops::Sub<Output = K>
+        + std::ops::Add<Output = K>
+        + std::ops::Mul<Output = K>
 {
 
     /// Adds Matrix<K> to another one
     /// When trying to add a matrix of different size, add does nothing.
     fn add(&mut self, m: &Matrix<K>) {
         if self.get_shape() == m.get_shape() {
-            // for (mut elem_1, elem_2) in self.data.into_iter().zip(m.data.into_iter()) {
-            //     elem_1 = elem_1 + elem_2;
-            // }
+            for (elem_1, elem_2) in self.data.iter_mut().zip(m.clone().into_iter()) {
+                elem_1.add(&elem_2);
+            }
         }
     }
 
