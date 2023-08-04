@@ -8,11 +8,11 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
     fn scl(&mut self, a: K);
 }
 
-/// A trait for the generic type K that need to be either numeric or complex
+/// A trait for the generic type K that need to be either a float or complex
 // Create a new trait that will be implemented by the types you are interested in.
 pub trait FloatOrComplex {}
 
 // Implement the trait for the types you care about.
-impl<T: Num + Copy> FloatOrComplex for Complex<T> {}  // Complex numbers
+impl<K: Num + Copy> FloatOrComplex for Complex<K> {}  // Complex numbers
 impl FloatOrComplex for f64 {}
 impl FloatOrComplex for f32 {}
