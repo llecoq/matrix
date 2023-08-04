@@ -1,16 +1,16 @@
 use core::fmt;
 
-use crate::traits::{AddSubScl, ComplexOrNum};
+use crate::traits::{AddSubScl, FloatOrComplex};
 
 //----------------------------------------------------- Structure
 /// A basic vector structure.
 #[derive(Clone, Debug)]
-pub struct Vector<K: ComplexOrNum> {
+pub struct Vector<K: FloatOrComplex> {
     data: Vec<K>
 }
 
 //--------------------------------------------- Utility functions
-impl<K: ComplexOrNum> Vector<K> 
+impl<K: FloatOrComplex> Vector<K> 
 where
     K:  fmt::Display
 {
@@ -32,7 +32,7 @@ where
 
 
 //----------------------------------------- Traits Implementation
-impl<K: ComplexOrNum> Vector<K> {
+impl<K: FloatOrComplex> Vector<K> {
     /// Associated constructor `from`
     pub fn from(vec_data: Vec<K>) -> Vector<K> { 
         Vector { data: vec_data }
@@ -40,7 +40,7 @@ impl<K: ComplexOrNum> Vector<K> {
 }
 
 // Implement fmt::Display trait to be able to print Vector<K>
-impl<K: ComplexOrNum> fmt::Display for Vector<K> 
+impl<K: FloatOrComplex> fmt::Display for Vector<K> 
 where
     K: fmt::Display
 {
@@ -61,7 +61,7 @@ where
 } 
 
 // Add, Substract and Scale
-impl<K: ComplexOrNum> AddSubScl<Vector<K>, K> for Vector<K> 
+impl<K: FloatOrComplex> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
     K:  Clone 
         + std::fmt::Display

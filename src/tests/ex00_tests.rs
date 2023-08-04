@@ -1,4 +1,4 @@
-use crate::{Vector, traits::{AddSubScl, ComplexOrNum}, Matrix, MatrixError};
+use crate::{Vector, traits::{AddSubScl, FloatOrComplex}, Matrix, MatrixError};
 use std::fmt::Write as _;
 
 //--------------------------------------------------------------- Utility function
@@ -38,7 +38,7 @@ where
 fn match_matrix_output<K>(matrix: Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
 where
     K:  std::fmt::Display
-        + ComplexOrNum
+        + FloatOrComplex
 {
     match matrix {
         Ok(matrix) => {

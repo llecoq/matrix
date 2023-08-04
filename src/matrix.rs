@@ -1,13 +1,13 @@
 use core::fmt;
 
 use crate::vector::Vector;
-use crate::traits::{AddSubScl, ComplexOrNum};
+use crate::traits::{AddSubScl, FloatOrComplex};
 
 //----------------------------------------------------- Structure
 /// A basic matrix structure
 #[allow(dead_code)]
 #[derive(Clone, Debug)]
-pub struct Matrix<K: ComplexOrNum> {
+pub struct Matrix<K: FloatOrComplex> {
     rows: usize,
     columns: usize,
     data: Vec<Vector<K>>
@@ -33,7 +33,7 @@ impl fmt::Display for MatrixError {
 
 //--------------------------------------------- Utility functions
 #[allow(dead_code)]
-impl<K: ComplexOrNum> Matrix<K> {
+impl<K: FloatOrComplex> Matrix<K> {
     // fn get_shape {}
     // fn is_a_square {}
     // fn print_matrix {}
@@ -41,7 +41,7 @@ impl<K: ComplexOrNum> Matrix<K> {
 }
 
 //----------------------------------------- Traits Implementation
-impl<K: ComplexOrNum> Matrix<K> {
+impl<K: FloatOrComplex> Matrix<K> {
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_format_is_valid(&input) {
             Ok(0) => return Err(MatrixError::Empty),
@@ -55,7 +55,7 @@ impl<K: ComplexOrNum> Matrix<K> {
     }
 }
 
-impl<K: ComplexOrNum> fmt::Display for Matrix<K> 
+impl<K: FloatOrComplex> fmt::Display for Matrix<K> 
 where
     K: fmt::Display
 {
@@ -74,7 +74,7 @@ where
 }
 
 #[allow(unused_variables)]
-impl<K: ComplexOrNum> AddSubScl<Matrix<K>, K> for Matrix<K> {
+impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K> {
 
     /// Add a matrix to another one
     fn add(&mut self, v: &Matrix<K>){
@@ -93,7 +93,7 @@ impl<K: ComplexOrNum> AddSubScl<Matrix<K>, K> for Matrix<K> {
 }
 
 //--------------------------------------- Private utility functions
-impl<K: ComplexOrNum> Matrix<K> {
+impl<K: FloatOrComplex> Matrix<K> {
 
     // check that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
