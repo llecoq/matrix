@@ -139,6 +139,12 @@ fn  matrix_utility_functions_tests() {
     let matrix = Matrix::from(input.clone());
     match_matrix_output(&matrix, input);
 
+    // Row vector
+    let input = vec![
+        vec![1.1],
+    ];
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(&matrix, input); 
 
     // Invalid matrix format
     let input = vec![

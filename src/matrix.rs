@@ -18,6 +18,7 @@ pub struct Matrix<K: FloatOrComplex> {
 #[derive(Debug)]
 pub enum MatrixError {
     InvalidFormat,
+    RowVector,
     Empty
 }
 
@@ -25,6 +26,7 @@ impl fmt::Display for MatrixError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match *self {
             MatrixError::InvalidFormat => write!(f, "Invalid matrix format"),
+            MatrixError::RowVector => write!(f, "Library does not handle row vectors"),
             MatrixError::Empty => write!(f, "Empty matrix")
         }
     }
@@ -67,7 +69,7 @@ impl<K: FloatOrComplex> Matrix<K> {
                         columns: Self::first_column_size(&input),
                         data: Self::build_matrix_data(input)
                     }),
-            Err(_) => return Err(MatrixError::InvalidFormat)
+            Err(err) => return Err(err)
         }
     }
 }
@@ -128,7 +130,10 @@ impl<K: FloatOrComplex> Matrix<K> {
     // check that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
     let first_inner_len: usize = Self::first_column_size(input);
-        if input
+        if input.len() == 1 {
+            return Err(MatrixError::RowVector);
+        }
+        else if input
             .iter()
             .all(|inner_vec| inner_vec.len() == first_inner_len) {
                 return Ok(first_inner_len);
