@@ -30,6 +30,7 @@ matrix
 - [x] Working on doc generation
 - [x] Defining Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
 - [x] Handling errors : subject is asking for undefined behavior in many cases, but I may choose to handle some
+- [x] Row vectors: Should the library handle the case where the matrix has only one row ? -> No
 - [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
