@@ -34,7 +34,11 @@ impl fmt::Display for MatrixError {
 //--------------------------------------------- Utility functions
 #[allow(dead_code)]
 impl<K: FloatOrComplex> Matrix<K> {
-    // fn get_shape {}
+
+    /// A function that returns the shape of the Matrix
+    pub fn get_shape(&self) -> String {
+        format!("({},{})", self.rows, self.columns)
+    }
     // fn is_a_square {}
     // fn print_matrix {}
     // fn reshape_into_vector {}
