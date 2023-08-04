@@ -75,6 +75,16 @@ where
     }
 }
 
+impl<K: FloatOrComplex> IntoIterator for Vector<K> {
+    type Item = K;
+    type IntoIter = std::vec::IntoIter<Self::Item>;
+
+    /// Implements into_iter for Vector<K> to iter through data.
+    fn  into_iter(self) -> Self::IntoIter {
+        self.data.into_iter()
+    }
+}
+
 // Add, Substract and Scale
 impl<K: FloatOrComplex> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
@@ -102,21 +112,21 @@ where
     /// // [10.0]
     /// ```
     /// 
-    /// Attention ! When trying to add a vector of different size, add does nothing.
+    /// When trying to add a vector of different size, add does nothing.
     fn add(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
-            for (element_1, element_2) in self.data.iter_mut().zip(v.data.iter()) {
-                *element_1 = element_1.clone() + element_2.clone();
+            for (elem_1, elem_2) in self.data.iter_mut().zip(v.data.iter()) {
+                *elem_1 = elem_1.clone() + elem_2.clone();
             }
         }
     }
 
     /// Substraction of a vector by another one.
-    /// Attention ! When trying to substract a vector of different size, sub does nothing.
+    /// When trying to substract a vector of different size, sub does nothing.
     fn sub(&mut self, v: &Vector<K>) {
         if self.get_size() == v.get_size() {
-            for (element_1, element_2) in self.data.iter_mut().zip(v.data.iter()) {
-                *element_1 = element_1.clone() - element_2.clone();
+            for (elem_1, elem_2) in self.data.iter_mut().zip(v.data.iter()) {
+                *elem_1 = elem_1.clone() - elem_2.clone();
             }
         }     
     }
