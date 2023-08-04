@@ -165,7 +165,11 @@ where
     /// Substraction of Matrix<K> by another one.
     /// When trying to add a matrix of different size, sub does nothing.
     fn sub(&mut self, m: &Matrix<K>){
-
+        if self.get_shape() == m.get_shape() {
+            for (elem_1, elem_2) in self.data.iter_mut().zip(m.clone().into_iter()) {
+                elem_1.sub(&elem_2);
+            }
+        }
     }
 
     /// Scaling of Matrix<K> by a scalar.
