@@ -1,4 +1,4 @@
-use crate::{Vector, traits::AddSubScl, Matrix, MatrixError};
+use crate::{Vector, traits::{AddSubScl, ComplexOrNum}, Matrix, MatrixError};
 use std::fmt::Write as _;
 
 //--------------------------------------------------------------- Utility function
@@ -37,7 +37,8 @@ where
 // match matrix output
 fn match_matrix_output<K>(matrix: Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
 where
-    K: std::fmt::Display
+    K:  std::fmt::Display
+        + ComplexOrNum
 {
     match matrix {
         Ok(matrix) => {
@@ -57,6 +58,7 @@ fn  vector_utility_functions_tests() {
     // from()
     let v: Vector<f32> = Vector::from(input_v.clone());
     let v2: Vector<f64> = Vector::from(input_v2.clone());
+    // let v3: Vector<i32> = Vector::from(vec![1]);
     // get_size()
     assert_eq!(v.get_size(), input_v.len());
     assert_eq!(v2.get_size(), input_v2.len());
