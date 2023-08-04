@@ -25,6 +25,20 @@ where
         .join("")
 }
 
+// flatten Vec<Vec<K>> input and returns a String
+fn  flatten_input<K>(input:Vec<Vec<K>>) -> String
+where
+    K: std::fmt::Display
+{
+    let mut flattened_input: String = String::new();
+
+    for vector in input {
+        flattened_input += &vector_to_string(&vector);
+    }
+
+    flattened_input
+}
+
 // format matrix to string
 fn  matrix_to_string<K>(matrix: &Vec<Vec<K>>) -> String
 where
@@ -119,18 +133,7 @@ fn  vector_scl_tests() {
 #[test]
 #[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
-    //-------------------------------------------------from(), get_shape()
-    // Valid
-    let input = vec![
-        vec![1.1, 2.],
-        vec![1.1, 2.]
-    ];
-    let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input);
-    let matrix: Matrix<f32> = matrix.unwrap();
-    assert_eq!(matrix.get_shape(), "(2,2)");
-    assert_eq!(matrix.is_a_square(), true);
-
+    //-------------------from(), get_shape(), reshape_into_vector(), is_a_square()
     // Invalid matrix format
     let input = vec![
         vec![1.1],
@@ -155,19 +158,6 @@ fn  matrix_utility_functions_tests() {
     let matrix = Matrix::from(input.clone());
     match_matrix_output(&matrix, input);
 
-    // Valid
-    let input = vec![
-        vec![1.1, 2., 3.6],
-        vec![0.1, 3., 2.6],
-        vec![1.1, 2., 4.5],
-        vec![1.3, 2., 4.5]
-    ];
-    let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input);
-    let matrix: Matrix<f32> = matrix.unwrap();
-    assert_eq!(matrix.get_shape(), "(4,3)");
-    assert_eq!(matrix.is_a_square(), false);
-
     // Empty matrix
     let v: Vec<f32> = Vec::new();
     let input: Vec<Vec<f32>> = vec![
@@ -178,6 +168,42 @@ fn  matrix_utility_functions_tests() {
     ];
     let matrix = Matrix::from(input.clone());
     match_matrix_output(&matrix, input);
+
+    // Valid
+    let input = vec![
+        vec![1.1, 2.],
+        vec![2.1, 2.]
+    ];
+    // from
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(&matrix, input.clone());
+    // get_shape()
+    let matrix: Matrix<f32> = matrix.unwrap();
+    assert_eq!(matrix.get_shape(), "(2,2)");
+    // is_a_square()
+    assert_eq!(matrix.is_a_square(), true);
+    // reshape matrix into vector
+    let vector: Vector<f32> = matrix.reshape_into_vector();
+    assert_output(&vector, &flatten_input(input));
+
+    // Valid
+    let input = vec![
+        vec![1.1, 2., 3.6],
+        vec![2.1, 3., 2.6],
+        vec![3.1, 2., 4.5],
+        vec![4.3, 2., 4.5]
+    ];
+    // from
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(&matrix, input.clone());
+    // get_shape()
+    let matrix: Matrix<f32> = matrix.unwrap();
+    assert_eq!(matrix.get_shape(), "(4,3)");
+    // is_a_square()
+    assert_eq!(matrix.is_a_square(), false);
+    // reshape matrix into vector
+    let vector: Vector<f32> = matrix.reshape_into_vector();
+    assert_output(&vector, &flatten_input(input));
 
     // Valid
     let input = vec![
@@ -194,10 +220,16 @@ fn  matrix_utility_functions_tests() {
         vec![11.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
         vec![12.3, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.]
     ];
+    // from
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input);
+    match_matrix_output(&matrix, input.clone());
+    // get_shape()
     let matrix: Matrix<f32> = matrix.unwrap();
     assert_eq!(matrix.get_shape(), "(12,9)");
+    // is_a_square()
     assert_eq!(matrix.is_a_square(), false);
+    // reshape matrix into vector
+    let vector: Vector<f32> = matrix.reshape_into_vector();
+    assert_output(&vector, &flatten_input(input));
 
 }
