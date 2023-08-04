@@ -112,6 +112,16 @@ where
     }
 }
 
+impl<K: FloatOrComplex> IntoIterator for Matrix<K> {
+    type Item = Vector<K>;
+    type IntoIter = std::vec::IntoIter<Self::Item>;
+
+    /// Implements into_iter for Matrix<K> to iter through data.
+    fn  into_iter(self) -> Self::IntoIter {
+        self.data.into_iter()
+    }
+}
+
 impl<K: FloatOrComplex> Matrix<K>
 where
     K:  fmt::Display
@@ -133,15 +143,26 @@ where
 }
 
 #[allow(unused_variables)]
-impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K> {
+impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K>
+where
+    K:  Clone
+        + fmt::Display
+    
+{
 
     /// Adds Matrix<K> to another one
-    fn add(&mut self, v: &Matrix<K>){
-
+    /// When trying to add a matrix of different size, add does nothing.
+    fn add(&mut self, m: &Matrix<K>) {
+        if self.get_shape() == m.get_shape() {
+            // for (mut elem_1, elem_2) in self.data.into_iter().zip(m.data.into_iter()) {
+            //     elem_1 = elem_1 + elem_2;
+            // }
+        }
     }
 
     /// Substraction of Matrix<K> by another one.
-    fn sub(&mut self, v: &Matrix<K>){
+    /// When trying to add a matrix of different size, sub does nothing.
+    fn sub(&mut self, m: &Matrix<K>){
 
     }
 
