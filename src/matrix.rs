@@ -6,7 +6,7 @@ use crate::traits::{AddSubScl, FloatOrComplex};
 //----------------------------------------------------- Structure
 /// A basic matrix structure
 #[allow(dead_code)]
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct Matrix<K: FloatOrComplex> {
     rows: usize,
     columns: usize,
@@ -35,7 +35,7 @@ impl fmt::Display for MatrixError {
 #[allow(dead_code)]
 impl<K: FloatOrComplex> Matrix<K>
 where
-    K   : std::fmt::Display
+    K:  fmt::Display
 {
 
     /// A function that returns the shape of the Matrix in the format (rows, columns).
@@ -48,7 +48,7 @@ where
         self.rows == self.columns
     }
 
-    /// A function that display the Matrix on the standard ouptut with a new line.
+    /// A function that displays the Matrix on the standard ouptut with a new line.
     pub fn print_matrix(&self) {
         println!("{}", self);
     }
@@ -58,6 +58,7 @@ where
 
 //----------------------------------------- Traits Implementation
 impl<K: FloatOrComplex> Matrix<K> {
+    /// Associated constructor `from`.
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_format_is_valid(&input) {
             Ok(0) => return Err(MatrixError::Empty),
@@ -75,6 +76,8 @@ impl<K: FloatOrComplex> fmt::Display for Matrix<K>
 where
     K: fmt::Display
 {
+    /// Implement display for Matrix<K> data.
+    /// This is not displaying the full content of Matrix<K>, use #[Derive(Debug)] for that.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut iter = self.data.iter().peekable();
 
@@ -88,6 +91,17 @@ where
         Ok(())
     }
 }
+
+// impl<K: FloatOrComplex> fmt::Debug for Matrix<K>
+// where
+//     K:  fmt::Display
+// {
+//     /// Implement pretty display for Matrix<K>.
+//     /// This is displaying the full content of Matrix<K> in a pretty way.
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        
+//     }
+// }
 
 #[allow(unused_variables)]
 impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K> {
