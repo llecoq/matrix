@@ -260,3 +260,46 @@ fn  matrix_utility_functions_tests() {
     assert_output(&vector, &flatten_input(input));
 
 }
+
+#[test]
+fn matrix_add_sub_scl_tests() {
+    let input = vec![
+        vec![1.1, 2., 3.6],
+        vec![2.1, 3., 2.6],
+        vec![3.1, 2., 4.5],
+        vec![4.3, 2., 4.5]
+    ];
+    let input_2 = vec![
+        vec![1., 1., 1.],
+        vec![1., 1., 1.],
+        vec![1., 1., 1.],
+        vec![1., 1., 1.]
+    ];
+    let matrix = Matrix::from(input.clone());
+    let matrix_2 = Matrix::from(input_2.clone());
+
+    
+    //-------------------------------------------------------------------- add
+    let mut matrix: Matrix<f32> = matrix.unwrap();
+    let matrix_2 = matrix_2.unwrap();
+    let result = vec![
+        vec![2.1, 3., 4.6],
+        vec![3.1, 4., 3.6],
+        vec![4.1, 3., 5.5],
+        vec![5.3, 3., 5.5]
+    ];
+    matrix.add(&matrix_2);
+    assert_output(&matrix, matrix_to_string(&result).as_str());
+
+    //-------------------------------------------------------------------- sub
+    matrix.sub(&matrix_2);
+    let result = vec![
+        vec![1.1, 2., 3.6],
+        vec![2.1, 3., 2.6],
+        vec![3.1, 2., 4.5],
+        vec![4.3, 2., 4.5]
+    ];
+    matrix.add(&matrix_2);
+    assert_output(&matrix, matrix_to_string(&result).as_str());
+
+}
