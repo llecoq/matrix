@@ -146,6 +146,7 @@ where
 impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K>
 where
     K:  Clone
+        + Copy
         + fmt::Display
         + std::ops::Sub<Output = K>
         + std::ops::Add<Output = K>
@@ -174,7 +175,9 @@ where
 
     /// Scaling of Matrix<K> by a scalar.
     fn scl(&mut self, a: K){
-
+        for elem in self.data.iter_mut().into_iter() {
+            elem.scl(a);
+        }
     }
 }
 
