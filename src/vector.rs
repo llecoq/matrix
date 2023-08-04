@@ -19,7 +19,7 @@ where
         self.data.len()
     }
 
-    /// Print a vector.
+    /// A function that display the vector on the standard output with a new line.
     pub fn print_vector(&self) {
         println!("{}", self);
     }
