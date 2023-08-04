@@ -1,6 +1,6 @@
 use core::fmt;
 
-use crate::traits::{AddSubScl, FloatOrComplex};
+use crate::{traits::{AddSubScl, FloatOrComplex}, MatrixError, Matrix};
 
 //----------------------------------------------------- Structure
 /// A basic vector structure.
@@ -15,19 +15,28 @@ where
     K:  fmt::Display
         + Clone
 {
-    /// Returns the size of the vector.
+    /// Returns the size of Vector<K>.
     pub fn  get_size(&self) -> usize {
         self.data.len()
     }
 
-    /// Displays the vector on the standard output with a new line.
+    /// Displays Vector<K> on the standard output with a new line.
     pub fn  print_vector(&self) {
         println!("{}", self);
     }
 
-    /// Reshapes a vector into a matrix.
-    pub fn  reshape_into_matrix(&self) {
+    /// Reshapes Vector<K> into a matrix given the number of rows.
+    /// Returns Err(MatrixError) if the dimensions are not valid.
+    pub fn  reshape_into_matrix(&self, rows: usize) -> Result<Matrix<K>, MatrixError> {
+        let mut matrix: Vec<Vec<K>> = Vec::new();
+    
+        if rows > 0 {
+            for chunk in self.data.chunks(rows) {
+                matrix.push(chunk.to_vec());
+            }
+        }
 
+        Matrix::from(matrix)
     }
 
     /// Returns a clone of the data of Vector<K>.

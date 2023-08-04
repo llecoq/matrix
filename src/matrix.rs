@@ -30,7 +30,6 @@ impl fmt::Display for MatrixError {
             MatrixError::Empty => write!(f, "Empty matrix")
         }
     }
-    
 }
 
 //--------------------------------------------- Utility functions
@@ -41,22 +40,22 @@ where
         + Clone
 {
 
-    /// A function that returns the shape of the Matrix<K> in the format (rows, columns).
+    /// A function that returns the shape of Matrix<K> in the format (rows, columns).
     pub fn get_shape(&self) -> String {
         format!("({},{})", self.rows, self.columns)
     }
 
-    /// A function that returns true if the Matrix<K> shape is a square.
+    /// A function that returns true if Matrix<K> shape is a square.
     pub fn is_a_square(&self) -> bool {
         self.rows == self.columns
     }
 
-    /// A function that displays the Matrix<K> on the standard ouptut with a new line.
+    /// A function that displays Matrix<K> on the standard ouptut with a new line.
     pub fn print_matrix(&self) {
         println!("{}", self);
     }
 
-    /// A function that is reshaping the Matrix<K> into a signle Vector<K> and returns it.
+    /// A function that is reshaping Matrix<K> into a signle Vector<K> and returns it.
     pub fn reshape_into_vector(&self) -> Vector<K> {
         let mut flattened_data: Vec<K> = Vec::new();
 
@@ -70,6 +69,7 @@ where
 //----------------------------------------- Traits Implementation
 impl<K: FloatOrComplex> Matrix<K> {
     /// Associated constructor `from`.
+    /// Returns Err(MatrixError) if the format is not valid.
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
         match Self::input_format_is_valid(&input) {
             Ok(0) => return Err(MatrixError::Empty),
@@ -87,7 +87,7 @@ impl<K: FloatOrComplex> fmt::Display for Matrix<K>
 where
     K: fmt::Display
 {
-    /// Implement display for Matrix<K> data.
+    /// Implements display for Matrix<K> data.
     /// This is not displaying the full content of Matrix<K>, use #[Derive(Debug)] for that.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         Self::format_and_display_data(self, f, "")
@@ -98,7 +98,7 @@ impl<K: FloatOrComplex> fmt::Debug for Matrix<K>
 where
     K:  fmt::Display
 {
-    /// Implement pretty display for Matrix<K>.
+    /// Implements pretty display for Matrix<K>.
     /// This is displaying the full content of Matrix<K> in a pretty way.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         writeln!(f, "Matrix {{")?;
@@ -135,17 +135,17 @@ where
 #[allow(unused_variables)]
 impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K> {
 
-    /// Add a matrix to another one
+    /// Adds Matrix<K> to another one
     fn add(&mut self, v: &Matrix<K>){
 
     }
 
-    /// Substraction of a matrix by another one.
+    /// Substraction of Matrix<K> by another one.
     fn sub(&mut self, v: &Matrix<K>){
 
     }
 
-    /// Scaling of a matrix by a scalar.
+    /// Scaling of Matrix<K> by a scalar.
     fn scl(&mut self, a: K){
 
     }
@@ -154,7 +154,7 @@ impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K> {
 //--------------------------------------- Private utility functions
 impl<K: FloatOrComplex> Matrix<K> {
 
-    // check that all the columns are the same size, and thus, that the matrix is valid
+    // Checks that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
     let first_inner_len: usize = Self::first_column_size(input);
         if input.len() == 1 {
@@ -168,7 +168,7 @@ impl<K: FloatOrComplex> Matrix<K> {
         Err(MatrixError::InvalidFormat)
     }
 
-    // return the first colomn size or 0
+    // Returns the first colomn size or 0
     fn first_column_size(input: &Vec<Vec<K>>) -> usize {
         input
             .first()
@@ -176,7 +176,7 @@ impl<K: FloatOrComplex> Matrix<K> {
             .unwrap_or(0)
     }
 
-    // build the matrix data up and returns it
+    // Builds Matrix<K> data's up and returns it
     #[allow(unused_variables)]
     fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
         input

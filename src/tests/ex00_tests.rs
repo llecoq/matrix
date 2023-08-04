@@ -88,7 +88,27 @@ fn  vector_utility_functions_tests() {
     //---------------------------------------------------print_vector()
     assert_output(&v, vector_to_string(&input_v).as_str());
     //--------------------------------------------reshape_into_matrix()
-
+    let input_v: Vector<f32> = Vector::from(vec![1., 2., 3., 4.,5.,6.,7.,8.,9.,1.,11.,12.]);
+    // Not valid  
+    let matrix = input_v.reshape_into_matrix(0);
+    assert!(matrix.is_err());
+    let matrix = input_v.reshape_into_matrix(5);
+    assert!(matrix.is_err());
+    let matrix = input_v.reshape_into_matrix(9);
+    assert!(matrix.is_err());
+    let matrix = input_v.reshape_into_matrix(12);
+    assert!(matrix.is_err());
+    // valid
+    let matrix = input_v.reshape_into_matrix(1);
+    assert!(matrix.is_ok());
+    let matrix = input_v.reshape_into_matrix(2);
+    assert!(matrix.is_ok());
+    let matrix = input_v.reshape_into_matrix(3);
+    assert!(matrix.is_ok());
+    let matrix = input_v.reshape_into_matrix(4);
+    assert!(matrix.is_ok());
+    let matrix = input_v.reshape_into_matrix(6);
+    assert!(matrix.is_ok());
 }
 
 #[test]
