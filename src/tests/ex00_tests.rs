@@ -98,7 +98,13 @@ fn  vector_utility_functions_tests() {
     assert!(matrix.is_err());
     let matrix = input_v.reshape_into_matrix(12);
     assert!(matrix.is_err());
+    let v: Vec<f32> = Vec::new();
+    let input_v: Vector<f32> = Vector::from(v);
+    let matrix = input_v.reshape_into_matrix(1);
+    assert!(matrix.is_err());
+
     // valid
+    let input_v: Vector<f32> = Vector::from(vec![1., 2., 3., 4.,5.,6.,7.,8.,9.,1.,11.,12.]);
     let matrix = input_v.reshape_into_matrix(1);
     assert!(matrix.is_ok());
     let matrix = input_v.reshape_into_matrix(2);
