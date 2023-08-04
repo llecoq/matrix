@@ -1,7 +1,7 @@
 use rand::Rng;
+use std::fmt::Write as _;
 
 use crate::{Vector, traits::{AddSubScl, FloatOrComplex}, Matrix, MatrixError};
-use std::fmt::Write as _;
 
 //--------------------------------------------------------------- Utility function
 // assert vector and matrix output
@@ -62,8 +62,8 @@ fn  generate_random_f32_vector() -> Vec<f32> {
 // Vector
 #[test]
 fn  vector_utility_functions_tests() {
-    let input_v = vec![2., 6.3];
-    let input_v2: Vec<f32> = vec![];
+    let input_v = generate_random_f32_vector();
+    let input_v2: Vec<f32> = generate_random_f32_vector();
     // from()
     let v: Vector<f32> = Vector::from(input_v.clone());
     let v2: Vector<f32> = Vector::from(input_v2.clone());
@@ -84,10 +84,10 @@ fn  vector_add_tests() {
     let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
 
     v.add(&v3);
-    assert_output(&v, "[3.1][8.3]\n");
+    assert_output(&v, "[3.1][8.3]");
 
     v.add(&v2); // should not do anything. Choosed not to use Result<> to make it lighter in use
-    assert_output(&v, "[3.1][8.3]\n");
+    assert_output(&v, "[3.1][8.3]");
 }
 
 #[test]
@@ -97,10 +97,10 @@ fn  vector_sub_tests() {
     let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
 
     v.sub(&v3);
-    assert_output(&v, "[0.9][4.3]\n");
+    assert_output(&v, "[0.9][4.3]");
 
     v.sub(&v2); // should not do anything. Choosed not to use Result<> to make it lighter in use
-    assert_output(&v, "[0.9][4.3]\n");
+    assert_output(&v, "[0.9][4.3]");
 }
 
 #[test]
@@ -108,11 +108,11 @@ fn  vector_scl_tests() {
     let mut u = Vector::from(vec![2., 3.]);
 
     u.scl(2.);
-    assert_output(&u, "[4.0][6.0]\n");
+    assert_output(&u, "[4.0][6.0]");
     u.scl(-1.);
-    assert_output(&u, "[-4.0][-6.0]\n");
+    assert_output(&u, "[-4.0][-6.0]");
     u.scl(-0.);
-    assert_output(&u, "[0.0][0.0]\n");
+    assert_output(&u, "[0.0][0.0]");
 }
 
 #[test]
@@ -127,48 +127,42 @@ fn  matrix_utility_functions_tests() {
     match_matrix_output(matrix, input);
 
     // Invalid matrix format
-    let matrix = Matrix::from(vec! [
+    let input = vec![
         vec![1.1],
         vec![1.1, 2.]
-    ]);
-    match matrix {
-        Ok(matrix) => println!("{}", matrix),
-        Err(error) => println!("{}", error)
-    };
+    ];
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(matrix, input);
+
 
     // Invalid matrix format
-    let matrix = Matrix::from(vec! [
+    let input = vec![
+        vec![1.1, 2., 3.6],
         vec![1.1, 2.],
-        vec![1.1, 2., 2.]
-    ]);
-    match matrix {
-        Ok(matrix) => println!("{}", matrix),
-        Err(error) => println!("{}", error)
-    };
+        vec![1.1, 2., 4.5]
+    ];
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(matrix, input);
 
     // Valid
-    let matrix = Matrix::from(vec! [
-        vec![1.1, 2., 6.],
-        vec![1.1, 2., 6.],
-        vec![1.1, 2., 6.],
-        vec![1.1, 2., 6.]
-    ]);
-    match matrix {
-        Ok(matrix) => println!("{}", matrix),
-        Err(error) => println!("{}", error)
-    };
+    let input = vec![
+        vec![1.1, 2., 3.6],
+        vec![0.1, 3., 2.6],
+        vec![1.1, 2., 4.5],
+        vec![1.3, 2., 4.5]
+    ];
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(matrix, input);
 
     // Empty matrix
     let v: Vec<f32> = Vec::new();
-    let matrix = Matrix::from(vec! [
+    let input: Vec<Vec<f32>> = vec![
         v,
         vec![],
         vec![],
         vec![]
-    ]);
-    match matrix {
-        Ok(matrix) => println!("{}", matrix),
-        Err(error) => println!("{}", error)
-    };
+    ];
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(matrix, input);
 
 }
