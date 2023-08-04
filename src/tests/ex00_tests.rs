@@ -3,7 +3,7 @@ use std::fmt::Write as _;
 
 use crate::{Vector, traits::{AddSubScl, FloatOrComplex}, Matrix, MatrixError};
 
-//--------------------------------------------------------------- Utility function
+//-------------------------------------------------------------- UTILITY FUNCTIONS
 // assert vector and matrix output
 fn  assert_output<K>(struct_output: &K, expected_output: &str)
 where
@@ -37,7 +37,7 @@ where
 }
 
 // match matrix output
-fn match_matrix_output<K>(matrix: Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
+fn match_matrix_output<K>(matrix: &Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
 where
     K:  std::fmt::Display
         + FloatOrComplex
@@ -58,22 +58,22 @@ fn  generate_random_f32_vector() -> Vec<f32> {
     (0..size).map(|_| rng.gen::<f32>()).collect()
 }
 
-//---------------------------------------------------------------------- Unit Test
-// Vector
+//---------------------------------------------------------------------- UNIT TEST
+//--------------------------------------------------------------------------VECTOR
 #[test]
 fn  vector_utility_functions_tests() {
     let input_v = generate_random_f32_vector();
     let input_v2: Vec<f32> = generate_random_f32_vector();
-    // from()
+    //-----------------------------------------------------------from()
     let v: Vector<f32> = Vector::from(input_v.clone());
     let v2: Vector<f32> = Vector::from(input_v2.clone());
     // let v3: Vector<i32> = Vector::from(vec![1]);
-    // get_size()
+    //-------------------------------------------------------get_size()
     assert_eq!(v.get_size(), input_v.len());
     assert_eq!(v2.get_size(), input_v2.len());
-    // print_vector()
+    //---------------------------------------------------print_vector()
     assert_output(&v, vector_to_string(&input_v).as_str());
-    // reshape_into_matrix()
+    //--------------------------------------------reshape_into_matrix()
 
 }
 
@@ -115,16 +115,19 @@ fn  vector_scl_tests() {
     assert_output(&u, "[0.0][0.0]");
 }
 
+//--------------------------------------------------------------------------MATRIX
 #[test]
 #[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
+    //-----------------------------------------------------------from()
     // Valid
     let input = vec![
         vec![1.1, 2.],
         vec![1.1, 2.]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(matrix, input);
+    match_matrix_output(&matrix, input);
+    matrix.unwrap().get_shape();
 
     // Invalid matrix format
     let input = vec![
@@ -132,7 +135,7 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2.]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(matrix, input);
+    match_matrix_output(&matrix, input);
 
 
     // Invalid matrix format
@@ -142,7 +145,7 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2., 4.5]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(matrix, input);
+    match_matrix_output(&matrix, input);
 
     // Valid
     let input = vec![
@@ -152,7 +155,7 @@ fn  matrix_utility_functions_tests() {
         vec![1.3, 2., 4.5]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(matrix, input);
+    match_matrix_output(&matrix, input);
 
     // Empty matrix
     let v: Vec<f32> = Vec::new();
@@ -163,6 +166,6 @@ fn  matrix_utility_functions_tests() {
         vec![]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(matrix, input);
+    match_matrix_output(&matrix, input);
 
 }
