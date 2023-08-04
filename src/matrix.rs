@@ -81,11 +81,41 @@ where
     /// Implement display for Matrix<K> data.
     /// This is not displaying the full content of Matrix<K>, use #[Derive(Debug)] for that.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let mut iter = self.data.iter().peekable();
+        Self::format_and_display_data(self, f, "")
+    }
+}
 
+impl<K: FloatOrComplex> fmt::Debug for Matrix<K>
+where
+    K:  fmt::Display
+{
+    /// Implement pretty display for Matrix<K>.
+    /// This is displaying the full content of Matrix<K> in a pretty way.
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        writeln!(f, "Matrix {{")?;
+        writeln!(f, "   rows: {},", self.rows)?;
+        writeln!(f, "   columns: {},", self.columns)?;
+        writeln!(f, "   data: [")?;
+        Self::format_and_display_data(self, f, "      ")?;
+        write!(f, "\n")?;
+        writeln!(f, "   ],")?;
+        write!(f, "}}")
+    }
+}
+
+impl<K: FloatOrComplex> Matrix<K>
+where
+    K:  fmt::Display
+{
+    // Format and displays the data, taking into account an input padding
+    fn format_and_display_data(matrix: &Matrix<K>, f: &mut fmt::Formatter<'_>, padding: &str) -> fmt::Result {
+        let mut iter = matrix.data.iter().peekable();
+        
         while let Some(vector) = iter.next() {
-            vector.fmt(f)?;
-
+            write!(f, "{}", padding)?;
+            // vector.fmt(f)?;
+            write!(f, "{}", vector)?;
+            
             if let Some(_) = iter.peek() {
                 write!(f, "\n")?;
             }
@@ -93,17 +123,6 @@ where
         Ok(())
     }
 }
-
-// impl<K: FloatOrComplex> fmt::Debug for Matrix<K>
-// where
-//     K:  fmt::Display
-// {
-//     /// Implement pretty display for Matrix<K>.
-//     /// This is displaying the full content of Matrix<K> in a pretty way.
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        
-//     }
-// }
 
 #[allow(unused_variables)]
 impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K> {

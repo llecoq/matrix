@@ -44,7 +44,7 @@ where
 {
     match matrix {
         Ok(matrix) => {
-            matrix.print_matrix();
+            println!("{:?}", matrix);
             assert_output(&matrix, matrix_to_string(&input).as_str());
         }        
         Err(error) => println!("{}", error)
