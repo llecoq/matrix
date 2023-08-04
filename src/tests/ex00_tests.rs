@@ -1,3 +1,5 @@
+use rand::Rng;
+
 use crate::{Vector, traits::{AddSubScl, FloatOrComplex}, Matrix, MatrixError};
 use std::fmt::Write as _;
 
@@ -49,15 +51,22 @@ where
     };
 }
 
+// generate a vector of f32 of random size amd random content
+fn  generate_random_f32_vector() -> Vec<f32> {
+    let mut rng = rand::thread_rng();
+    let size = rng.gen_range(0..=10);
+    (0..size).map(|_| rng.gen::<f32>()).collect()
+}
+
 //---------------------------------------------------------------------- Unit Test
 // Vector
 #[test]
 fn  vector_utility_functions_tests() {
     let input_v = vec![2., 6.3];
-    let input_v2: Vec<f64> = vec![];
+    let input_v2: Vec<f32> = vec![];
     // from()
     let v: Vector<f32> = Vector::from(input_v.clone());
-    let v2: Vector<f64> = Vector::from(input_v2.clone());
+    let v2: Vector<f32> = Vector::from(input_v2.clone());
     // let v3: Vector<i32> = Vector::from(vec![1]);
     // get_size()
     assert_eq!(v.get_size(), input_v.len());
