@@ -33,7 +33,7 @@ where
 
 //----------------------------------------- Traits Implementation
 impl<K: FloatOrComplex> Vector<K> {
-    /// Associated constructor `from`
+    /// Associated constructor `from`.
     pub fn from(vec_data: Vec<K>) -> Vector<K> { 
         Vector { data: vec_data }
     }
@@ -44,6 +44,7 @@ impl<K: FloatOrComplex> fmt::Display for Vector<K>
 where
     K: fmt::Display
 {
+    /// Format and print the data of Vector<K>.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "[")?;
 
@@ -58,7 +59,7 @@ where
 
         write!(f, "]")
     }
-} 
+}
 
 // Add, Substract and Scale
 impl<K: FloatOrComplex> AddSubScl<Vector<K>, K> for Vector<K> 
