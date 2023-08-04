@@ -119,7 +119,7 @@ fn  vector_scl_tests() {
 #[test]
 #[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
-    //-----------------------------------------------------------from()
+    //-------------------------------------------------from(), get_shape()
     // Valid
     let input = vec![
         vec![1.1, 2.],
@@ -127,7 +127,9 @@ fn  matrix_utility_functions_tests() {
     ];
     let matrix = Matrix::from(input.clone());
     match_matrix_output(&matrix, input);
-    matrix.unwrap().get_shape();
+    let matrix: Matrix<f32> = matrix.unwrap();
+    assert_eq!(matrix.get_shape(), "(2,2)");
+    assert_eq!(matrix.is_a_square(), true);
 
     // Invalid matrix format
     let input = vec![
@@ -156,6 +158,9 @@ fn  matrix_utility_functions_tests() {
     ];
     let matrix = Matrix::from(input.clone());
     match_matrix_output(&matrix, input);
+    let matrix: Matrix<f32> = matrix.unwrap();
+    assert_eq!(matrix.get_shape(), "(4,3)");
+    assert_eq!(matrix.is_a_square(), false);
 
     // Empty matrix
     let v: Vec<f32> = Vec::new();
@@ -167,5 +172,26 @@ fn  matrix_utility_functions_tests() {
     ];
     let matrix = Matrix::from(input.clone());
     match_matrix_output(&matrix, input);
+
+    // Valid
+    let input = vec![
+        vec![1.1, 2., 3.6, 4.0, 5.3, 6.2, 7.6, 8., 9.],
+        vec![2.1, 3., 2.6, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![3.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![4.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![5.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![6.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![7.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![8.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![9.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![10.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![11.1, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.],
+        vec![12.3, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6.]
+    ];
+    let matrix = Matrix::from(input.clone());
+    match_matrix_output(&matrix, input);
+    let matrix: Matrix<f32> = matrix.unwrap();
+    assert_eq!(matrix.get_shape(), "(12,9)");
+    assert_eq!(matrix.is_a_square(), false);
 
 }
