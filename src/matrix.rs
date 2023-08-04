@@ -38,24 +38,33 @@ impl fmt::Display for MatrixError {
 impl<K: FloatOrComplex> Matrix<K>
 where
     K:  fmt::Display
+        + Clone
 {
 
-    /// A function that returns the shape of the Matrix in the format (rows, columns).
+    /// A function that returns the shape of the Matrix<K> in the format (rows, columns).
     pub fn get_shape(&self) -> String {
         format!("({},{})", self.rows, self.columns)
     }
 
-    /// A function that returns true if the Matrix shape is a square.
+    /// A function that returns true if the Matrix<K> shape is a square.
     pub fn is_a_square(&self) -> bool {
         self.rows == self.columns
     }
 
-    /// A function that displays the Matrix on the standard ouptut with a new line.
+    /// A function that displays the Matrix<K> on the standard ouptut with a new line.
     pub fn print_matrix(&self) {
         println!("{}", self);
     }
 
-    // fn reshape_into_vector {}
+    /// A function that is reshaping the Matrix<K> into a signle Vector<K> and returns it.
+    pub fn reshape_into_vector(&self) -> Vector<K> {
+        let mut flattened_data: Vec<K> = Vec::new();
+
+        for rows in &self.data {
+            flattened_data.extend(rows.get_data());
+        }   
+        Vector::from(flattened_data)
+    }
 }
 
 //----------------------------------------- Traits Implementation
@@ -113,7 +122,6 @@ where
         
         while let Some(vector) = iter.next() {
             write!(f, "{}", padding)?;
-            // vector.fmt(f)?;
             write!(f, "{}", vector)?;
             
             if let Some(_) = iter.peek() {
