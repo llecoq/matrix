@@ -13,20 +13,26 @@ pub struct Vector<K: FloatOrComplex> {
 impl<K: FloatOrComplex> Vector<K> 
 where
     K:  fmt::Display
+        + Clone
 {
-    /// Return the size of the vector.
-    pub fn get_size(&self) -> usize {
+    /// Returns the size of the vector.
+    pub fn  get_size(&self) -> usize {
         self.data.len()
     }
 
-    /// A function that display the vector on the standard output with a new line.
-    pub fn print_vector(&self) {
+    /// Displays the vector on the standard output with a new line.
+    pub fn  print_vector(&self) {
         println!("{}", self);
     }
 
-    /// Reshape a vector into a matrix.
-    pub fn reshape_into_matrix(&self) {
+    /// Reshapes a vector into a matrix.
+    pub fn  reshape_into_matrix(&self) {
 
+    }
+
+    /// Returns a clone of the data of Vector<K>.
+    pub fn  get_data(&self) -> Vec<K> {
+        self.data.clone()
     }
 }
 
@@ -56,7 +62,6 @@ where
                 write!(f, "][")?;
             }
         }
-
         write!(f, "]")
     }
 }
