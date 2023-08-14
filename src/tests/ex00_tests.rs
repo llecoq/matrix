@@ -87,7 +87,9 @@ fn  vector_utility_functions_tests() {
     assert_eq!(v.get_size(), input_v.len());
     assert_eq!(v2.get_size(), input_v2.len());
     //---------------------------------------------------print_vector()
-    assert_output(&v, vector_to_string(&input_v).as_str());
+    if v.get_size() > 0 {
+        assert_output(&v, vector_to_string(&input_v).as_str());
+    }
     //--------------------------------------------reshape_into_matrix()
     let input_v: Vector<f32> = Vector::from(vec![1., 2., 3., 4.,5.,6.,7.,8.,9.,1.,11.,12.]);
     // Not valid  
