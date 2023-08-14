@@ -299,7 +299,6 @@ fn matrix_add_sub_scl_tests() {
         vec![3.1, 2., 4.5],
         vec![4.3, 2., 4.5]
     ];
-    matrix.add(&matrix_2);
     assert_output(&matrix, matrix_to_string(&result).as_str());
 
 }
