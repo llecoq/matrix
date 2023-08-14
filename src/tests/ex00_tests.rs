@@ -301,4 +301,14 @@ fn matrix_add_sub_scl_tests() {
     ];
     assert_output(&matrix, matrix_to_string(&result).as_str());
 
+    //-------------------------------------------------------------------- scale
+    matrix.scl(2.);
+    let result = vec![
+        vec![2.2, 4.0, 7.2],
+        vec![4.2, 6.0, 5.2],
+        vec![6.2, 4.0, 9.0],
+        vec![8.6, 4.0, 9.0]
+    ];
+    assert_output(&matrix, matrix_to_string(&result).as_str());
+
 }
