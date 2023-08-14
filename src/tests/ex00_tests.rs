@@ -125,12 +125,16 @@ fn  vector_add_tests() {
     let mut v: Vector<f32> = Vector::from(vec![2., 6.3]);
     let v2: Vector<f32> = Vector::from(vec![]);
     let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
+    let v4: Vector<f32> = Vector::from(vec![-3.1, -8.3]);
 
     v.add(&v3);
     assert_output(&v, "[3.1][8.3]");
 
     v.add(&v2); // should not do anything. Choosed not to use Result<> to make it lighter in use
     assert_output(&v, "[3.1][8.3]");
+
+    v.add(&v4); // adding negatives
+    assert_output(&v, "[0.0][0.0]");
 }
 
 #[test]
