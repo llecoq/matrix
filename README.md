@@ -34,7 +34,7 @@ matrix
 - [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
-- [ ] Exercise 00 - Add, Subtract and Scale
+- [x] Exercise 00 - Add, Subtract and Scale
 - [ ] Exercise 01 - Linear combination
 - [ ] Exercise 01 - Linear interpolation
 - [ ] Exercise 03 - Dot product
