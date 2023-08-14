@@ -15,17 +15,17 @@ where
     K:  fmt::Display
         + Clone
 {
-    /// Returns the size of Vector<K>.
+    /// Returns the size of `Vector<K>`.
     pub fn  get_size(&self) -> usize {
         self.data.len()
     }
 
-    /// Displays Vector<K> on the standard output with a new line.
+    /// Displays `Vector<K>` on the standard output with a new line.
     pub fn  print_vector(&self) {
         println!("{}", self);
     }
 
-    /// Reshapes Vector<K> into a matrix given the number of rows.
+    /// Reshapes `Vector<K>` into a matrix given the number of rows.
     /// Returns Err(MatrixError) if the dimensions are not valid.
     pub fn  reshape_into_matrix(&self, rows: usize) -> Result<Matrix<K>, MatrixError> {
         let mut matrix: Vec<Vec<K>> = Vec::new();
@@ -39,7 +39,7 @@ where
         Matrix::from(matrix)
     }
 
-    /// Returns a clone of the data of Vector<K>.
+    /// Returns a clone of the data of `Vector<K>`.
     pub fn  get_data(&self) -> Vec<K> {
         self.data.clone()
     }
@@ -54,12 +54,12 @@ impl<K: FloatOrComplex> Vector<K> {
     }
 }
 
-// Implement fmt::Display trait to be able to print Vector<K>
+// Implement fmt::Display trait to be able to print `Vector<K>`
 impl<K: FloatOrComplex> fmt::Display for Vector<K> 
 where
     K: fmt::Display
 {
-    /// Format and print the data of Vector<K>.
+    /// Format and print the data of `Vector<K>`.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "[")?;
 
@@ -79,7 +79,7 @@ impl<K: FloatOrComplex> IntoIterator for Vector<K> {
     type Item = K;
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
-    /// Implements into_iter for Vector<K> to iter through data.
+    /// Implements into_iter for `Vector<K>` to iter through data.
     fn  into_iter(self) -> Self::IntoIter {
         self.data.into_iter()
     }

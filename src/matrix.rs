@@ -40,22 +40,22 @@ where
         + Clone
 {
 
-    /// A function that returns the shape of Matrix<K> in the format (rows, columns).
+    /// A function that returns the shape of `Matrix<K>` in the format (rows, columns).
     pub fn get_shape(&self) -> String {
         format!("({},{})", self.rows, self.columns)
     }
 
-    /// A function that returns true if Matrix<K> shape is a square.
+    /// A function that returns true if `Matrix<K>` shape is a square.
     pub fn is_a_square(&self) -> bool {
         self.rows == self.columns
     }
 
-    /// A function that displays Matrix<K> on the standard ouptut with a new line.
+    /// A function that displays `Matrix<K>` on the standard ouptut with a new line.
     pub fn print_matrix(&self) {
         println!("{}", self);
     }
 
-    /// A function that is reshaping Matrix<K> into a signle Vector<K> and returns it.
+    /// A function that is reshaping `Matrix<K>` into a signle `Vector<K>` and returns it.
     pub fn reshape_into_vector(&self) -> Vector<K> {
         let mut flattened_data: Vec<K> = Vec::new();
 
@@ -87,8 +87,8 @@ impl<K: FloatOrComplex> fmt::Display for Matrix<K>
 where
     K: fmt::Display
 {
-    /// Implements display for Matrix<K> data.
-    /// This is not displaying the full content of Matrix<K>, use #[Derive(Debug)] for that.
+    /// Implements display for `Matrix<K>` data.
+    /// This is not displaying the full content of `Matrix<K>`, use #[Derive(Debug)] for that.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         Self::format_and_display_data(self, f, "")
     }
@@ -98,8 +98,8 @@ impl<K: FloatOrComplex> fmt::Debug for Matrix<K>
 where
     K:  fmt::Display
 {
-    /// Implements pretty display for Matrix<K>.
-    /// This is displaying the full content of Matrix<K> in a pretty way.
+    /// Implements pretty display for `Matrix<K>`.
+    /// This is displaying the full content of `Matrix<K>` in a pretty way.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         writeln!(f, "Matrix {{")?;
         writeln!(f, "   rows: {},", self.rows)?;
@@ -116,7 +116,7 @@ impl<K: FloatOrComplex> IntoIterator for Matrix<K> {
     type Item = Vector<K>;
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
-    /// Implements into_iter for Matrix<K> to iter through data.
+    /// Implements into_iter for `Matrix<K>` to iter through data.
     fn  into_iter(self) -> Self::IntoIter {
         self.data.into_iter()
     }
@@ -153,7 +153,7 @@ where
         + std::ops::Mul<Output = K>
 {
 
-    /// Adds Matrix<K> to another one
+    /// Adds `Matrix<K>` to another one
     /// When trying to add a matrix of different size, add does nothing.
     fn add(&mut self, m: &Matrix<K>) {
         if self.get_shape() == m.get_shape() {
@@ -163,7 +163,7 @@ where
         }
     }
 
-    /// Substraction of Matrix<K> by another one.
+    /// Substraction of `Matrix<K>` by another one.
     /// When trying to add a matrix of different size, sub does nothing.
     fn sub(&mut self, m: &Matrix<K>){
         if self.get_shape() == m.get_shape() {
@@ -173,7 +173,7 @@ where
         }
     }
 
-    /// Scaling of Matrix<K> by a scalar.
+    /// Scaling of `Matrix<K>` by a scalar.
     fn scl(&mut self, a: K){
         for elem in self.data.iter_mut().into_iter() {
             elem.scl(a);
@@ -206,7 +206,7 @@ impl<K: FloatOrComplex> Matrix<K> {
             .unwrap_or(0)
     }
 
-    // Builds Matrix<K> data's up and returns it
+    // Builds `Matrix<K>` data's up and returns it
     #[allow(unused_variables)]
     fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
         input
