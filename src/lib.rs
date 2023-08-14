@@ -33,6 +33,7 @@ pub use self::matrix::*;
 pub mod vector;
 pub mod matrix;
 pub mod traits;
+pub mod operations;
 
 //------------------------- TESTS
 #[cfg(test)]
