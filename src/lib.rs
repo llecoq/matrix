@@ -38,6 +38,7 @@ pub mod operations;
 //------------------------- TESTS
 #[cfg(test)]
 mod tests {
+    mod test_utils;
     mod ex00_tests; // Add, Substract and Scale
     mod ex01_tests; // Linear combination
     mod ex02_tests; // Linear interpolation

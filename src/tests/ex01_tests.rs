@@ -1,6 +1,5 @@
 use crate::{Vector, operations::linear_combination::linear_combination};
 
-
 #[test]
 fn linear_combination_tests() {
     let e1 = Vector::from(vec![1., 0., 0.]);
