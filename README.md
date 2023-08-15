@@ -35,7 +35,7 @@ matrix
 
 ### Let's do it !
 - [x] Exercise 00 - Add, Subtract and Scale
-- [ ] Exercise 01 - Linear combination
+- [x] Exercise 01 - Linear combination
 - [ ] Exercise 01 - Linear interpolation
 - [ ] Exercise 03 - Dot product
 - [ ] Exercise 04 - Norm
