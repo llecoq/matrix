@@ -1,4 +1,4 @@
-use crate::{Vector, operations::linear_combination::linear_combination, tests::test_utils::assert_output};
+use crate::{Vector, tests::test_utils::assert_output, linear_combination};
 
 #[test]
 fn linear_combination_tests() {

@@ -28,6 +28,8 @@
 pub use vector::*;
 #[doc(inline)]
 pub use self::matrix::*;
+#[doc(inline)]
+pub use operations::*;
 
 //----------------------- MODULES
 pub mod vector;
