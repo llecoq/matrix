@@ -29,4 +29,11 @@ fn linear_combination_tests() {
     // undefined
     println!("{}", linear_combination(&[e1, e2, e3], &[16., 0.5]));
     println!("{}", linear_combination(&[v1, v2], &[1., 0., 7., 9.]));
+
+    // empty
+    let e1: Vector<f32> = Vector::from(vec![]);
+    let e2 = Vector::from(vec![0., 5.]);
+    let e3 = Vector::from(vec![0.6, 0., -1.]); 
+    println!("{}", linear_combination(&[e1, e2, e3], &[16.]));
+
 }
