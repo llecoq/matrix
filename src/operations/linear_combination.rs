@@ -21,7 +21,7 @@ where
     if let Some(first_element) = scaled_vectors.first() {
         let mut result = first_element.clone();
 
-        for elem in scaled_vectors.iter().skip(1).take(1) {
+        for elem in scaled_vectors.iter().skip(1) {
             result.add(&elem);
         }
         return result;
