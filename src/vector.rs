@@ -1,6 +1,6 @@
 use core::fmt;
 
-use crate::{traits::{AddSubScl, FloatOrComplex}, MatrixError, Matrix};
+use crate::{traits::{AddSubScl, FloatOrComplex, MathDisplay}, MatrixError, Matrix};
 
 //----------------------------------------------------- Structure
 /// A basic vector structure.
@@ -10,10 +10,9 @@ pub struct Vector<K: FloatOrComplex> {
 }
 
 //--------------------------------------------- Utility functions
-impl<K: FloatOrComplex> Vector<K> 
+impl<K> Vector<K> 
 where
-    K:  fmt::Display
-        + Clone
+    K:  FloatOrComplex + fmt::Display + Clone
 {
     /// Returns the size of `Vector<K>`.
     pub fn  get_size(&self) -> usize {
@@ -47,7 +46,10 @@ where
 
 
 //----------------------------------------- Traits Implementation
-impl<K: FloatOrComplex> Vector<K> {
+impl<K> Vector<K>
+where
+    K:  FloatOrComplex
+{
     /// Associated constructor `from`.
     pub fn from(vec_data: Vec<K>) -> Vector<K> { 
         Vector { data: vec_data }
@@ -55,9 +57,9 @@ impl<K: FloatOrComplex> Vector<K> {
 }
 
 // Implement fmt::Display trait to be able to print `Vector<K>`
-impl<K: FloatOrComplex> fmt::Display for Vector<K> 
+impl<K> fmt::Display for Vector<K> 
 where
-    K: fmt::Display
+    K:  FloatOrComplex + fmt::Display
 {
     /// Format and print the data of `Vector<K>`.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -75,7 +77,10 @@ where
     }
 }
 
-impl<K: FloatOrComplex> IntoIterator for Vector<K> {
+impl<K> IntoIterator for Vector<K>
+where
+    K:  FloatOrComplex
+{
     type Item = K;
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
@@ -86,13 +91,9 @@ impl<K: FloatOrComplex> IntoIterator for Vector<K> {
 }
 
 // Add, Substract and Scale
-impl<K: FloatOrComplex> AddSubScl<Vector<K>, K> for Vector<K> 
+impl<K> AddSubScl<Vector<K>, K> for Vector<K> 
 where 
-    K:  Clone 
-        + fmt::Display
-        + std::ops::Sub<Output = K>
-        + std::ops::Add<Output = K>
-        + std::ops::Mul<Output = K>
+    K:  MathDisplay + FloatOrComplex + Clone
 {
     /// Add a vector to another one
     /// 

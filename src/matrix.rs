@@ -1,7 +1,7 @@
 use core::fmt;
 
 use crate::vector::Vector;
-use crate::traits::{AddSubScl, FloatOrComplex};
+use crate::traits::{AddSubScl, FloatOrComplex, MathDisplay};
 
 //----------------------------------------------------- Structure
 /// A basic matrix structure
@@ -34,10 +34,9 @@ impl fmt::Display for MatrixError {
 
 //--------------------------------------------- Utility functions
 #[allow(dead_code)]
-impl<K: FloatOrComplex> Matrix<K>
+impl<K> Matrix<K>
 where
-    K:  fmt::Display
-        + Clone
+    K:  FloatOrComplex + fmt::Display + Clone
 {
 
     /// A function that returns the shape of `Matrix<K>` in the format (rows, columns).
@@ -67,7 +66,10 @@ where
 }
 
 //----------------------------------------- Traits Implementation
-impl<K: FloatOrComplex> Matrix<K> {
+impl<K> Matrix<K>
+where
+    K : FloatOrComplex
+{
     /// Associated constructor `from`.
     /// Returns Err(MatrixError) if the format is not valid.
     pub fn from(input: Vec<Vec<K>>) -> Result<Matrix<K>, MatrixError> {
@@ -83,9 +85,9 @@ impl<K: FloatOrComplex> Matrix<K> {
     }
 }
 
-impl<K: FloatOrComplex> fmt::Display for Matrix<K> 
+impl<K> fmt::Display for Matrix<K> 
 where
-    K: fmt::Display
+    K: FloatOrComplex + fmt::Display
 {
     /// Implements display for `Matrix<K>` data.
     /// This is not displaying the full content of `Matrix<K>`, use #[Derive(Debug)] for that.
@@ -94,9 +96,9 @@ where
     }
 }
 
-impl<K: FloatOrComplex> fmt::Debug for Matrix<K>
+impl<K> fmt::Debug for Matrix<K>
 where
-    K:  fmt::Display
+    K:  FloatOrComplex + fmt::Display
 {
     /// Implements pretty display for `Matrix<K>`.
     /// This is displaying the full content of `Matrix<K>` in a pretty way.
@@ -112,7 +114,10 @@ where
     }
 }
 
-impl<K: FloatOrComplex> IntoIterator for Matrix<K> {
+impl<K> IntoIterator for Matrix<K>
+where
+    K:  FloatOrComplex
+{
     type Item = Vector<K>;
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
@@ -122,9 +127,9 @@ impl<K: FloatOrComplex> IntoIterator for Matrix<K> {
     }
 }
 
-impl<K: FloatOrComplex> Matrix<K>
+impl<K> Matrix<K>
 where
-    K:  fmt::Display
+    K:  FloatOrComplex + fmt::Display
 {
     // Format and displays the data, taking into account an input padding
     fn format_and_display_data(matrix: &Matrix<K>, f: &mut fmt::Formatter<'_>, padding: &str) -> fmt::Result {
@@ -143,14 +148,9 @@ where
 }
 
 #[allow(unused_variables)]
-impl<K: FloatOrComplex> AddSubScl<Matrix<K>, K> for Matrix<K>
+impl<K> AddSubScl<Matrix<K>, K> for Matrix<K>
 where
-    K:  Clone
-        + Copy
-        + fmt::Display
-        + std::ops::Sub<Output = K>
-        + std::ops::Add<Output = K>
-        + std::ops::Mul<Output = K>
+    K:  MathDisplay + FloatOrComplex + Clone + Copy
 {
 
     /// Adds `Matrix<K>` to another one
@@ -182,8 +182,10 @@ where
 }
 
 //--------------------------------------- Private utility functions
-impl<K: FloatOrComplex> Matrix<K> {
-
+impl<K> Matrix<K> 
+where
+    K:  FloatOrComplex
+{
     // Checks that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
     let first_inner_len: usize = Self::first_column_size(input);

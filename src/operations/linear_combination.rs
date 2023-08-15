@@ -1,20 +1,13 @@
-use core::fmt;
-
-use crate::{Vector, traits::FloatOrComplex, traits::AddSubScl};
+use crate::{Vector, traits::FloatOrComplex, traits::{AddSubScl, MathDisplay}};
 
 /// Calculate the linear combination of the vectors of u scaled by their respective
 /// coefficients.
 /// If the two arrays provided as input are not of the same size, or if the array’s contents
 /// are incoherent, the result is undefined.
 #[allow(unused_variables)]
-pub fn linear_combination<K: FloatOrComplex>(u: &[Vector<K>], coefs: &[K]) -> Vector<K>
+pub fn linear_combination<K>(u: &[Vector<K>], coefs: &[K]) -> Vector<K>
 where
-    K:  fmt::Display
-        + std::fmt::Display
-        + std::ops::Sub<Output = K>
-        + std::ops::Add<Output = K>
-        + std::ops::Mul<Output = K>
-        + Clone
+    K:  MathDisplay + FloatOrComplex + Clone
 {
     let mut scl_vectors: Vec<Vector<K>> = vec![];
 
