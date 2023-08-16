@@ -72,3 +72,8 @@ pub fn  generate_random_f32_vector() -> Vec<f32> {
     let size = rng.gen_range(0..=10);
     (0..size).map(|_| rng.gen::<f32>()).collect()
 }
+
+// returns true if floats are close enough
+pub fn float_are_close(a: f32, b: f32) -> bool {
+    (a - b).abs() < 0.00001
+}
