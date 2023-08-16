@@ -171,7 +171,7 @@ where
     }
 
     /// Returns the L2 norm (Euclidian norm) of `Vector<K>`.
-    pub fn norm<V>(&mut self) -> f32 {
+    pub fn norm(&mut self) -> f32 {
         let squared_sum: f32 = self.clone()
             .into_iter()
             .map(|elem| elem.squares())
