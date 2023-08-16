@@ -186,6 +186,9 @@ where
             .into_iter()
             .max_by(|x, y| x.norm_value().partial_cmp(&y.norm_value()).unwrap());
 
-        result.unwrap().norm_value()
+        match result {
+            Some(x) => return x.norm_value(),
+            None => return 0.0
+        }
     }
 }
