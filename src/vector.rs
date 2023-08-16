@@ -54,6 +54,16 @@ where
     pub fn from(vec_data: Vec<K>) -> Vector<K> { 
         Vector { data: vec_data }
     }
+
+    /// Associated constructor `new`
+    pub fn new() -> Vector<K> {
+        Vector { data: vec![] }
+    }
+
+    /// Safe indexed read data
+    pub fn get(&self, index: usize) -> Option<&K> {
+        self.data.get(index)
+    }
 }
 
 // Implement fmt::Display trait to be able to print `Vector<K>`
