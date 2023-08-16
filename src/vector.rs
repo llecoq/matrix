@@ -180,7 +180,8 @@ where
         squared_sum.sqrt()
     }
 
-    // /// Returns the L∞ norm (Supremum or Maximum or Infinity norm) of `Vector<K>`.
+    /// Returns the L∞ norm (Supremum or Maximum or Infinity norm) of `Vector<K>`.
+    /// Return 0.0 when `Vector<K>` is empty.
     pub fn norm_inf(&mut self) -> f32 {
         let result: Option<K> = self.clone()
             .into_iter()
