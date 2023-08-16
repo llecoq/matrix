@@ -209,7 +209,6 @@ where
     }
 
     // Builds `Matrix<K>` data's up and returns it
-    #[allow(unused_variables)]
     fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
         input
             .into_iter()
