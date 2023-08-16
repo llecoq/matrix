@@ -38,6 +38,23 @@ fn linear_interpolation_tests() {
         vec![11., 5.5],
         vec![16.5, 22.]
     ];
-
     assert_output(&lerp(matrix.unwrap(), matrix_2.unwrap(), 0.5), &matrix_to_string(&result));
+
+    // // extra vectors will be ignored
+    // let input = vec![
+    //     vec![2., 1., 6.3],
+    //     vec![3., 4., 9.6]
+    // ];
+    // let matrix = Matrix::from(input.clone());
+    // let input_2 = vec![
+    //     vec![20., 10.],
+    //     vec![30., 40.]
+    // ];
+    // let matrix_2 = Matrix::from(input_2.clone());
+    // let result = vec![
+    //     vec![11., 5.5],
+    //     vec![16.5, 22.]
+    // ];
+    // assert_output(&lerp(matrix_2.unwrap(), matrix.unwrap(), 0.5), &matrix_to_string(&result));    
+
 }
