@@ -18,7 +18,6 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
 pub trait FloatOrComplex {
     fn norm_value(&self) -> f32;
     fn square_root(&self) -> f32;
-    fn squares(&self) -> f32;
 }
 
 // Implement the trait for f32 and Complex types
@@ -31,10 +30,6 @@ impl<K: Num + Copy> FloatOrComplex for Complex<K> {
     fn square_root(&self) -> f32 {
         2.   
     }
-    /// Squares the complex number and returns it.
-    fn squares(&self) -> f32 {
-        2.
-    }
 }  // Complex numbers
 
 impl FloatOrComplex for f32 {
@@ -45,10 +40,6 @@ impl FloatOrComplex for f32 {
     /// Returns the square root of the number.
     fn square_root(&self) -> f32 {
         self.sqrt()   
-    }
-    /// Squares the number and returns it.
-    fn squares(&self) -> f32 {
-        self * self
     }
 }  // Float numbers
 
