@@ -1,4 +1,5 @@
 use core::fmt;
+use std::iter::Sum;
 
 use crate::vector::Vector;
 use crate::traits::{AddSubScl, FloatOrComplex, MathDisplay};
@@ -178,6 +179,27 @@ where
             elem.scl(a);
         }
     }
+}
+
+impl<K> Matrix<K>
+where
+    K:  FloatOrComplex + MathDisplay + Sum + Clone
+{
+    /// Multiplies a matrix by a vector
+    pub fn mul_vec(&self, vec: &Vector<K>) -> Vector<K> {
+        let mut result: Vec<K> = Vec::new();
+
+        for elem in &self.data {
+            result.push(elem.dot(vec));
+        }
+
+        Vector::from(result)
+    }
+
+    // /// Multiplies a matrix by a matrix
+    // pub fn mul_mat(&mut self, mat: Matrix::<K>) -> Matrix::<K> {
+
+    // }
 }
 
 //--------------------------------------- Private utility functions
