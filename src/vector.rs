@@ -113,23 +113,23 @@ where
     /// // [10.0]
     /// ```
     /// 
-    /// When trying to add a vector of different size, add does nothing.
+    /// When trying to add a vector of different size, result is undefined.
     fn add(&mut self, v: &Vector<K>) {
-        if self.get_size() == v.get_size() {
+        // if self.get_size() == v.get_size() {
             for (elem_1, elem_2) in self.data.iter_mut().zip(v.data.iter()) {
                 *elem_1 = elem_1.clone() + elem_2.clone();
             }
-        }
+        // }
     }
 
     /// Substraction of a vector by another one.
-    /// When trying to substract a vector of different size, sub does nothing.
+    /// When trying to substract a vector of different size, result is undefined.
     fn sub(&mut self, v: &Vector<K>) {
-        if self.get_size() == v.get_size() {
+        // if self.get_size() == v.get_size() {
             for (elem_1, elem_2) in self.data.iter_mut().zip(v.data.iter()) {
                 *elem_1 = elem_1.clone() - elem_2.clone();
             }
-        }     
+        // }     
     }
 
     /// Scaling of a vector by a scalar.

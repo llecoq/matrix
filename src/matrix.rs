@@ -14,7 +14,6 @@ pub struct Matrix<K: FloatOrComplex> {
 }
 
 //------------------------------------------------- Error handling
-
 #[derive(Debug)]
 pub enum MatrixError {
     InvalidFormat,
@@ -154,23 +153,23 @@ where
 {
 
     /// Adds `Matrix<K>` to another one
-    /// When trying to add a matrix of different size, add does nothing.
+    /// When trying to add a matrix of different size, result is undefined.
     fn add(&mut self, m: &Matrix<K>) {
-        if self.get_shape() == m.get_shape() {
+        // if self.get_shape() == m.get_shape() {
             for (elem_1, elem_2) in self.data.iter_mut().zip(m.clone().into_iter()) {
                 elem_1.add(&elem_2);
             }
-        }
+        // }
     }
 
     /// Substraction of `Matrix<K>` by another one.
-    /// When trying to add a matrix of different size, sub does nothing.
+    /// When trying to add a matrix of different size, result is undefined.
     fn sub(&mut self, m: &Matrix<K>){
-        if self.get_shape() == m.get_shape() {
+        // if self.get_shape() == m.get_shape() {
             for (elem_1, elem_2) in self.data.iter_mut().zip(m.clone().into_iter()) {
                 elem_1.sub(&elem_2);
             }
-        }
+        // }
     }
 
     /// Scaling of `Matrix<K>` by a scalar.
