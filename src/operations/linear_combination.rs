@@ -4,7 +4,6 @@ use crate::{Vector, traits::FloatOrComplex, traits::{AddSubScl, MathDisplay}};
 /// coefficients.
 /// If the two arrays provided as input are not of the same size, or if the array’s contents
 /// are incoherent, the result is undefined.
-#[allow(unused_variables)]
 pub fn linear_combination<K>(u: &[Vector<K>], coefs: &[K]) -> Vector<K>
 where
     K:  MathDisplay + FloatOrComplex + Clone
