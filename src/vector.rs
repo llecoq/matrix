@@ -170,8 +170,15 @@ where
             .sum()
     }
 
-    // /// Returns the L2 norm (Euclidian norm) of `Vector<K>`.
-    // fn norm<V>(&mut self) -> f32 {}
+    /// Returns the L2 norm (Euclidian norm) of `Vector<K>`.
+    pub fn norm<V>(&mut self) -> f32 {
+        let squared_sum: f32 = self.clone()
+            .into_iter()
+            .map(|elem| elem.squares())
+            .sum();
+
+        squared_sum.sqrt()
+    }
 
     // /// Returns the L∞ norm (Supremum or Maximum or Infinity norm) of `Vector<K>`.
     // fn norm_inf<V>(&mut self) -> f32 {}
