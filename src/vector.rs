@@ -181,5 +181,11 @@ where
     }
 
     // /// Returns the L∞ norm (Supremum or Maximum or Infinity norm) of `Vector<K>`.
-    // fn norm_inf<V>(&mut self) -> f32 {}
+    pub fn norm_inf(&mut self) -> f32 {
+        let result: Option<K> = self.clone()
+            .into_iter()
+            .max_by(|x, y| x.norm_value().partial_cmp(&y.norm_value()).unwrap());
+
+        result.unwrap().norm_value()
+    }
 }
