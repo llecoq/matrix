@@ -140,3 +140,20 @@ where
     }
 
 }
+
+impl<K> Vector<K>
+where
+    K:  FloatOrComplex + std::ops::Mul + std::iter::Sum<<K as std::ops::Mul>::Output> + Clone
+{
+    /// Compute the dot product of two vectors of the same dimension.
+    /// If both vectors have different dimensions, tne behavior is undefined.
+    pub fn dot(&self, v: &Vector::<K>) -> K {
+        let self_clone = self.clone();
+
+        self_clone.into_iter()
+            .clone()
+            .zip(v.clone().into_iter())
+            .map(|(a, b)| a * b)
+            .sum()
+    }
+}
