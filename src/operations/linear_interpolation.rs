@@ -1,7 +1,8 @@
 use crate::traits::AddSubScl;
 
 /// Computes a linear interpolation between two objects of the same type.
-/// If the objects are not of the same size, extra items will be ignored
+/// If the objects are not of the same size, extra items will be ignored.
+/// The operations are done on clones of the given objects and does not modify them.
 #[allow(unused_variables)]
 pub fn lerp<V>(u: V, v: V, t: f32) -> V
 where
