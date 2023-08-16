@@ -160,14 +160,15 @@ where
 
 impl<K> Vector<K>
 where
-    K: FloatOrComplex
+    K: FloatOrComplex + Clone
 {
-    // / Returns the L1 norm (Taxicab or Manhattan norm) of `Vector<K>`.
-    // fn norm_1<V>(&mut self) -> f32 {
-    //     self.clone()
-    //         .into_iter()
-    //         .
-    // }
+    /// Returns the L1 norm (Taxicab or Manhattan norm) of `Vector<K>`.
+    pub fn norm_1(&mut self) -> f32 {
+        self.clone()
+            .into_iter()
+            .map(|elem| elem.norm_value())
+            .sum()
+    }
 
     // /// Returns the L2 norm (Euclidian norm) of `Vector<K>`.
     // fn norm<V>(&mut self) -> f32 {}
