@@ -40,7 +40,7 @@ fn linear_interpolation_tests() {
     ];
     assert_output(&lerp(&matrix, &matrix_2, 0.5), &matrix_to_string(&result));
 
-    // extra vectors will be ignored
+    // udefined result because of different sizes
     let input = vec![
         vec![2., 1., 6.3],
         vec![3., 4., 9.6]
