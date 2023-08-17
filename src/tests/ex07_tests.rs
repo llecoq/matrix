@@ -63,4 +63,27 @@ fn mul_mat_tests() {
     assert_output(&u.mul_mat(&v), "[-14.0][-7.0]\n[44.0][22.0]");
     // [-14., -7.]
     // [44., 22.]
+
+    let u = Matrix::from(vec![
+        vec![0.],
+        vec![0.],
+        vec![0.],
+    ]).unwrap();
+    let v = Matrix::from(vec![
+        vec![2., 1., 5.],
+        vec![4., 2., 3.],
+    ]).unwrap();
+    assert_output(&u.mul_mat(&v), "[0.0][0.0][0.0]\n[0.0][0.0][0.0]\n[0.0][0.0][0.0]");
+
+    // should be empty because not matching row / column len
+    let u = Matrix::from(vec![
+        vec![3., -5., 0.],
+        vec![6., 8., 6.],
+    ]).unwrap();
+    let v = Matrix::from(vec![
+        vec![2., 1., 5.],
+        vec![4., 2., 3.],
+    ]).unwrap();
+    assert_output(&u.mul_mat(&v), "[]");
+
 }
