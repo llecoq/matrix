@@ -241,7 +241,7 @@ where
     /// Returns an empty matrix if the number of rows of `self` is different form the number of columns of `mat`.
     pub fn mul_mat(&self, mat: &Matrix<K>) -> Matrix<K> {
         if self.rows == mat.columns {
-            let transposed_mat: Matrix<K> = Self::transpose(mat);
+            let transposed_mat: Matrix<K> = mat.transpose();
             let mut new_data: Vec<Vec<K>> = Vec::new();
 
             for self_row in self.clone() {
@@ -265,6 +265,14 @@ where
         }
         Err(MatrixError::IsNotSquare)
     }
+
+    /// Transposes `Matrix<K>` rows into columns and vice-versa
+    pub fn transpose(&self) -> Matrix<K> {
+        (0..self.columns).map(|j| {
+            (0..self.rows).map(|i| self[i][j].clone()).collect::<Vector<K>>()
+        }).collect::<Matrix<K>>()
+    }
+
 }
 
 //--------------------------------------- Private utility functions
@@ -302,10 +310,4 @@ where
             .collect()
     }
 
-    /// Transposes `Matrix<K>` rows into columns and vice-versa
-    fn transpose(input: &Matrix<K>) -> Matrix<K> {
-        (0..input.columns).map(|j| {
-            (0..input.rows).map(|i| input[i][j].clone()).collect::<Vector<K>>()
-        }).collect::<Matrix<K>>()
-    }
 }
