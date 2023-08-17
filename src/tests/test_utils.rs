@@ -51,8 +51,8 @@ where
         .join("\n")
 }
 
-// match matrix output
-pub fn match_matrix_output<K>(matrix: &Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
+// match matrix result
+pub fn match_matrix_result<K>(matrix: &Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
 where
     K:  fmt::Display
         + FloatOrComplex

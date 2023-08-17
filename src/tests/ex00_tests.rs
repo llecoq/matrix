@@ -99,14 +99,14 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2.]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input);
+    match_matrix_result(&matrix, input);
 
     // Row vector
     let input = vec![
         vec![1.1],
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input); 
+    match_matrix_result(&matrix, input); 
 
     // Invalid matrix format
     let input = vec![
@@ -115,7 +115,7 @@ fn  matrix_utility_functions_tests() {
         vec![1.1, 2., 4.5]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input);
+    match_matrix_result(&matrix, input);
 
     // Empty matrix
     let v: Vec<f32> = Vec::new();
@@ -126,7 +126,7 @@ fn  matrix_utility_functions_tests() {
         vec![]
     ];
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input);
+    match_matrix_result(&matrix, input);
 
     // Valid
     let input = vec![
@@ -135,7 +135,7 @@ fn  matrix_utility_functions_tests() {
     ];
     // from
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input.clone());
+    match_matrix_result(&matrix, input.clone());
     // get_shape()
     let matrix: Matrix<f32> = matrix.unwrap();
     assert_eq!(matrix.get_shape(), "(2,2)");
@@ -154,7 +154,7 @@ fn  matrix_utility_functions_tests() {
     ];
     // from
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input.clone());
+    match_matrix_result(&matrix, input.clone());
     // get_shape()
     let matrix: Matrix<f32> = matrix.unwrap();
     assert_eq!(matrix.get_shape(), "(4,3)");
@@ -181,7 +181,7 @@ fn  matrix_utility_functions_tests() {
     ];
     // from
     let matrix = Matrix::from(input.clone());
-    match_matrix_output(&matrix, input.clone());
+    match_matrix_result(&matrix, input.clone());
     // get_shape()
     let matrix: Matrix<f32> = matrix.unwrap();
     assert_eq!(matrix.get_shape(), "(12,9)");
