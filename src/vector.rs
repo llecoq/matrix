@@ -79,6 +79,17 @@ where
     }
 }
 
+/// Implements `FromIterator` for `Vector<K>` to be able to use `collect` method.
+impl<K> FromIterator<K> for Vector<K>
+where
+    K:  FloatOrComplex
+{
+    fn from_iter<T: IntoIterator<Item = K>>(iter: T) -> Self {
+        let collected_data: Vec<K> = iter.into_iter().collect();        
+        Vector {data: collected_data}
+    }
+}
+
 // Implement fmt::Display trait to be able to print `Vector<K>`.
 impl<K> fmt::Display for Vector<K> 
 where

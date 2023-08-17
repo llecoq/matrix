@@ -142,6 +142,17 @@ where
     }
 }
 
+/// Implements `FromIterator` for `Matrix<K>`
+impl<K> FromIterator<Vector<K>> for Matrix<K>
+where
+    K:  FloatOrComplex + Clone + std::fmt::Display
+{
+    fn from_iter<T: IntoIterator<Item = Vector<K>>>(iter: T) -> Self {
+        let collected_data: Vec<Vector<K>> = iter.into_iter().collect();
+        Matrix { rows: (collected_data.len()), columns: (collected_data[0].get_size()), data: (collected_data) }
+    }
+}
+
 impl<K> IntoIterator for Matrix<K>
 where
     K:  FloatOrComplex
@@ -237,7 +248,7 @@ where
 //--------------------------------------- Private utility functions
 impl<K> Matrix<K> 
 where
-    K:  FloatOrComplex + Clone
+    K:  FloatOrComplex + Clone + Iterator
 {
     // Checks that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
@@ -274,10 +285,8 @@ where
 
 
     //     (0..input.columns).map(|j| {
-    //         (0..input.rows).map(|i| {
-    //             input[i][j].clone().collect()
-    //         })
-    //     });
+    //         (0..input.rows).map(|i| input[i][j].clone()).collect::<Vector<K>>()
+    //     }).collect();
 
     //     Self::new()
     // }
