@@ -69,7 +69,7 @@ where
 //----------------------------------------- Traits Implementation
 impl<K> Matrix<K>
 where
-    K : FloatOrComplex + Clone
+    K : FloatOrComplex + Clone + std::fmt::Display
 {
     /// Associated constructor `from`.
     /// Returns Err(MatrixError) if the format is not valid.
@@ -248,7 +248,7 @@ where
 //--------------------------------------- Private utility functions
 impl<K> Matrix<K> 
 where
-    K:  FloatOrComplex + Clone + Iterator
+    K:  FloatOrComplex + Clone + std::fmt::Display
 {
     // Checks that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
@@ -280,14 +280,14 @@ where
             .collect()
     }
 
-    // // Transposes `Matrix<K>` rows into columns and vice-versa
-    // fn transpose(input: &Matrix<K>) -> Matrix<K> {
+    // Transposes `Matrix<K>` rows into columns and vice-versa
+    fn transpose(input: &Matrix<K>) -> Matrix<K> {
 
 
-    //     (0..input.columns).map(|j| {
-    //         (0..input.rows).map(|i| input[i][j].clone()).collect::<Vector<K>>()
-    //     }).collect();
+        (0..input.columns).map(|j| {
+            (0..input.rows).map(|i| input[i][j].clone()).collect::<Vector<K>>()
+        }).collect::<Matrix<K>>();
 
-    //     Self::new()
-    // }
+        Self::new()
+    }
 }
