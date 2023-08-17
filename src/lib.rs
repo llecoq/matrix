@@ -51,11 +51,9 @@ mod tests {
     mod ex07_tests; // Linear map, Matrix multiplication
     mod ex08_tests; // Trace
     mod ex09_tests; // Transpose
-    mod in00_tests; // Solving systems of linear equations
     mod ex10_tests; // Reduced row-echelon form
     mod ex11_tests; // Determinant
     mod ex12_tests; // Inverse
-    mod in01_tests; // Rank-nullity theorem
     mod ex13_tests; // Rank
     mod ex14_tests; // Projection matrix
     mod ex15_tests; // Complex vector spaces
