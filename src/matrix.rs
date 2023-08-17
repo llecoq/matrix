@@ -239,7 +239,18 @@ where
     /// Returns an empty matrix if the number of rows of `self` is different form the number of columns of `mat`.
     pub fn mul_mat(&self, mat: &Matrix<K>) -> Matrix<K> {
         if self.rows == mat.columns {
+            let transposed_mat: Matrix<K> = Self::transpose(mat);
+            let mut new_data: Vec<Vec<K>> = Vec::new();
 
+            for self_row in self.clone() {
+                let mut new_row: Vec<K> = Vec::new();
+
+                for mat_column in transposed_mat.clone() {
+                    new_row.push(self_row.dot(&mat_column));
+                }
+                new_data.push(new_row);
+            }
+            return Matrix::from(new_data).unwrap();
         }
         Self::new()
     }
@@ -250,7 +261,7 @@ impl<K> Matrix<K>
 where
     K:  FloatOrComplex + Clone + std::fmt::Display
 {
-    // Checks that all the columns are the same size, and thus, that the matrix is valid
+    /// Checks that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
     let first_inner_len: usize = Self::first_column_size(input);
         if input.len() == 1 {
@@ -264,7 +275,7 @@ where
         Err(MatrixError::InvalidFormat)
     }
 
-    // Returns the first colomn size or 0
+    /// Returns the first colomn size or 0
     fn first_column_size(input: &Vec<Vec<K>>) -> usize {
         input
             .first()
@@ -272,7 +283,7 @@ where
             .unwrap_or(0)
     }
 
-    // Builds `Matrix<K>` data's up and returns it
+    /// Builds `Matrix<K>` data's up and returns it
     fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
         input
             .into_iter()
@@ -280,7 +291,7 @@ where
             .collect()
     }
 
-    // Transposes `Matrix<K>` rows into columns and vice-versa
+    /// Transposes `Matrix<K>` rows into columns and vice-versa
     fn transpose(input: &Matrix<K>) -> Matrix<K> {
         (0..input.columns).map(|j| {
             (0..input.rows).map(|i| input[i][j].clone()).collect::<Vector<K>>()
