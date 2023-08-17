@@ -83,6 +83,16 @@ where
             Err(err) => return Err(err)
         }
     }
+
+    /// Associated constructor `new`.
+    /// Returns an empty `Matrix<K>`.
+    pub fn new() -> Matrix<K> {
+        Matrix {
+            rows: (0),
+            columns: (0),
+            data: (Self::build_matrix_data(vec![vec![]]))
+        }
+    }
 }
 
 impl<K> fmt::Display for Matrix<K> 
@@ -196,10 +206,13 @@ where
         Vector::from(result)
     }
 
-    // /// Multiplies a matrix by a matrix
-    // pub fn mul_mat(&mut self, mat: Matrix::<K>) -> Matrix::<K> {
-
-    // }
+    /// Multiplies a matrix by a matrix
+    pub fn mul_mat(&self, mat: Matrix<K>) -> Matrix<K> {
+        if self.rows == mat.columns {
+            
+        }
+        Self::new()
+    }
 }
 
 //--------------------------------------- Private utility functions
