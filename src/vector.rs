@@ -1,4 +1,5 @@
 use core::fmt;
+use std::ops::Index;
 
 use crate::{traits::{AddSubScl, FloatOrComplex, MathDisplay}, MatrixError, Matrix};
 
@@ -66,7 +67,19 @@ where
     }
 }
 
-// Implement fmt::Display trait to be able to print `Vector<K>`
+/// Implements `Index` for `Vector<K>`.
+impl<K> Index<usize> for Vector<K>
+where
+    K:  FloatOrComplex
+{
+    type Output = K;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.data[index]
+    }
+}
+
+// Implement fmt::Display trait to be able to print `Vector<K>`.
 impl<K> fmt::Display for Vector<K> 
 where
     K:  FloatOrComplex + fmt::Display
@@ -165,6 +178,7 @@ where
             .map(|(a, b)| a * b)
             .sum()
     }
+
 }
 
 

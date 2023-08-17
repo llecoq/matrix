@@ -1,7 +1,8 @@
 use core::fmt;
 use std::iter::Sum;
+use std::ops::Index;
 
-use crate::vector::Vector;
+use crate::vector::{Vector, self};
 use crate::traits::{AddSubScl, FloatOrComplex, MathDisplay};
 
 //----------------------------------------------------- Structure
@@ -68,7 +69,7 @@ where
 //----------------------------------------- Traits Implementation
 impl<K> Matrix<K>
 where
-    K : FloatOrComplex
+    K : FloatOrComplex + Clone
 {
     /// Associated constructor `from`.
     /// Returns Err(MatrixError) if the format is not valid.
@@ -92,6 +93,23 @@ where
             columns: (0),
             data: (Self::build_matrix_data(vec![vec![]]))
         }
+    }
+
+    /// Safe indexed read data
+    pub fn get(&self, index: usize) -> Option<&vector::Vector<K>> {
+        self.data.get(index)
+    }
+}
+
+/// Implements `Index` for `Matrix<K>`
+impl<K> Index<usize> for Matrix<K>
+where 
+    K:  FloatOrComplex
+{
+    type Output = Vector<K>;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.data[index]
     }
 }
 
@@ -206,10 +224,11 @@ where
         Vector::from(result)
     }
 
-    /// Multiplies a matrix by a matrix
-    pub fn mul_mat(&self, mat: Matrix<K>) -> Matrix<K> {
+    /// Multiplies a matrix by a matrix.
+    /// Returns an empty matrix if the number of rows of `self` is different form the number of columns of `mat`.
+    pub fn mul_mat(&self, mat: &Matrix<K>) -> Matrix<K> {
         if self.rows == mat.columns {
-            
+
         }
         Self::new()
     }
@@ -218,7 +237,7 @@ where
 //--------------------------------------- Private utility functions
 impl<K> Matrix<K> 
 where
-    K:  FloatOrComplex
+    K:  FloatOrComplex + Clone
 {
     // Checks that all the columns are the same size, and thus, that the matrix is valid
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
@@ -249,4 +268,17 @@ where
             .map(|element| Vector::from(element))
             .collect()
     }
+
+    // // Transposes `Matrix<K>` rows into columns and vice-versa
+    // fn transpose(input: &Matrix<K>) -> Matrix<K> {
+
+
+    //     (0..input.columns).map(|j| {
+    //         (0..input.rows).map(|i| {
+    //             input[i][j].clone().collect()
+    //         })
+    //     });
+
+    //     Self::new()
+    // }
 }
