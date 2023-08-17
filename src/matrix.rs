@@ -282,12 +282,8 @@ where
 
     // Transposes `Matrix<K>` rows into columns and vice-versa
     fn transpose(input: &Matrix<K>) -> Matrix<K> {
-
-
         (0..input.columns).map(|j| {
             (0..input.rows).map(|i| input[i][j].clone()).collect::<Vector<K>>()
-        }).collect::<Matrix<K>>();
-
-        Self::new()
+        }).collect::<Matrix<K>>()
     }
 }
