@@ -74,6 +74,6 @@ pub fn  generate_random_f32_vector() -> Vec<f32> {
 }
 
 // returns true if floats are close enough
-pub fn float_are_close(a: f32, b: f32) -> bool {
+pub fn floats_are_close(a: f32, b: f32) -> bool {
     (a - b).abs() < 0.00001
 }

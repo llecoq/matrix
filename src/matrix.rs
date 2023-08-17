@@ -20,7 +20,8 @@ pub struct Matrix<K: FloatOrComplex> {
 pub enum MatrixError {
     InvalidFormat,
     RowVector,
-    Empty
+    Empty,
+    IsNotSquare
 }
 
 impl fmt::Display for MatrixError {
@@ -28,7 +29,8 @@ impl fmt::Display for MatrixError {
         match *self {
             MatrixError::InvalidFormat => write!(f, "Invalid matrix format"),
             MatrixError::RowVector => write!(f, "Library does not handle row vectors"),
-            MatrixError::Empty => write!(f, "Empty matrix")
+            MatrixError::Empty => write!(f, "Empty matrix"),
+            MatrixError::IsNotSquare => write!(f, "Matrix needs to be square to compute trace")
         }
     }
 }
@@ -253,6 +255,15 @@ where
             return Matrix::from(new_data).unwrap();
         }
         Self::new()
+    }
+
+    /// Computes the trace of `Matrix<K>`.
+    /// If the matrix isn't square, return MatrixError
+    pub fn trace(&self) -> Result<K, MatrixError> {
+        if self.is_a_square() {
+            return Ok((0..self.rows).map(|i| self.data[i][i].clone()).sum::<K>());
+        }
+        Err(MatrixError::IsNotSquare)
     }
 }
 
