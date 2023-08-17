@@ -189,7 +189,6 @@ where
             .map(|(a, b)| a * b)
             .sum()
     }
-
 }
 
 
