@@ -200,7 +200,7 @@ where
     pub fn norm_1(&mut self) -> f32 {
         self.clone()
             .into_iter()
-            .map(|elem| elem.abs_value())
+            .map(|elem| elem.norm_value())
             .sum()
     }
 
@@ -219,10 +219,10 @@ where
     pub fn norm_inf(&mut self) -> f32 {
         let result: Option<K> = self.clone()
             .into_iter()
-            .max_by(|x, y| x.abs_value().partial_cmp(&y.abs_value()).unwrap());
+            .max_by(|x, y| x.norm_value().partial_cmp(&y.norm_value()).unwrap());
 
         match result {
-            Some(x) => return x.abs_value(),
+            Some(x) => return x.norm_value(),
             None => return 0.0
         }
     }

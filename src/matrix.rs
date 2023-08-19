@@ -1,6 +1,9 @@
 use core::fmt;
+use std::f32::EPSILON;
 use std::iter::Sum;
 use std::ops::Index;
+
+// use num_complex::ComplexFloat;
 
 use crate::vector::{Vector, self};
 use crate::traits::{AddSubScl, FloatOrComplex, MathDisplay};
@@ -281,21 +284,46 @@ where
     /// and a maximum space complexity of O(n^2) for a square matrix.
     pub fn row_echelon(&self) -> Matrix<K> {
         let mut rref_matrix = self.clone();
-        let current_row :usize = 0;
 
+        // 1. Set current_row to 0.
+        let mut current_row :usize = 0;
+
+        // 2. For each column:
         let _ = (0..rref_matrix.columns).map( |current_column| {
-            let pivot_row: Option<usize> = Self::find_pivot_row(&rref_matrix, current_column);
 
-            match pivot_row {
-                Some(index) => rref_matrix.data.swap(current_row, index),
+            // 2.1. Find the row, pivotRow, below currentRow (including currentRow) with the largest absolute value
+            match Self::find_pivot_row(&rref_matrix, current_column) {
+                Some(index) => {
+                    
+                    // 2.2. Swap current_row with pivot_row.
+                    if index != current_row {
+                        rref_matrix.data.swap(current_row, index);
+                    }
+                    let leading_coeff: &K = &rref_matrix.data[current_row][current_column].clone();
+
+                    // 2.3. If the leading entry (pivot) in current_row is not 1:
+                    if leading_coeff.close_to_one() == false {
+                        let scale_factor: K = leading_coeff.scale_factor();
+
+                        // 2.3.1. Scale the entire current_row by the pivot to make the leading entry 1.
+                        rref_matrix.data[current_row].scl(scale_factor);
+                    }
+
+                    // 2.4. Make all other entries in current_column (below the pivot) zero:
+                    let _ = ((current_row + 1)..rref_matrix.rows).map(|index| {
+                        let element: &K = &rref_matrix.data[index][current_column];
+
+                        if element.close_to_zero() == false {
+                            let multiplication_factor: K = leading_coeff.divide(&element);
+
+                            // 2.4.1. Subtract an appropriate multiple of current_row from pivot_row such that the entry in current_column of current_row becomes zero.  
+                            rref_matrix.data[index].scl(multiplication_factor);
+                        }
+                    });
+                }
                 None => {} // increment to next column
             }
-            // if pivot_row != current_row {
-            //     rref_matrix.data.swap(current_row, pivot_row);
-            // }
-            // if rref_matrix.data[current_row][current_column] != 1 {
-            //     rref_matrix.data[current_row].scl(1 / rref_matrix.data[current_row][current_column]);
-            // }
+            current_row += 1;
         });
     
         Matrix::new()
@@ -338,37 +366,38 @@ where
             .collect()
     }
 
-    /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
+    /// Finds the pivot row with the largest absolute value of the given column and returns the index of it
+    /// or None if its value is close to 0.
     fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> Option<usize> {
         let current_row: usize = current_column;
-        let mut largest_abs_value: f32 = matrix.data[current_row][current_column].abs_value();
+        let mut largest_norm_value: f32 = matrix.data[current_row][current_column].norm_value();
         let mut pivot_row: usize = current_row;
     
         let _ = (current_row..matrix.rows).map(|index| {
-            let current_abs_value: f32 = matrix.data[index][current_column].abs_value();
+            let current_norm_value: f32 = matrix.data[index][current_column].norm_value();
             
-            if current_abs_value > largest_abs_value {
-                largest_abs_value = current_abs_value;
+            if current_norm_value > largest_norm_value {
+                largest_norm_value = current_norm_value;
                 pivot_row = index;
             };
         });
-        match Self::close_to_zero(largest_abs_value) {
-            true => return Some(pivot_row),
-            false => return None
+        match Self::close_to_float(&largest_norm_value, &0.0) {
+            false => return Some(pivot_row),
+            true => return None
         }
     }
 
     /// Takes a number `n` in argument and if it's close to 0, returns true.
-    fn close_to_zero(n: f32) -> bool {
-        n < 0.000000001
+    fn close_to_float(a: &f32, b: &f32) -> bool {
+        (a - b).abs() < EPSILON
     }
     
     // /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
     // fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> usize {
     //     let current_row: usize = current_column;
     //     let (pivot_row, _) = (current_row..matrix.rows)
-    //         .map(|index| (index, matrix.data[index][current_column].abs_value()))
-    //         .fold((current_row, matrix.data[current_row][current_column].abs_value()),
+    //         .map(|index| (index, matrix.data[index][current_column].norm_value()))
+    //         .fold((current_row, matrix.data[current_row][current_column].norm_value()),
     //             |(max_row, max_val), (idx, val)| {
     //                 if val > max_val { (idx, val) } else { (max_row, max_val) }
     //             });
