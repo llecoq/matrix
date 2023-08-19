@@ -289,7 +289,7 @@ where
         let mut current_row :usize = 0;
 
         // 2. For each column:
-        let _ = (0..rref_matrix.columns).map( |current_column| {
+        (0..rref_matrix.columns).for_each( |current_column| {
 
             // 2.1. Find the row, pivotRow, below currentRow (including currentRow) with the largest absolute value
             match Self::find_pivot_row(&rref_matrix, current_column) {
@@ -310,7 +310,7 @@ where
                     }
 
                     // 2.4. Make all other entries in current_column (below the pivot) zero:
-                    let _ = ((current_row + 1)..rref_matrix.rows).map(|index| {
+                    ((current_row + 1)..rref_matrix.rows).for_each(|index| {
                         let element: &K = &rref_matrix.data[index][current_column];
 
                         if element.close_to_zero() == false {
@@ -326,7 +326,7 @@ where
             current_row += 1;
         });
     
-        Matrix::new()
+        rref_matrix
     } 
 
 }
@@ -373,7 +373,7 @@ where
         let mut largest_norm_value: f32 = matrix.data[current_row][current_column].norm_value();
         let mut pivot_row: usize = current_row;
     
-        let _ = (current_row..matrix.rows).map(|index| {
+        (current_row..matrix.rows).for_each(|index| {
             let current_norm_value: f32 = matrix.data[index][current_column].norm_value();
             
             if current_norm_value > largest_norm_value {
