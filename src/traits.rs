@@ -15,31 +15,41 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
 
 //-------------------------------------------------------------------- FloatOrComplex
 /// A trait to be implemented for the f32 or Complex type
+#[allow(unused_must_use)]
 pub trait FloatOrComplex {
-    fn norm_value(&self) -> f32;
+    fn abs_value(&self) -> f32;
     fn squares(&self) -> f32;
+    fn divide(&self, denominator: &Self) -> Self;
 }
 
 // Implement the trait for f32 and Complex types
 impl<K: Num + Copy> FloatOrComplex for Complex<K> {
     /// Returns the normed value of the complex number.
-    fn norm_value(&self) -> f32 {
+    fn abs_value(&self) -> f32 {
         2. // will be handled later on
     }
     /// Squares the complex number and returns it.
     fn squares(&self) -> f32 {
         2.
     }
+    /// Divides the complex number by a given denominator.
+    fn divide(&self, denominator: &Self) -> Complex<K> {
+        self / denominator
+    }
 }  // Complex numbers
 
 impl FloatOrComplex for f32 {
     /// Returns the absolute value of the number.
-    fn norm_value(&self) -> f32 {
+    fn abs_value(&self) -> f32 {
         self.abs()
     }
     /// Squares the number and returns it.
     fn squares(&self) -> f32 {
         self * self
+    }
+    /// Divides the float by a given denominator.
+    fn divide(&self, denominator: &Self) -> f32 {
+        self / denominator
     }
 }  // Float numbers
 
