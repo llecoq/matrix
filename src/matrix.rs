@@ -222,11 +222,12 @@ where
     }
 }
 
+#[allow(unused_variables)]
 impl<K> Matrix<K>
 where
     K:  FloatOrComplex + MathDisplay + Sum + Clone
 {
-    /// Multiplies a matrix by a vector
+    /// Multiplies a matrix by a vector and returns a new `Vector<K>`.
     pub fn mul_vec(&self, vec: &Vector<K>) -> Vector<K> {
         let mut result: Vec<K> = Vec::new();
 
@@ -237,7 +238,7 @@ where
         Vector::from(result)
     }
 
-    /// Multiplies a matrix by a matrix.
+    /// Multiplies a matrix by a matrix and returns a new `Matrix<K>`.
     /// Returns an empty matrix if the number of rows of `self` is different form the number of columns of `mat`.
     pub fn mul_mat(&self, mat: &Matrix<K>) -> Matrix<K> {
         if self.rows == mat.columns {
@@ -258,7 +259,8 @@ where
     }
 
     /// Computes the trace of `Matrix<K>`.
-    /// If the matrix isn't square, return MatrixError
+    /// If the matrix isn't square, returns MatrixError,
+    /// else returns a new `Matrix<K>` on success.
     pub fn trace(&self) -> Result<K, MatrixError> {
         if self.is_a_square() {
             return Ok((0..self.rows).map(|i| self.data[i][i].clone()).sum::<K>());
@@ -267,11 +269,37 @@ where
     }
 
     /// Transposes `Matrix<K>` rows into columns and vice-versa
+    /// and returns a new `Matrix<K>`.
     pub fn transpose(&self) -> Matrix<K> {
         (0..self.columns).map(|j| {
             (0..self.rows).map(|i| self[i][j].clone()).collect::<Vector<K>>()
         }).collect::<Matrix<K>>()
     }
+
+    /// Computes the reduced row-echelon form of `Matrix<K>` using the
+    /// Gauss-Jordan elimination method with a maximum time complexity of O(n^3)
+    /// and a maximum space complexity of O(n^2) for a square matrix.
+    pub fn row_echelon(&self) -> Matrix<K> {
+        let mut rref_matrix = self.clone();
+        let current_row :usize = 0;
+
+        let _ = (0..rref_matrix.columns).map( |current_column| {
+            let pivot_row: Option<usize> = Self::find_pivot_row(&rref_matrix, current_column);
+
+            match pivot_row {
+                Some(index) => rref_matrix.data.swap(current_row, index),
+                None => {} // increment to next column
+            }
+            // if pivot_row != current_row {
+            //     rref_matrix.data.swap(current_row, pivot_row);
+            // }
+            // if rref_matrix.data[current_row][current_column] != 1 {
+            //     rref_matrix.data[current_row].scl(1 / rref_matrix.data[current_row][current_column]);
+            // }
+        });
+    
+        Matrix::new()
+    } 
 
 }
 
@@ -280,7 +308,7 @@ impl<K> Matrix<K>
 where
     K:  FloatOrComplex + Clone + std::fmt::Display
 {
-    /// Checks that all the columns are the same size, and thus, that the matrix is valid
+    /// Checks that all the columns are the same size, and thus, that the matrix is valid.
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
     let first_inner_len: usize = Self::first_column_size(input);
         if input.len() == 1 {
@@ -294,7 +322,7 @@ where
         Err(MatrixError::InvalidFormat)
     }
 
-    /// Returns the first colomn size or 0
+    /// Returns the first colomn size or 0.
     fn first_column_size(input: &Vec<Vec<K>>) -> usize {
         input
             .first()
@@ -302,12 +330,50 @@ where
             .unwrap_or(0)
     }
 
-    /// Builds `Matrix<K>` data's up and returns it
+    /// Builds `Matrix<K>` data's up and returns it.
     fn build_matrix_data(input: Vec<Vec<K>>) -> Vec<Vector<K>> {
         input
             .into_iter()
             .map(|element| Vector::from(element))
             .collect()
     }
+
+    /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
+    fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> Option<usize> {
+        let current_row: usize = current_column;
+        let mut largest_abs_value: f32 = matrix.data[current_row][current_column].abs_value();
+        let mut pivot_row: usize = current_row;
+    
+        let _ = (current_row..matrix.rows).map(|index| {
+            let current_abs_value: f32 = matrix.data[index][current_column].abs_value();
+            
+            if current_abs_value > largest_abs_value {
+                largest_abs_value = current_abs_value;
+                pivot_row = index;
+            };
+        });
+        match Self::close_to_zero(largest_abs_value) {
+            true => return Some(pivot_row),
+            false => return None
+        }
+    }
+
+    /// Takes a number `n` in argument and if it's close to 0, returns true.
+    fn close_to_zero(n: f32) -> bool {
+        n < 0.000000001
+    }
+    
+    // /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
+    // fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> usize {
+    //     let current_row: usize = current_column;
+    //     let (pivot_row, _) = (current_row..matrix.rows)
+    //         .map(|index| (index, matrix.data[index][current_column].abs_value()))
+    //         .fold((current_row, matrix.data[current_row][current_column].abs_value()),
+    //             |(max_row, max_val), (idx, val)| {
+    //                 if val > max_val { (idx, val) } else { (max_row, max_val) }
+    //             });
+    
+    //     pivot_row
+    // }
 
 }
