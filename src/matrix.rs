@@ -290,19 +290,20 @@ where
 
         // 2. For each column:
         (0..rref_matrix.columns)
-            .filter(|current_column| current_column < &self.rows)
             .for_each(|current_column| {
 
             // 2.1. Find the row, pivotRow, below currentRow (including currentRow) with the largest absolute value
-            match Self::find_pivot_row(&rref_matrix, current_column) {
-                Some(index) => {
-                    
+            if current_row < rref_matrix.rows {
+
+                match Self::find_pivot_row(&rref_matrix, current_row, current_column) {
+                    Some(index) => {
+                        
                     // 2.2. Swap current_row with pivot_row.
                     if index != current_row {
                         rref_matrix.data.swap(current_row, index);
                     }
                     let leading_coeff: &K = &rref_matrix.data[current_row][current_column].clone();
-
+                    
                     // 2.3. If the leading entry (pivot) in current_row is not 1:
                     if leading_coeff.close_to_one() == false {
                         let scale_factor: K = leading_coeff.scale_factor();
@@ -311,21 +312,25 @@ where
                         rref_matrix.data[current_row].scl(scale_factor);
                     }
 
-                    // 2.4. Make all other entries in current_column (below the pivot) zero:
-                    ((current_row + 1)..rref_matrix.rows).for_each(|index| {
-                        let element: &K = &rref_matrix.data[index][current_column];
+                    // 2.4. Make all other entries in current_column (above and below the pivot) zero:
+                    (0..rref_matrix.rows)
+                        .filter(|&index| index != current_row)
+                        .for_each(|index| {
+                            let element: &K = &rref_matrix.data[index][current_column];
 
                         if element.close_to_zero() == false {
-                            let multiplication_factor: K = leading_coeff.divide(&element);
-
+                            let multiplication_factor: K = element.clone();
+                            let mut scaled_current_row: Vector<K> = rref_matrix.data[current_row].clone();
                             // 2.4.1. Subtract an appropriate multiple of current_row from pivot_row such that the entry in current_column of current_row becomes zero.  
-                            rref_matrix.data[index].scl(multiplication_factor);
+                            scaled_current_row.scl(multiplication_factor);
+                            rref_matrix.data[index].sub(&scaled_current_row);
                         }
                     });
+                    current_row += 1;
                 }
                 None => {} // increment to next column
+                }
             }
-            current_row += 1;
         });
     
         rref_matrix
@@ -370,8 +375,8 @@ where
 
     /// Finds the pivot row with the largest absolute value of the given column and returns the index of it
     /// or None if its value is close to 0.
-    fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> Option<usize> {
-        let current_row: usize = current_column;
+    fn find_pivot_row(matrix: &Matrix<K>, current_row: usize, current_column: usize) -> Option<usize> {
+        // let current_row: usize = current_column;
         let mut largest_norm_value: f32 = matrix.data[current_row][current_column].norm_value();
         let mut pivot_row: usize = current_row;
     

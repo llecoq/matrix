@@ -19,7 +19,8 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
 pub trait FloatOrComplex {
     fn norm_value(&self) -> f32;
     fn squares(&self) -> f32;
-    fn divide(&self, numerator: &Self) -> Self;
+    // fn multiplication_factor(&self) -> Self;
+    // fn divide(&self, numerator: &Self) -> Self;
     fn close_to_one(&self) -> bool;
     fn close_to_zero(&self) -> bool;
     fn scale_factor(&self) -> Self;
@@ -55,10 +56,14 @@ impl FloatOrComplex for f32 {
     fn squares(&self) -> f32 {
         self * self
     }
-    /// Divides the float by a given numerator.
-    fn divide(&self, numerator: &Self) -> Self {
-        numerator / self
-    }
+
+    // fn multiplication_factor(&self) -> Self {
+    //     1.0 / self
+    // }
+    // /// Divides the float by a given numerator.
+    // fn divide(&self, numerator: &Self) -> Self {
+    //     numerator / self
+    // }
 
     fn close_to_one(&self) -> bool {
         (self - 1.0).abs() < EPSILON

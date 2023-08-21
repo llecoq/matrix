@@ -2,12 +2,12 @@ use crate::Matrix;
 
 #[test]
 fn row_echelon_tests() {
-    // let u = Matrix::from(vec![
-    //     vec![1., 0., 0.],
-    //     vec![0., 1., 0.],
-    //     vec![0., 0., 1.],
-    //     ]).unwrap();
-    //     println!("{}", u.row_echelon());
+    let u = Matrix::from(vec![
+        vec![1., 0., 0.],
+        vec![0., 1., 0.],
+        vec![0., 0., 1.],
+        ]).unwrap();
+        println!("{}", u.row_echelon());
         // [1.0, 0.0, 0.0]
         // [0.0, 1.0, 0.0]
         // [0.0, 0.0, 1.0]
@@ -18,11 +18,11 @@ fn row_echelon_tests() {
         println!("{}", u.row_echelon());
         // [1.0, 0.0]
         // [0.0, 1.0]
-        // let u = Matrix::from(vec![
-        // vec![1., 2.],
-        // vec![2., 4.],
-        // ]).unwrap();
-        // println!("{}", u.row_echelon());
+        let u = Matrix::from(vec![
+        vec![1., 2.],
+        vec![2., 4.],
+        ]).unwrap();
+        println!("{}", u.row_echelon());
         // [1.0, 2.0]
         // [0.0, 0.0]
         let u = Matrix::from(vec![
