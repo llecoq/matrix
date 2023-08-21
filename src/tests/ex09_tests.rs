@@ -48,7 +48,7 @@ fn transpose_tests() {
     ]).unwrap();
     let result: Vec<Vec<f32>> = vec![
         vec![0., 1., 0.],
-        vec![-8., -0., 6.],
+        vec![-8., 0., 6.],
         vec![4., 4., 0.],
     ];
     assert_output(&u.transpose(), matrix_to_string(&result).as_str());
@@ -73,7 +73,7 @@ fn transpose_tests() {
     ]).unwrap();
     let result: Vec<Vec<f32>> = vec![
         vec![0., 1., 0., 0.],
-        vec![-8., -0., 6., 6.],
+        vec![-8., 0., 6., 6.],
         vec![4., 4., 0., 0.],
     ]; 
     assert_output(&u.transpose(), matrix_to_string(&result).as_str());
