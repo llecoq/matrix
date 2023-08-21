@@ -289,7 +289,9 @@ where
         let mut current_row :usize = 0;
 
         // 2. For each column:
-        (0..rref_matrix.columns).for_each( |current_column| {
+        (0..rref_matrix.columns)
+            .filter(|current_column| current_column < &self.rows)
+            .for_each(|current_column| {
 
             // 2.1. Find the row, pivotRow, below currentRow (including currentRow) with the largest absolute value
             match Self::find_pivot_row(&rref_matrix, current_column) {
