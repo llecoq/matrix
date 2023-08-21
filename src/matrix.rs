@@ -42,7 +42,7 @@ impl fmt::Display for MatrixError {
 #[allow(dead_code)]
 impl<K> Matrix<K>
 where
-    K:  FloatOrComplex + fmt::Display + Clone
+    K:  FloatOrComplex + MathDisplay + Clone + Copy
 {
 
     /// A function that returns the shape of `Matrix<K>` in the format (rows, columns).
@@ -74,7 +74,7 @@ where
 //----------------------------------------- Traits Implementation
 impl<K> Matrix<K>
 where
-    K : FloatOrComplex + Clone + std::fmt::Display
+    K : FloatOrComplex + Clone + MathDisplay + Copy
 {
     /// Associated constructor `from`.
     /// Returns Err(MatrixError) if the format is not valid.
@@ -150,7 +150,7 @@ where
 /// Implements `FromIterator` for `Matrix<K>`
 impl<K> FromIterator<Vector<K>> for Matrix<K>
 where
-    K:  FloatOrComplex + Clone + std::fmt::Display
+    K:  FloatOrComplex + Clone + MathDisplay + Copy
 {
     fn from_iter<T: IntoIterator<Item = Vector<K>>>(iter: T) -> Self {
         let collected_data: Vec<Vector<K>> = iter.into_iter().collect();
@@ -228,7 +228,7 @@ where
 #[allow(unused_variables)]
 impl<K> Matrix<K>
 where
-    K:  FloatOrComplex + MathDisplay + Sum + Clone
+    K:  FloatOrComplex + MathDisplay + Sum + Clone + Copy
 {
     /// Multiplies a matrix by a vector and returns a new `Vector<K>`.
     pub fn mul_vec(&self, vec: &Vector<K>) -> Vector<K> {
@@ -336,12 +336,27 @@ where
         rref_matrix
     } 
 
+
+    /// Computes the determinant of `Matrix<K>` of 4 dimensions maximum and returns it.
+    /// If the matrix isn't square, returns the first element of the first row.
+    pub fn determinant(&self) -> K {
+        let mut determinant: K = self.data[0][0].clone();
+
+        match &*self.get_shape() {
+            "(2,2)" => determinant = Self::det_2x2(&self),
+            "(3,3)" => determinant = Self::det_3x3(&self),
+            "(4,4)" => determinant = Self::det_4x4(&self),
+            _ => {}
+        }
+        determinant
+    }
+
 }
 
 //--------------------------------------- Private utility functions
 impl<K> Matrix<K> 
 where
-    K:  FloatOrComplex + Clone + std::fmt::Display
+    K:  FloatOrComplex + Clone + Copy + MathDisplay
 {
     /// Checks that all the columns are the same size, and thus, that the matrix is valid.
     fn input_format_is_valid(input: &Vec<Vec<K>>) -> Result<usize, MatrixError> {
@@ -398,7 +413,42 @@ where
     fn close_to_float(a: &f32, b: &f32) -> bool {
         (a - b).abs() < EPSILON
     }
+
+    fn det_2x2(&self) -> K {
+        self.data[0][0] * self.data[1][1] - self.data[0][1] * self.data[1][0]
+    }
+
+    fn det_3x3(&self) -> K {
+        self.data[0][0] * (self.data[1][1] * self.data[2][2] - self.data[1][2] * self.data[2][1])
+            - self.data[0][1] * (self.data[1][0] * self.data[2][2] - self.data[1][2] * self.data[2][0])
+            - self.data[0][2] * (self.data[1][0] * self.data[2][1] - self.data[1][1] * self.data[2][0])
+    }
     
+    // Laplace (or cofactor) expansion hard-coded for better efficiency given the 4x4 limitation.
+    fn det_4x4(&self) -> K {
+        let mat_1: Matrix<K> = Self::format_3x3(self, 0);
+        let mat_2: Matrix<K> = Self::format_3x3(self, 1);
+        let mat_3: Matrix<K> = Self::format_3x3(self, 2);
+        let mat_4: Matrix<K> = Self::format_3x3(self, 3);
+
+        self.data[0][0] * mat_1.determinant() - self.data[0][1] * mat_2.determinant() +
+            self.data[0][2] * mat_3.determinant() - self.data[0][3] * mat_4.determinant()
+    }
+
+    // Delete the first row and the given column from `Matrix<K>` and returns a new matrix.
+    fn format_3x3(&self, column_index: usize) -> Matrix<K> {
+        let mut matrix: Matrix<K> = self.clone();
+
+        matrix.data.remove(0);
+        for row in matrix.data.iter_mut() {
+            row.remove(column_index);
+        }
+
+        matrix.columns = 3;
+        matrix.rows = 3;
+        matrix
+    }
+
     // /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
     // fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> usize {
     //     let current_row: usize = current_column;

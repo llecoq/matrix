@@ -1,5 +1,5 @@
 use core::fmt;
-use std::{ops::{Add, Sub, Mul}, f32::EPSILON};
+use std::{ops::{Add, Sub, Mul}, f32::EPSILON, iter::Sum};
 
 // use num_complex::{Complex, ComplexFloat};
 // use num_traits::Num;
@@ -87,6 +87,7 @@ pub trait MathDisplay:
     + Add<Output = Self>
     + Sized + Sub<Output = Self>
     + Mul<Output = Self>
+    + Sum
 {}
 // Blanket implementation
 impl<K> MathDisplay for K where K:
@@ -94,4 +95,5 @@ impl<K> MathDisplay for K where K:
     + Add<Output = K>
     + Sized + Sub<Output = K>
     + Mul<Output = K>
+    + Sum
 {}

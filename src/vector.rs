@@ -13,7 +13,7 @@ pub struct Vector<K: FloatOrComplex> {
 //--------------------------------------------- Utility functions
 impl<K> Vector<K> 
 where
-    K:  FloatOrComplex + fmt::Display + Clone
+    K:  FloatOrComplex + MathDisplay + Clone + Copy
 {
     /// Returns the size of `Vector<K>`.
     pub fn  get_size(&self) -> usize {
@@ -64,6 +64,10 @@ where
     /// Safe indexed read data
     pub fn get(&self, index: usize) -> Option<&K> {
         self.data.get(index)
+    }
+
+    pub fn remove(&mut self, index: usize) {
+        self.data.remove(index);
     }
 }
 
