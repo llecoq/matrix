@@ -31,24 +31,22 @@ matrix
 - [x] Defining Vector and Matrix structures in a generic way to be able to implement a Complex number type later on
 - [x] Handling errors : subject is asking for undefined behavior in many cases, but I may choose to handle some
 - [x] Row vectors: Should the library handle the case where the matrix has only one row ? -> No
-- [ ] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
+- [x] Better understanding of Matrices / Maths (Essence of linear algebra - 3Blue1Brown - YT)
 
 ### Let's do it !
 - [x] Exercise 00 - Add, Subtract and Scale
 - [x] Exercise 01 - Linear combination
-- [ ] Exercise 01 - Linear interpolation
-- [ ] Exercise 03 - Dot product
-- [ ] Exercise 04 - Norm
-- [ ] Exercise 05 - Cosine
-- [ ] Exercise 06 - Cross product
-- [ ] Exercise 07 - Linear map, Matrix multiplication
-- [ ] Exercise 08 - Trace
-- [ ] Exercise 09 - Transpose
-- [ ] Interlude 00 - Solving systems of linear equations
-- [ ] Exercise 10 - Reduced row-echelon form
+- [x] Exercise 01 - Linear interpolation
+- [x] Exercise 03 - Dot product
+- [x] Exercise 04 - Norm
+- [x] Exercise 05 - Cosine
+- [x] Exercise 06 - Cross product
+- [x] Exercise 07 - Linear map, Matrix multiplication
+- [x] Exercise 08 - Trace
+- [x] Exercise 09 - Transpose
+- [x] Exercise 10 - Reduced row-echelon form
 - [ ] Exercise 11 - Determinant
 - [ ] Exercise 12 - Inverse
-- [ ] Interlude 01 - Rank–nullity theorem
 - [ ] Exercise 13 - Rank
 
 ### Bonus
