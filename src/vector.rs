@@ -101,7 +101,12 @@ where
 
         let mut iter = self.data.iter().peekable();
         while let Some(element) = iter.next() {
-            write!(f, "{:.1}", element)?;
+            if element.close_to_zero() {
+                write!(f, "0.0")?;
+            }
+            else {
+                write!(f, "{:.1}", element)?;
+            }
 
             if let Some(_) = iter.peek() {
                 write!(f, "][")?;
