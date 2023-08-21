@@ -421,7 +421,7 @@ where
     fn det_3x3(&self) -> K {
         self.data[0][0] * (self.data[1][1] * self.data[2][2] - self.data[1][2] * self.data[2][1])
             - self.data[0][1] * (self.data[1][0] * self.data[2][2] - self.data[1][2] * self.data[2][0])
-            - self.data[0][2] * (self.data[1][0] * self.data[2][1] - self.data[1][1] * self.data[2][0])
+            + self.data[0][2] * (self.data[1][0] * self.data[2][1] - self.data[1][1] * self.data[2][0])
     }
     
     // Laplace (or cofactor) expansion hard-coded for better efficiency given the 4x4 limitation.
