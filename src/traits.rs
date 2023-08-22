@@ -24,7 +24,6 @@ pub trait FloatOrComplex {
     fn scale_factor(&self) -> Self;
     fn zero() -> Self;
     fn one() -> Self;
-    fn fractional_part(&self) -> Self;
 }
 
 // // Implement the trait for f32 and Complex types
@@ -81,11 +80,6 @@ impl FloatOrComplex for f32 {
     /// Returns one.
     fn one() -> Self {
         1.0
-    }
-
-    /// Returns the fractional part of self.
-    fn fractional_part(&self) -> Self {
-        self.fract()
     }
 
 }  // Float numbers
