@@ -51,4 +51,4 @@ matrix
 
 ### Bonus
 - [ ] Exercise 14 - Bonus: Projection matrix
-- [ ] Exercise 15 - Bonus: Complex vector spaces
+- [x] Exercise 15 - Bonus: Complex vector spaces
