@@ -1,6 +1,6 @@
 use crate::{Matrix, MatrixError};
 
-use super::test_utils::{assert_output, floats_are_close};
+use super::test_utils::{assert_output, numbers_are_close};
 
 #[test]
 fn trace_tests() {
@@ -58,7 +58,7 @@ fn trace_tests() {
         vec![12.3, 2., 4.5, 5.0, 9.3, 4.2, 2.6, 4., 6., 1., 2., 13.]
     ]).unwrap();
     let result: Result<f32, MatrixError> = u.trace();
-    assert_eq!(floats_are_close(result.unwrap(), 55.7), true);
+    assert_eq!(numbers_are_close(result.unwrap(), 55.7), true);
 
     // Not square
     let u = Matrix::from(vec![

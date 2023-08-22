@@ -1,6 +1,6 @@
 use rand::Rng;
 use core::fmt;
-use std::fmt::Write as _;
+use std::{fmt::Write as _, f32::EPSILON};
 
 use crate::{Matrix, MatrixError, traits::FloatOrComplex};
 
@@ -73,7 +73,21 @@ pub fn  generate_random_f32_vector() -> Vec<f32> {
     (0..size).map(|_| rng.gen::<f32>()).collect()
 }
 
-// returns true if floats are close enough
-pub fn floats_are_close(a: f32, b: f32) -> bool {
-    (a - b).abs() < 0.00001
+// returns true if numbers are close enough
+pub fn numbers_are_close<K>(a: K, b: K) -> bool
+where
+    K: FloatOrComplex + std::ops::Sub<Output = K>
+{
+    (a - b).norm_value() < EPSILON * 100.0
 }
+
+// pub fn compare_matrices<K>(mat_1: Matrix<K>, mat_2: Matrix<K>)
+// where
+//     K: FloatOrComplex + std::ops::Sub<Output = K>
+// {
+//     for (vec_1, vec_2) in mat_1.into_iter().zip(mat_2) {
+//         for (elem_1, elem_2) in vec_1.into_iter().zip(vec_2) {
+//             assert_eq!(numbers_are_close(elem_1, elem_2), true);
+//         }
+//     }
+// }
