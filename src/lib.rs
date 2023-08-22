@@ -50,7 +50,7 @@ mod tests {
     mod ex06_tests; // Cross product
     mod ex07_tests; // Linear map, Matrix multiplication
     mod ex08_tests; // Trace
-    mod ex09_tests; // Transpose
+    mod ex09_tests; // Transposes
     mod ex10_tests; // Reduced row-echelon form
     mod ex11_tests; // Determinant
     mod ex12_tests; // Inverse

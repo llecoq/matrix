@@ -8,7 +8,7 @@ use crate::{Vector, traits::{FloatOrComplex, MathDisplay}};
 /// Returns NaN if one vector is empty
 pub fn angle_cos<K>(u: &Vector::<K>, v: &Vector::<K>) -> f32
 where
-    K:  FloatOrComplex + MathDisplay + Clone + Sum + std::ops::Div<f32, Output = f32>
+    K:  FloatOrComplex + MathDisplay + Clone + Sum + std::ops::Div<f32, Output = f32>, f32: Sum<K>
 {
     u.dot(v) / (u.clone().norm() * v.clone().norm())
 }

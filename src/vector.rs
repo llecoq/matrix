@@ -1,5 +1,5 @@
 use core::fmt;
-use std::ops::{Index, RangeBounds};
+use std::{ops::{Index, RangeBounds}, iter::Sum};
 
 use crate::{traits::{AddSubScl, FloatOrComplex, MathDisplay}, MatrixError, Matrix};
 
@@ -218,7 +218,7 @@ where
 
 impl<K> Vector<K>
 where
-    K: FloatOrComplex + Clone
+    K: FloatOrComplex + Clone, f32: Sum<K>
 {
     /// Returns the L1 norm (Taxicab or Manhattan norm) of `Vector<K>`.
     pub fn norm_1(&mut self) -> f32 {

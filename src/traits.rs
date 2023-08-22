@@ -1,8 +1,7 @@
 use core::fmt;
 use std::{ops::{Add, Sub, Mul}, f32::EPSILON, iter::Sum};
 
-// use num_complex::{Complex, ComplexFloat};
-// use num_traits::Num;
+use num_complex::Complex;
 
 //------------------------------------------------------------------------- AddSubScl
 /// A trait for the Addition, Substraction and Scaling of both a vector and a matrix.
@@ -18,7 +17,7 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
 #[allow(unused_must_use)]
 pub trait FloatOrComplex {
     fn norm_value(&self) -> f32;
-    fn squares(&self) -> f32;
+    fn squares(&self) -> Self;
     fn close_to_one(&self) -> bool;
     fn close_to_zero(&self) -> bool;
     fn scale_factor(&self) -> Self;
@@ -26,34 +25,54 @@ pub trait FloatOrComplex {
     fn one() -> Self;
 }
 
-// // Implement the trait for f32 and Complex types
-// impl<K: Num + Copy> FloatOrComplex for Complex<K> {
-//     /// Returns the normed value of the complex number.
-//     fn norm_value(&self) -> f32 {
-//         2. // will be handled later on
-//     }
-//     /// Squares the complex number and returns it.
-//     fn squares(&self) -> f32 {
-//         2. // will be handled later on
-//     }
-//     /// Divides the complex number by a given denominator.
-//     fn divide(&self, numerator: &f32) -> Self {
-//         numerator / self // will be handled later on
-//     }
+// Implement the trait for f32 and Complex types
+impl FloatOrComplex for Complex<f32>
+{
+    /// Returns the normed value of the complex number.
+    fn norm_value(&self) -> f32 {
+        self.norm()
+    }
 
-//     fn close_to_one(&self) -> bool {
-//         false // will be handled later on
-//     }
+    /// Squares the complex number and returns it.
+    fn squares(&self) -> Self {
+        self * self
+    }
 
-// }  // Complex numbers
+    /// Returns true if the float is close to `one`.
+    fn close_to_one(&self) -> bool {
+        (self - Self::one()).norm() < EPSILON 
+    }
+
+    /// Returns true if the float is close to `zero`.
+    fn close_to_zero(&self) -> bool {
+        self.norm_sqr() < EPSILON * EPSILON
+    }
+
+    /// Returns the scale factor of a float to make it `one`.
+    fn scale_factor(&self) -> Self {
+        1.0 / self
+    }
+
+    /// Returns `zero`.
+    fn zero() -> Self {
+        Complex::new(0.0, 0.0)
+    }
+
+    /// Returns `one`.
+    fn one() -> Self {
+        Complex::new(1.0, 0.0)
+    }
+
+}  // Complex numbers
 
 impl FloatOrComplex for f32 {
     /// Returns the absolute value of the number.
     fn norm_value(&self) -> f32 {
         self.abs()
     }
+  
     /// Squares the number and returns it.
-    fn squares(&self) -> f32 {
+    fn squares(&self) -> Self {
         self * self
     }
 
