@@ -7,14 +7,14 @@ fn rank_tests() {
         vec![0., 1., 0.],
         vec![0., 0., 1.],
     ]).unwrap();
-    println!("{}", u.rank());
+    assert_eq!(u.rank(), 3);
     // 3
     let u = Matrix::from(vec![
         vec![ 1., 2., 0., 0.],
         vec![ 2., 4., 0., 0.],
         vec![-1., 2., 1., 1.],
     ]).unwrap();
-    println!("{}", u.rank());
+    assert_eq!(u.rank(), 2);
     // 2
     let u = Matrix::from(vec![
         vec![ 8., 5., -2.],
@@ -22,7 +22,7 @@ fn rank_tests() {
         vec![ 7., 6., 1.],
         vec![21., 18., 7.],
     ]).unwrap();
-    println!("{}", u.rank());
+    assert_eq!(u.rank(), 3);
     // 3
 
 }

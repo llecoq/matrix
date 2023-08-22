@@ -81,13 +81,14 @@ where
     (a - b).norm_value() < EPSILON * 100.0
 }
 
-// pub fn compare_matrices<K>(mat_1: Matrix<K>, mat_2: Matrix<K>)
-// where
-//     K: FloatOrComplex + std::ops::Sub<Output = K>
-// {
-//     for (vec_1, vec_2) in mat_1.into_iter().zip(mat_2) {
-//         for (elem_1, elem_2) in vec_1.into_iter().zip(vec_2) {
-//             assert_eq!(numbers_are_close(elem_1, elem_2), true);
-//         }
-//     }
-// }
+// compares 2 given matrices
+pub fn compare_matrices<K>(mat_1: Matrix<K>, mat_2: Matrix<K>)
+where
+    K: FloatOrComplex + std::ops::Sub<Output = K>
+{
+    for (vec_1, vec_2) in mat_1.into_iter().zip(mat_2) {
+        for (elem_1, elem_2) in vec_1.into_iter().zip(vec_2) {
+            assert_eq!(numbers_are_close(elem_1, elem_2), true);
+        }
+    }
+}
