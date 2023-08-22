@@ -123,10 +123,12 @@ where
             if element.close_to_zero() {
                 write!(f, "0.0")?;
             }
-            else {
+            else if element.fractional_part().close_to_zero() {
                 write!(f, "{:.1}", element)?;
             }
-
+            else {
+            }
+                write!(f, "{}", element)?;
             if let Some(_) = iter.peek() {
                 write!(f, "][")?;
             }
