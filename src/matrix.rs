@@ -370,7 +370,21 @@ where
         }
     }
 
+    /// Computes the rank of self and returns it.
+    pub fn rank(&self) -> usize {
+        let mut rank: usize = 0;
+        let rref_matrix: Matrix<K> = self.row_echelon();
 
+        for row in rref_matrix {
+            for element in row {
+                if !element.close_to_zero() {
+                    rank += 1;
+                    break;
+                }
+            }
+        }
+        rank
+    }
 
 }
 
