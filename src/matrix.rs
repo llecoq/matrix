@@ -281,7 +281,7 @@ where
         }).collect::<Matrix<K>>()
     }
 
-    /// Computes the reduced row-echelon form of `Matrix<K>` using the
+    /// Computes the reduced row-echelon form of `Matrix<K>` on a clone of self, using the
     /// Gauss-Jordan elimination method with a maximum time complexity of O(n^3)
     /// and a maximum space complexity of O(n^2) for a square matrix.
     pub fn row_echelon(&self) -> Matrix<K> {
@@ -357,8 +357,12 @@ where
     /// Returns a `MatrixError` if the matrix is singular.
     pub fn inverse(&self) -> Result<Matrix<K>, MatrixError> {
         if self.is_a_square() && !self.determinant().close_to_zero() {
-            let inverted_matrix: Matrix<K> = self.append_identity_matrix();
-
+            // Augment the matrix with the identity matrix.
+            let mut inverted_matrix: Matrix<K> = self.append_identity_matrix();
+            // Apply Gauss-Jordan Elimination to the augmented matrix.
+            inverted_matrix = inverted_matrix.row_echelon();
+            // Extract the inverse (the right side of the matrix)
+            inverted_matrix.extract_inverse();
             Ok(inverted_matrix)
         }
         else {
@@ -431,16 +435,19 @@ where
         (a - b).abs() < EPSILON
     }
 
+    /// Returns the determinant of a 2x2 matrix.
     fn det_2x2(&self) -> K {
         self.data[0][0] * self.data[1][1] - self.data[0][1] * self.data[1][0]
     }
-
+    
+    /// Returns the determinant of a 3x3 matrix.
     fn det_3x3(&self) -> K {
         self.data[0][0] * (self.data[1][1] * self.data[2][2] - self.data[1][2] * self.data[2][1])
             - self.data[0][1] * (self.data[1][0] * self.data[2][2] - self.data[1][2] * self.data[2][0])
             + self.data[0][2] * (self.data[1][0] * self.data[2][1] - self.data[1][1] * self.data[2][0])
     }
     
+    /// Returns the determinant of a 4x4 matrix.
     /// Laplace (or cofactor) expansion hard-coded for better efficiency given the 4x4 limitation.
     fn det_4x4(&self) -> K {
         let mat_1: Matrix<K> = Self::format_3x3(self, 0);
@@ -476,8 +483,15 @@ where
             vec[index] = K::one();
             row.append(&mut vec);
         }
-        augmented_matrix.columns = augmented_matrix.data[0].get_size();
+        // augmented_matrix.columns = augmented_matrix.data[0].get_size();
         augmented_matrix
+    }
+
+    /// Extract the inverse of self by removing the left side of the matrix.
+    fn extract_inverse(&mut self) {
+        for row in self.data.iter_mut() {
+            row.drain_and_drop(0..(row.get_size() / 2));
+        }
     }
 
     // /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
