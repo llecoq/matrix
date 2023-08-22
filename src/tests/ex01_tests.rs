@@ -46,8 +46,8 @@ fn linear_combination_tests() {
     let v1 = Vector::from(vec![Complex::new(1., -0.5), Complex::new(2., 0.2), Complex::new(3., -1.0)]);
     let v2 = Vector::from(vec![Complex::new(0., 0.3), Complex::new(10., -0.9), Complex::new(-100., 2.3)]);
     
-    assert_output(&linear_combination(&[e1.clone(), e2.clone(), e3.clone()], &[Complex::new(10., -0.5), Complex::new(-2., 0.3), Complex::new(0.5, 1.2)]), "[...]");
-    assert_output(&linear_combination(&[v1.clone(), v2.clone()], &[Complex::new(10., 1.0), Complex::new(-2., -1.5)]), "[...]");
+    assert_output(&linear_combination(&[e1.clone(), e2.clone(), e3.clone()], &[Complex::new(10., -0.5), Complex::new(-2., 0.3), Complex::new(0.5, 1.2)]), "[11.4+2.5i][-2.5+0.2i][-0.1+13.9i]");
+    assert_output(&linear_combination(&[v1.clone(), v2.clone()], &[Complex::new(10., 1.0), Complex::new(-2., -1.5)]), "[10.9-4.6i][-1.6-9.2i][234.4+138.4i]");
     
     println!("{}", linear_combination(&[e1, e2, e3], &[Complex::new(16., 0.8), Complex::new(0.5, -0.4)]));
     println!("{}", linear_combination(&[v1, v2], &[Complex::new(1., 0.3), Complex::new(0., -1.0), Complex::new(7., 2.0), Complex::new(9., -1.5)]));
