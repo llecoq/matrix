@@ -24,7 +24,8 @@ pub enum MatrixError {
     InvalidFormat,
     RowVector,
     Empty,
-    IsNotSquare
+    IsNotSquare,
+    IsSingular
 }
 
 impl fmt::Display for MatrixError {
@@ -33,7 +34,8 @@ impl fmt::Display for MatrixError {
             MatrixError::InvalidFormat => write!(f, "Invalid matrix format"),
             MatrixError::RowVector => write!(f, "Library does not handle row vectors"),
             MatrixError::Empty => write!(f, "Empty matrix"),
-            MatrixError::IsNotSquare => write!(f, "Matrix needs to be square to compute trace")
+            MatrixError::IsNotSquare => write!(f, "Matrix needs to be square to compute trace"),
+            MatrixError::IsSingular => write!(f, "Matrix is singular and cannot be inverted")
         }
     }
 }
@@ -351,6 +353,21 @@ where
         determinant
     }
 
+    /// Computes the inverse matrix of `Matrix<K>` on a clone of self and returns it.
+    /// Returns a `MatrixError` if the matrix is singular.
+    pub fn inverse(&self) -> Result<Matrix<K>, MatrixError> {
+        if self.is_a_square() && !self.determinant().close_to_zero() {
+            let inverted_matrix: Matrix<K> = self.append_identity_matrix();
+
+            Ok(inverted_matrix)
+        }
+        else {
+            Err(MatrixError::IsSingular)
+        }
+    }
+
+
+
 }
 
 //--------------------------------------- Private utility functions
@@ -424,7 +441,7 @@ where
             + self.data[0][2] * (self.data[1][0] * self.data[2][1] - self.data[1][1] * self.data[2][0])
     }
     
-    // Laplace (or cofactor) expansion hard-coded for better efficiency given the 4x4 limitation.
+    /// Laplace (or cofactor) expansion hard-coded for better efficiency given the 4x4 limitation.
     fn det_4x4(&self) -> K {
         let mat_1: Matrix<K> = Self::format_3x3(self, 0);
         let mat_2: Matrix<K> = Self::format_3x3(self, 1);
@@ -435,7 +452,7 @@ where
             self.data[0][2] * mat_3.determinant() - self.data[0][3] * mat_4.determinant()
     }
 
-    // Delete the first row and the given column from `Matrix<K>` and returns a new matrix.
+    /// Delete the first row and the given column from `Matrix<K>` and returns a new matrix.
     fn format_3x3(&self, column_index: usize) -> Matrix<K> {
         let mut matrix: Matrix<K> = self.clone();
 
@@ -447,6 +464,20 @@ where
         matrix.columns = 3;
         matrix.rows = 3;
         matrix
+    }
+
+    /// Appends an identity matrix to a clone of `Matrix<K>` and returns it.
+    fn append_identity_matrix(&self) -> Matrix<K> {
+        let mut augmented_matrix: Matrix<K> = self.clone();
+
+        for (index, row) in augmented_matrix.data.iter_mut().enumerate() {
+            let mut vec: Vec<K> = vec![K::zero(); row.get_size()];
+
+            vec[index] = K::one();
+            row.append(&mut vec);
+        }
+        augmented_matrix.columns = augmented_matrix.data[0].get_size();
+        augmented_matrix
     }
 
     // /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
