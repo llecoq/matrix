@@ -45,9 +45,9 @@ matrix
 - [x] Exercise 08 - Trace
 - [x] Exercise 09 - Transpose
 - [x] Exercise 10 - Reduced row-echelon form
-- [ ] Exercise 11 - Determinant
-- [ ] Exercise 12 - Inverse
-- [ ] Exercise 13 - Rank
+- [x] Exercise 11 - Determinant
+- [x] Exercise 12 - Inverse
+- [x] Exercise 13 - Rank
 
 ### Bonus
 - [ ] Exercise 14 - Bonus: Projection matrix
