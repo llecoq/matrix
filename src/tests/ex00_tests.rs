@@ -90,7 +90,6 @@ fn  vector_scl_tests() {
 
 //--------------------------------------------------------------------------MATRIX
 #[test]
-#[allow(unused_variables)]
 fn  matrix_utility_functions_tests() {
     //-------------------from(), get_shape(), reshape_into_vector(), is_a_square()
     // Invalid matrix format

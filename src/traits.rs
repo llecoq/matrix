@@ -14,7 +14,6 @@ pub trait AddSubScl<T, K> { // will need to add a complex type later
 
 //-------------------------------------------------------------------- FloatOrComplex
 /// A trait to be implemented for the f32 or Complex type
-#[allow(unused_must_use)]
 pub trait FloatOrComplex {
     fn norm_value(&self) -> f32;
     fn squares(&self) -> Self;

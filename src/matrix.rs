@@ -10,7 +10,6 @@ use crate::traits::{AddSubScl, FloatOrComplex, MathDisplay};
 
 //----------------------------------------------------- Structure
 /// A basic matrix structure
-#[allow(dead_code)]
 #[derive(Clone)]
 pub struct Matrix<K: FloatOrComplex> {
     rows: usize,
@@ -41,7 +40,6 @@ impl fmt::Display for MatrixError {
 }
 
 //--------------------------------------------- Utility functions
-#[allow(dead_code)]
 impl<K> Matrix<K>
 where
     K:  FloatOrComplex + MathDisplay + Clone + Copy
@@ -193,7 +191,6 @@ where
     }
 }
 
-#[allow(unused_variables)]
 impl<K> AddSubScl<Matrix<K>, K> for Matrix<K>
 where
     K:  MathDisplay + FloatOrComplex + Clone + Copy
@@ -227,7 +224,6 @@ where
     }
 }
 
-#[allow(unused_variables)]
 impl<K> Matrix<K>
 where
     K:  FloatOrComplex + MathDisplay + Sum + Clone + Copy
