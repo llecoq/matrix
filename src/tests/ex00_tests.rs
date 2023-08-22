@@ -1,3 +1,5 @@
+use num_complex::Complex;
+
 use crate::{Vector, traits::AddSubScl, Matrix, tests::test_utils::*};
 
 //--------------------------------------------------------------------------VECTOR
@@ -48,6 +50,7 @@ fn  vector_utility_functions_tests() {
 
 #[test]
 fn  vector_add_tests() {
+    //----------------------------------------------------------------------------------f32
     let mut v: Vector<f32> = Vector::from(vec![2., 6.3]);
     let v2: Vector<f32> = Vector::from(vec![]);
     let v3: Vector<f32> = Vector::from(vec![1.1, 2.]);
@@ -61,6 +64,21 @@ fn  vector_add_tests() {
 
     v.add(&v4); // adding negatives
     assert_output(&v, "[0.0][0.0]");
+
+    //---------------------------------------------------------------------------Complex<f32>
+    let mut v: Vector<Complex<f32>> = Vector::from(vec![Complex::new(2., 1.5), Complex::new(6.3, -2.4)]);
+    let v2: Vector<Complex<f32>> = Vector::from(vec![]);
+    let v3: Vector<Complex<f32>> = Vector::from(vec![Complex::new(1.1, -0.5), Complex::new(2., 2.4)]);
+    let v4: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-3.1, 2.), Complex::new(-8.3, -0.2)]);
+
+    v.add(&v3);
+    assert_output(&v, "[3.1+1.0i][8.3+0.0i]");
+
+    v.add(&v2); // should not do anything. Chose not to use Result<> to make it lighter in use
+    assert_output(&v, "[3.1+1.0i][8.3+0.0i]");
+
+    v.add(&v4); // adding negatives
+    assert_output(&v, "[0.0+3.0i][0.0-0.2i]");
 }
 
 #[test]

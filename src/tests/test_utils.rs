@@ -2,7 +2,7 @@ use rand::Rng;
 use core::fmt;
 use std::{fmt::Write as _, f32::EPSILON};
 
-use crate::{Matrix, MatrixError, traits::FloatOrComplex};
+use crate::{Matrix, MatrixError, traits::FloatOrComplex, Vector};
 
 //-------------------------------------------------------------- UTILITY FUNCTIONS
 // assert vector and matrix output
@@ -15,7 +15,7 @@ where
     assert_eq!(output, expected_output);
 }
 
-// format vector to string
+/// format vector to string
 pub fn  vector_to_string<K>(vector: &Vec<K>) -> String
 where
     K: fmt::Display
@@ -26,7 +26,7 @@ where
         .join("")
 }
 
-// flatten Vec<Vec<K>> input and returns a String
+/// flatten Vec<Vec<K>> input and returns a String
 pub fn  flatten_input<K>(input:Vec<Vec<K>>) -> String
 where
     K: fmt::Display
@@ -40,7 +40,7 @@ where
     flattened_input
 }
 
-// format matrix to string
+/// format matrix to string
 pub fn  matrix_to_string<K>(matrix: &Vec<Vec<K>>) -> String
 where
     K: fmt::Display
@@ -51,7 +51,7 @@ where
         .join("\n")
 }
 
-// match matrix result
+/// match matrix result
 pub fn match_matrix_result<K>(matrix: &Result<Matrix<K>, MatrixError>, input:Vec<Vec<K>>)
 where
     K:  fmt::Display
@@ -66,14 +66,14 @@ where
     };
 }
 
-// generate a vector of f32 of random size amd random content
+/// generate a vector of f32 of random size amd random content
 pub fn  generate_random_f32_vector() -> Vec<f32> {
     let mut rng = rand::thread_rng();
     let size = rng.gen_range(0..=10);
     (0..size).map(|_| rng.gen::<f32>()).collect()
 }
 
-// returns true if numbers are close enough
+/// returns true if numbers are close enough
 pub fn numbers_are_close<K>(a: K, b: K) -> bool
 where
     K: FloatOrComplex + std::ops::Sub<Output = K>
@@ -81,14 +81,22 @@ where
     (a - b).norm_value() < EPSILON * 100.0
 }
 
-// compares 2 given matrices
+/// compares 2 given matrices
 pub fn compare_matrices<K>(mat_1: Matrix<K>, mat_2: Matrix<K>)
 where
     K: FloatOrComplex + std::ops::Sub<Output = K>
 {
     for (vec_1, vec_2) in mat_1.into_iter().zip(mat_2) {
-        for (elem_1, elem_2) in vec_1.into_iter().zip(vec_2) {
-            assert_eq!(numbers_are_close(elem_1, elem_2), true);
-        }
+        compare_vectors(vec_1, vec_2);
     }
+}
+
+/// compares 2 given matrices
+pub fn compare_vectors<K>(vec_1: Vector<K>, vec_2: Vector<K>)
+where
+    K: FloatOrComplex + std::ops::Sub<Output = K>
+{
+    for (elem_1, elem_2) in vec_1.into_iter().zip(vec_2) {
+        assert_eq!(numbers_are_close(elem_1, elem_2), true);
+    }    
 }
