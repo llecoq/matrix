@@ -40,9 +40,15 @@ where
     }
 
     /// Returns a clone of the data of `Vector<K>`.
-    pub fn  get_data(&self) -> Vec<K> {
+    pub fn get_data(&self) -> Vec<K> {
         self.data.clone()
     }
+
+    /// Moves all the elements of other into self, leaving other empty.
+    pub fn append(&mut self, other: &mut Vec<K>) {
+        self.data.append(other);
+    }
+
 }
 
 
