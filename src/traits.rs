@@ -5,12 +5,11 @@ use num_complex::Complex;
 
 //------------------------------------------------------------------------- AddSubScl
 /// A trait for the Addition, Substraction and Scaling of both a vector and a matrix.
-pub trait AddSubScl<T, K> { // will need to add a complex type later
+pub trait AddSubScl<T, K> {
     fn add(&mut self, t: &T);
     fn sub(&mut self, t: &T);
     fn scl(&mut self, a: K);
 }
-
 
 //-------------------------------------------------------------------- FloatOrComplex
 /// A trait to be implemented for the f32 or Complex type
