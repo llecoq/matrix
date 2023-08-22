@@ -1,5 +1,5 @@
 use core::fmt;
-use std::ops::Index;
+use std::ops::{Index, RangeBounds};
 
 use crate::{traits::{AddSubScl, FloatOrComplex, MathDisplay}, MatrixError, Matrix};
 
@@ -47,6 +47,15 @@ where
     /// Moves all the elements of other into self, leaving other empty.
     pub fn append(&mut self, other: &mut Vec<K>) {
         self.data.append(other);
+    }
+
+    /// Removes the specified range from the vector in bulk, returning all removed elements as an iterator. 
+    /// The iterator is dropped before being fully consumed, droping the remaining removed elements.
+    pub fn drain_and_drop<R>(&mut self, range: R)
+    where 
+        R: RangeBounds<usize> 
+    {
+        self.data.drain(range).for_each(drop);
     }
 
 }
