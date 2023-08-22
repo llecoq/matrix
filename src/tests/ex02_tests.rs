@@ -78,11 +78,11 @@ fn linear_interpolation_tests() {
 
     let v1: Vector<Complex<f32>> = Vector::from(vec![Complex::new(21., 1.5)]);
     let v2: Vector<Complex<f32>> = Vector::from(vec![Complex::new(42., -1.5)]);
-    assert_output(&lerp(&v1, &v2, 0.3), "[27.3+0.0i]");
+    assert_output(&lerp(&v1, &v2, 0.3), "[27.3+0.6i]");
 
     let v1: Vector<Complex<f32>> = Vector::from(vec![Complex::new(2., 0.9), Complex::new(1., -0.8)]);
     let v2: Vector<Complex<f32>> = Vector::from(vec![Complex::new(4., -0.9), Complex::new(2., 0.8)]);
-    assert_output(&lerp(&v1, &v2, 0.3), "[2.6+0.0i][1.3+0.0i]");
+    assert_output(&lerp(&v1, &v2, 0.3), "[2.6+0.4i][1.3-0.3i]");
 
     let input = vec![
         vec![Complex::new(2., 0.4), Complex::new(1., -0.4)],
@@ -112,7 +112,7 @@ fn linear_interpolation_tests() {
     ];
     let matrix_2 = Matrix::from(input_2.clone()).unwrap();
     let result = vec![
-        vec![Complex::new(11., -0.4), Complex::new(5.5, 0.4)],
+        vec![Complex::new(11., -0.1), Complex::new(5.5, 0.1)],
         vec![Complex::new(16.5, 0.15), Complex::new(22., -0.15)]
     ];
     assert_output(&lerp(&matrix_2, &matrix, 0.5), &matrix_to_string(&result));
