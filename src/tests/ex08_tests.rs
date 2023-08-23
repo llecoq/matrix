@@ -1,9 +1,12 @@
+use num_complex::Complex;
+
 use crate::{Matrix, MatrixError};
 
 use super::test_utils::{assert_output, numbers_are_close};
 
 #[test]
-fn trace_tests() {
+fn f32_trace_tests() {
+
     let u = Matrix::from(vec![
         vec![1., 0.],
         vec![0., 1.],
@@ -71,6 +74,67 @@ fn trace_tests() {
         Ok(result) => println!("{}", result),
         Err(err_msg) => println!("{}", err_msg)
     }
+    let u = Matrix::from(vec![
+        vec![3., 4.],
+        vec![5., 6.],
+    ]).unwrap();
+    let result: Result<f32, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "9");
 
+    let u = Matrix::from(vec![
+        vec![7., 8., 9.],
+        vec![10., 11., 12.],
+        vec![13., 14., 15.],
+    ]).unwrap();
+    let result: Result<f32, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "33");
 
+    let u = Matrix::from(vec![
+        vec![1., 0., 0.],
+        vec![0., -2., 0.],
+        vec![0., 0., 3.],
+    ]).unwrap();
+    let result: Result<f32, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "2");
+
+    let u = Matrix::from(vec![
+        vec![4., 0., 0., 0.],
+        vec![0., 5., 0., 0.],
+        vec![0., 0., 6., 0.],
+        vec![0., 0., 0., 7.],
+    ]).unwrap();
+    let result: Result<f32, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "22");
+}
+
+#[test]
+fn complex_trace_tests() {
+    let u = Matrix::from(vec![
+        vec![Complex::new(2., 1.), Complex::new(0., -1.)],
+        vec![Complex::new(1., -1.), Complex::new(2., 1.)],
+    ]).unwrap();
+    let result: Result<Complex<f32>, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "4+2i");  
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(1., 2.), Complex::new(3., 4.), Complex::new(5., 6.)],
+        vec![Complex::new(7., 8.), Complex::new(9., 10.), Complex::new(11., 12.)],
+        vec![Complex::new(13., 14.), Complex::new(15., 16.), Complex::new(17., 18.)],
+    ]).unwrap();
+    let result: Result<Complex<f32>, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "27+30i");  
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(0., 1.), Complex::new(1., 0.)],
+        vec![Complex::new(2., 0.), Complex::new(0., 2.)],
+    ]).unwrap();
+    let result: Result<Complex<f32>, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "0+3i");  
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(3., 0.), Complex::new(0., 3.)],
+        vec![Complex::new(4., 5.), Complex::new(6., 7.)],
+    ]).unwrap();
+    let result: Result<Complex<f32>, MatrixError> = u.trace();
+    assert_output(&result.unwrap(), "9+7i");  
 }
