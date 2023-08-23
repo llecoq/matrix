@@ -104,30 +104,30 @@ fn norm_1_complex_tests() {
     assert_eq!(vec.norm_1(), 1.4142135);
 }
 
-// //---------------------------------------------------------------------- norm
-// #[test]
-// fn norm_complex_tests() {
-//     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(0., 0.), Complex::new(0., 0.), Complex::new(0., 0.)]);
-//     assert_eq!(vec.norm(), 0.0);
+//---------------------------------------------------------------------- norm
+#[test]
+fn norm_complex_tests() {
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(0., 0.), Complex::new(0., 0.), Complex::new(0., 0.)]);
+    assert_eq!(vec.norm(), 0.0);
 
-//     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(1., 1.), Complex::new(2., 2.), Complex::new(3., 3.)]);
-//     assert_eq!(vec.norm(), (14.0 as f32).sqrt());
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(1., 1.), Complex::new(2., 2.), Complex::new(3., 3.)]);
+    assert_eq!(vec.norm(), 5.2915025);
 
-//     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-1., -1.), Complex::new(-2., -2.)]);
-//     assert_eq!(vec.norm(), (10.0 as f32).sqrt());
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-1., -1.), Complex::new(-2., -2.)]);
+    assert_eq!(vec.norm(), 3.1622775);
 
-//     // let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-1., -1.), Complex::new(-2., -2.), Complex::new(3., 3.), Complex::new(4., 4.), Complex::new(-6.3, -6.3), Complex::new(5.2, 5.2), Complex::new(-3., -3.)]);
-//     // assert!(vec.norm() - 105.96819).abs() < 1e-5);
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-1., -1.), Complex::new(-2., -2.), Complex::new(3., 3.), Complex::new(4., 4.), Complex::new(-6.3, -6.3), Complex::new(5.2, 5.2), Complex::new(-3., -3.)]);
+    assert_eq!(vec.norm(), 14.541664);
 
-//     let mut vec: Vector<Complex<f32>> = Vector::from(vec![]);
-//     assert_eq!(vec.norm(), 0.0);
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![]);
+    assert_eq!(vec.norm(), 0.0);
 
-//     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(1., 1.)]);
-//     assert_eq!(vec.norm(), (2.0 as f32).sqrt());
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(1., 1.)]);
+    assert_eq!(vec.norm(), (2.0 as f32).sqrt());
 
-//     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-1., -1.)]);
-//     assert_eq!(vec.norm(), (2.0 as f32).sqrt());
-// }
+    let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(-1., -1.)]);
+    assert_eq!(vec.norm(), (2.0 as f32).sqrt());
+}
 
 // //------------------------------------------------------------------- norm_inf
 // #[test]
