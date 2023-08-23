@@ -1,7 +1,7 @@
 use crate::{Vector, traits::{FloatOrComplex, MathDisplay}};
 
 /// Computes the cross product of two 3-dimensional vectors.
-/// If one or both vectors are not 3-dimensional, returns an empty Vector<K>.
+/// If one or both vectors are not 3-dimensional, returns an empty `Vector<K>`.
 pub fn cross_product<K>(u: &Vector::<K>, v: &Vector::<K>) -> Vector::<K>
 where
     K:  FloatOrComplex + MathDisplay + Copy
