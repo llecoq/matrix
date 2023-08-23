@@ -1,9 +1,11 @@
+use num_complex::Complex;
+
 use crate::Matrix;
 
 use super::test_utils::{assert_output, matrix_to_string};
 
 #[test]
-fn transpose_tests() {
+fn f32_transpose_tests() {
     let u = Matrix::from(vec![
         vec![1., 0.],
         vec![0., 1.],
@@ -125,6 +127,36 @@ fn transpose_tests() {
     let result: Vec<Vec<f32>> = vec![
         vec![1., 2., 3.],
         vec![4., 5., 6.],
+    ];
+    assert_output(&u.transpose(), matrix_to_string(&result).as_str());
+
+}
+
+#[test]
+fn complex_transpose_tests() {
+
+    // Transposing a 3x3 matrix (square matrix) with complex numbers
+    let u = Matrix::from(vec![
+        vec![Complex::new(1.0, 2.0), Complex::new(3.0, 4.0), Complex::new(5.0, 6.0)],
+        vec![Complex::new(7.0, 8.0), Complex::new(9.0, 0.0), Complex::new(1.0, 2.0)],
+        vec![Complex::new(3.0, 4.0), Complex::new(5.0, 6.0), Complex::new(7.0, 8.0)]
+    ]).unwrap();
+    let result: Vec<Vec<Complex<f32>>> = vec![
+        vec![Complex::new(1.0, 2.0), Complex::new(7.0, 8.0), Complex::new(3.0, 4.0)],
+        vec![Complex::new(3.0, 4.0), Complex::new(9.0, 0.0), Complex::new(5.0, 6.0)],
+        vec![Complex::new(5.0, 6.0), Complex::new(1.0, 2.0), Complex::new(7.0, 8.0)]
+    ];
+    assert_output(&u.transpose(), matrix_to_string(&result).as_str());
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(1.0, 2.0), Complex::new(2.0, 0.0), Complex::new(3.0, 4.0), Complex::new(5.0, 6.0)],
+        vec![Complex::new(1.0, 2.0), Complex::new(1.0, 2.0), Complex::new(1.0, 2.0), Complex::new(1.0, 2.0)]
+    ]).unwrap();
+    let result: Vec<Vec<Complex<f32>>> = vec![
+        vec![Complex::new(1.0, 2.0), Complex::new(1.0, 2.0)],
+        vec![Complex::new(2.0, 0.0), Complex::new(1.0, 2.0)],
+        vec![Complex::new(3.0, 4.0), Complex::new(1.0, 2.0)],
+        vec![Complex::new(5.0, 6.0), Complex::new(1.0, 2.0)]
     ];
     assert_output(&u.transpose(), matrix_to_string(&result).as_str());
 
