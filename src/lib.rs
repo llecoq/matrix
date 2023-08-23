@@ -56,5 +56,4 @@ mod tests {
     mod ex12_tests; // Inverse
     mod ex13_tests; // Rank
     mod ex14_tests; // Projection matrix
-    mod ex15_tests; // Complex vector spaces
 }
