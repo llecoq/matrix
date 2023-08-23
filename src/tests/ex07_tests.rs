@@ -26,6 +26,7 @@ fn mul_vec_tests() {
     assert_output(&u.mul_vec(&v), "[4.0][-4.0]");
     // [4.]
     // [-4.]
+
 }
 
 #[test]

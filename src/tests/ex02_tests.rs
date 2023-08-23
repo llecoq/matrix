@@ -62,7 +62,10 @@ fn linear_interpolation_tests() {
 
     println!("{}", matrix);
 
+}
 
+#[test]
+fn complex_linear_interpolation_tests() {
     //---------------------------------------------------------------------------Complex<f32>
     let v1: Vector<Complex<f32>> = Vector::from(vec![Complex::new(0., 0.5)]);
     let v2: Vector<Complex<f32>> = Vector::from(vec![Complex::new(1., -0.5)]);
@@ -115,6 +118,5 @@ fn linear_interpolation_tests() {
         vec![Complex::new(11., -0.1), Complex::new(5.5, 0.1)],
         vec![Complex::new(16.5, 0.15), Complex::new(22., -0.15)]
     ];
-    assert_output(&lerp(&matrix_2, &matrix, 0.5), &matrix_to_string(&result));
-
+        assert_output(&lerp(&matrix_2, &matrix, 0.5), &matrix_to_string(&result));
 }

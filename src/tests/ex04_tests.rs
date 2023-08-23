@@ -4,7 +4,7 @@ use crate::Vector;
 
 //-------------------------------------------------------------------- norm_1
 #[test]
-fn norm_1_tests() {
+fn f32_norm_1_tests() {
 
     let mut vec: Vector<f32> = Vector::from(vec![0., 0., 0.]);
     assert_eq!(vec.norm_1(), 0.0);
@@ -30,7 +30,7 @@ fn norm_1_tests() {
 
 //---------------------------------------------------------------------- norm
 #[test]
-fn norm_tests() {
+fn f32_norm_tests() {
 
     let mut vec: Vector<f32> = Vector::from(vec![0., 0., 0.]);
     assert_eq!(vec.norm(), 0.0);
@@ -56,7 +56,8 @@ fn norm_tests() {
 
 //------------------------------------------------------------------- norm_inf
 #[test]
-fn norm_inf_tests() {
+fn f32_norm_inf_tests() {
+
     let mut vec: Vector<f32> = Vector::from(vec![0., 0., 0.]);
     assert_eq!(vec.norm_inf(), 0.0);
 
@@ -81,7 +82,8 @@ fn norm_inf_tests() {
 
 //---------------------------------------------------------------------- norm_1
 #[test]
-fn norm_1_complex_tests() {
+fn complex_norm_1_tests() {
+
     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(0., 0.), Complex::new(0., 0.), Complex::new(0., 0.)]);
     assert_eq!(vec.norm_1(), 0.0);
 
@@ -106,7 +108,8 @@ fn norm_1_complex_tests() {
 
 //---------------------------------------------------------------------- norm
 #[test]
-fn norm_complex_tests() {
+fn complex_norm_tests() {
+
     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(0., 0.), Complex::new(0., 0.), Complex::new(0., 0.)]);
     assert_eq!(vec.norm(), 0.0);
 
@@ -131,7 +134,8 @@ fn norm_complex_tests() {
 
 //------------------------------------------------------------------- norm_inf
 #[test]
-fn norm_inf_complex_tests() {
+fn complex_norm_inf_tests() {
+
     let mut vec: Vector<Complex<f32>> = Vector::from(vec![Complex::new(0., 0.), Complex::new(0., 0.), Complex::new(0., 0.)]);
     assert_eq!(vec.norm_inf(), 0.0);
 

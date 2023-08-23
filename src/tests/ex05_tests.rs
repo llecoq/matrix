@@ -4,6 +4,7 @@ use crate::{Vector, angle_cos, tests::test_utils::numbers_are_close};
 
 #[test]
 fn cosine_tests() {
+
     let u = Vector::from(vec![1., 0.]);
     let v = Vector::from(vec![1., 0.]);
     assert_eq!(numbers_are_close(angle_cos(&u, &v), 1.0), true);
@@ -43,6 +44,7 @@ fn cosine_tests() {
 
 #[test]
 fn cosine_complex_tests() {
+
     let u = Vector::from(vec![Complex::new(1., 0.), Complex::new(0., 0.)]);
     let v = Vector::from(vec![Complex::new(1., 0.), Complex::new(0., 0.)]);
     assert_eq!(numbers_are_close(angle_cos(&u, &v), 1.0), true);
@@ -81,4 +83,5 @@ fn cosine_complex_tests() {
     let u = Vector::from(vec![Complex::new(1., 0.)]);
     let v = Vector::from(vec![]);
     println!("{}", angle_cos(&u, &v));
+    
 }
