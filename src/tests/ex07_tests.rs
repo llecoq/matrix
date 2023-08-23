@@ -130,7 +130,7 @@ fn f32_mul_mat_tests() {
         vec![2., 3.],
     ]).unwrap();
     let v = Vector::from(vec![3., 6.]);
-    assert_output(&u.mul_vec(&v), "[15.0][24.0]");
+    assert_output(&u.mul_vec(&v), "[21.0][24.0]");
 
     let u = Matrix::from(vec![
         vec![5., -1.],
