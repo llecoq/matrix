@@ -27,22 +27,22 @@ pub trait FloatOrComplex {
 // Implement the trait for f32 and Complex types
 impl FloatOrComplex for Complex<f32>
 {
-    /// Returns the normed value of the complex number.
+    /// Returns the normed value of `self`.
     fn norm_value(&self) -> f32 {
         self.norm()
     }
 
-    /// Returns true if the float is close to `one`.
+    /// Returns true if `self` is close to `one`.
     fn close_to_one(&self) -> bool {
         (self - Self::one()).norm() < EPSILON 
     }
 
-    /// Returns true if the float is close to `zero`.
+    /// Returns true if `self` is close to `zero`.
     fn close_to_zero(&self) -> bool {
         self.norm_sqr() < EPSILON * EPSILON
     }
 
-    /// Returns the scale factor of a float to make it `one`.
+    /// Returns the scale factor of `self` to make it `one`.
     fn scale_factor(&self) -> Self {
         1.0 / self
     }
@@ -57,10 +57,12 @@ impl FloatOrComplex for Complex<f32>
         Complex::new(1.0, 0.0)
     }
 
+    /// Divides `self` by a f32 and returns it.
     fn divide(&self, denominator: f32) -> Self {
         self / denominator
     }
     
+    /// Returns the real part of `self`.
     fn real(&self) -> f32 {
         self.re
     }
@@ -68,40 +70,42 @@ impl FloatOrComplex for Complex<f32>
 }  // Complex numbers
 
 impl FloatOrComplex for f32 {
-    /// Returns the absolute value of the number.
+    /// Returns the absolute value of `self`.
     fn norm_value(&self) -> f32 {
         self.abs()
     }
 
-    /// Returns true if the float is close to one.
+    /// Returns true if `self` is close to `one`.
     fn close_to_one(&self) -> bool {
         (self - 1.0).abs() < EPSILON
     }
     
-    /// Returns true if the float is close to zero.
+    /// Returns true if `self` is close to `zero`.
     fn close_to_zero(&self) -> bool {
         self.abs() < EPSILON
     }
 
-    /// Returns the scale factor of a float to make it 1.0.
+    /// Returns the scale factor of `self` to make it `one`.
     fn scale_factor(&self) -> Self {
         1.0 / self
     }
 
-    /// Returns zero.
+    /// Returns `zero`.
     fn zero() -> Self {
         0.0
     }
 
-    /// Returns one.
+    /// Returns `one`.
     fn one() -> Self {
         1.0
     }
 
+    /// Divides `self` by a f32 and returns it.
     fn divide(&self, denominator: f32) -> Self {
         self / denominator
     }
 
+    /// Returns the real part of `self`.
     fn real(&self) -> f32 {
         *self
     }

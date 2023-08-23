@@ -153,24 +153,7 @@ impl<K> AddSubScl<Vector<K>, K> for Vector<K>
 where 
     K:  MathDisplay + FloatOrComplex + Clone
 {
-    /// Add a vector to another one
-    /// 
-    /// # Examples
-    /// 
-    /// ```
-    /// use matrix::Vector;
-    /// use crate::matrix::traits::AddSubScl;
-    /// 
-    /// let mut u = Vector::from(vec![2., 3.]);
-    /// let v = Vector::from(vec![5., 7.]);
-    /// 
-    /// u.add(&v);
-    /// println!("{}", u);
-    /// 
-    /// // [7.0]
-    /// // [10.0]
-    /// ```
-    /// 
+    /// Adds a vector to `self`
     /// When trying to add a vector of different size, result is undefined.
     fn add(&mut self, v: &Vector<K>) {
         // if self.get_size() == v.get_size() {
@@ -180,7 +163,7 @@ where
         // }
     }
 
-    /// Substraction of a vector by another one.
+    /// Substraction of a vector to `self`.
     /// When trying to substract a vector of different size, result is undefined.
     fn sub(&mut self, v: &Vector<K>) {
         // if self.get_size() == v.get_size() {
@@ -190,7 +173,7 @@ where
         // }     
     }
 
-    /// Scaling of a vector by a scalar.
+    /// Scaling of `self` by a scalar.
     fn scl(&mut self, a: K) {
         for element in self.data.iter_mut() {
             *element = element.clone() * a.clone();

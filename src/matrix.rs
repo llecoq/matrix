@@ -493,7 +493,6 @@ where
             vec[index] = K::one();
             row.append(&mut vec);
         }
-        // augmented_matrix.columns = augmented_matrix.data[0].get_size();
         augmented_matrix
     }
 
@@ -503,18 +502,5 @@ where
             row.drain_and_drop(0..(row.get_size() / 2));
         }
     }
-
-    // /// Finds the pivot row with the largest absolute value of the given column and returns the index of it.
-    // fn find_pivot_row(matrix: &Matrix<K>, current_column: usize) -> usize {
-    //     let current_row: usize = current_column;
-    //     let (pivot_row, _) = (current_row..matrix.rows)
-    //         .map(|index| (index, matrix.data[index][current_column].norm_value()))
-    //         .fold((current_row, matrix.data[current_row][current_column].norm_value()),
-    //             |(max_row, max_val), (idx, val)| {
-    //                 if val > max_val { (idx, val) } else { (max_row, max_val) }
-    //             });
-    
-    //     pivot_row
-    // }
 
 }
