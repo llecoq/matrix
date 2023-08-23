@@ -1,7 +1,7 @@
 use core::fmt;
 use std::f32::EPSILON;
 use std::iter::Sum;
-use std::ops::Index;
+use std::ops::{Index, IndexMut};
 
 // use num_complex::ComplexFloat;
 
@@ -115,6 +115,16 @@ where
 
     fn index(&self, index: usize) -> &Self::Output {
         &self.data[index]
+    }
+}
+
+/// Implements `IndexMut` for `Matrix<K>`
+impl<K> IndexMut<usize> for Matrix<K>
+where
+    K: FloatOrComplex
+{
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.data[index]
     }
 }
 

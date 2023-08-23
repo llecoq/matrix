@@ -1,5 +1,5 @@
 use core::fmt;
-use std::ops::{Index, RangeBounds};
+use std::ops::{Index, RangeBounds, IndexMut};
 
 use crate::{traits::{AddSubScl, FloatOrComplex, MathDisplay}, MatrixError, Matrix};
 
@@ -95,6 +95,16 @@ where
 
     fn index(&self, index: usize) -> &Self::Output {
         &self.data[index]
+    }
+}
+
+/// Implements `IndexMut` for `Vector<K>`.
+impl<K> IndexMut<usize> for Vector<K>
+where
+    K: FloatOrComplex
+{
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.data[index]
     }
 }
 
