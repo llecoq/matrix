@@ -1,6 +1,6 @@
-use crate::{Matrix, tests::test_utils::{assert_output, matrix_to_string}};
+use num_complex::Complex;
 
-use super::test_utils::compare_matrices;
+use crate::{Matrix, tests::test_utils::{assert_output, matrix_to_string, compare_matrices}};
 
 #[test]
 fn f32_row_echelon_tests() {
@@ -92,4 +92,51 @@ fn f32_row_echelon_tests() {
     ]).unwrap();
     compare_matrices(u.row_echelon(), result);
 
+}
+
+#[test]
+fn complex_row_echelon_tests() {
+    let u = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],
+    ]).unwrap();
+    let result = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],
+    ]).unwrap();
+    compare_matrices(u.row_echelon(), result);
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(2.0, 0.0)],
+        vec![Complex::new(3.0, 0.0), Complex::new(4.0, 0.0)],
+    ]).unwrap();
+    let result = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],
+    ]).unwrap();
+    compare_matrices(u.row_echelon(), result);
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(2.0, 0.0)],
+        vec![Complex::new(2.0, 0.0), Complex::new(4.0, 0.0)],
+    ]).unwrap();
+    let result = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(2.0, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(0.0, 0.0)],
+    ]).unwrap();
+    compare_matrices(u.row_echelon(), result);
+
+    let u = Matrix::from(vec![
+        vec![Complex::new(8.0, 0.0), Complex::new(5.0, 0.0), Complex::new(-2.0, 0.0), Complex::new(4.0, 0.0), Complex::new(28.0, 0.0)],
+        vec![Complex::new(4.0, 0.0), Complex::new(2.5, 0.0), Complex::new(20.0, 0.0), Complex::new(4.0, 0.0), Complex::new(-4.0, 0.0)],
+        vec![Complex::new(8.0, 0.0), Complex::new(5.0, 0.0), Complex::new(1.0, 0.0), Complex::new(4.0, 0.0), Complex::new(17.0, 0.0)],
+    ]).unwrap();
+    let result = Matrix::from(vec![
+        vec![Complex::new(1.0, 0.0), Complex::new(0.625, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(-12.1666667, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(0.0, 0.0), Complex::new(-3.6666667, 0.0)],
+        vec![Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(0.0, 0.0), Complex::new(1.0, 0.0), Complex::new(29.5, 0.0)],
+    ]).unwrap();
+    compare_matrices(u.row_echelon(), result);
 }
