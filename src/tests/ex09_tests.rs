@@ -78,4 +78,54 @@ fn transpose_tests() {
     ]; 
     assert_output(&u.transpose(), matrix_to_string(&result).as_str());
 
+    // Transposing a 2x3 matrix
+    let u = Matrix::from(vec![
+        vec![1., 2., 3.],
+        vec![4., 5., 6.],
+    ]).unwrap();
+    let result: Vec<Vec<f32>> = vec![
+        vec![1., 4.],
+        vec![2., 5.],
+        vec![3., 6.],
+    ];
+    assert_output(&u.transpose(), matrix_to_string(&result).as_str());
+
+    // Transposing a 4x1 matrix
+    let u = Matrix::from(vec![
+        vec![1.],
+        vec![2.],
+        vec![3.],
+        vec![4.],
+    ]).unwrap();
+    let result: Vec<Vec<f32>> = vec![
+        vec![1., 2., 3., 4.]
+    ];
+    assert_output(&u.transpose(), matrix_to_string(&result).as_str());
+
+    // Transposing a 3x4 matrix
+    let u = Matrix::from(vec![
+        vec![1., 2., 3., 4.],
+        vec![5., 6., 7., 8.],
+        vec![9., 10., 11., 12.],
+    ]).unwrap();
+    let result: Vec<Vec<f32>> = vec![
+        vec![1., 5., 9.],
+        vec![2., 6., 10.],
+        vec![3., 7., 11.],
+        vec![4., 8., 12.],
+    ];
+    assert_output(&u.transpose(), matrix_to_string(&result).as_str());
+
+    // Transposing a 3x2 matrix
+    let u = Matrix::from(vec![
+        vec![1., 4.],
+        vec![2., 5.],
+        vec![3., 6.],
+    ]).unwrap();
+    let result: Vec<Vec<f32>> = vec![
+        vec![1., 2., 3.],
+        vec![4., 5., 6.],
+    ];
+    assert_output(&u.transpose(), matrix_to_string(&result).as_str());
+
 }
