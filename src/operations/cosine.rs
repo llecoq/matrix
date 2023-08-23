@@ -1,5 +1,3 @@
-use std::iter::Sum;
-
 use crate::{Vector, traits::{FloatOrComplex, MathDisplay}};
 
 /// Compute the cosine of the angle between two vectors
@@ -8,7 +6,10 @@ use crate::{Vector, traits::{FloatOrComplex, MathDisplay}};
 /// Returns NaN if one vector is empty
 pub fn angle_cos<K>(u: &Vector::<K>, v: &Vector::<K>) -> f32
 where
-    K:  FloatOrComplex + MathDisplay + Clone + Sum + std::ops::Div<f32, Output = f32>, f32: Sum<K>
+    K:  FloatOrComplex + MathDisplay + Clone 
 {
-    u.dot(v) / (u.clone().norm() * v.clone().norm())
+    let dot_product: K = u.dot(v);
+    let denominator: f32 = u.clone().norm() * v.clone().norm();
+
+    dot_product.divide(denominator).real()
 }
