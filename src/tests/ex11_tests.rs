@@ -9,7 +9,6 @@ fn f32_determinant_tests() {
         vec![-1., 1.],
     ]).unwrap();
     assert_eq!(u.determinant(), 0.0);
-    // 0.0
 
     let u = Matrix::from(vec![
         vec![2., 0., 0.],
@@ -17,7 +16,6 @@ fn f32_determinant_tests() {
         vec![0., 0., 2.],
     ]).unwrap();
     assert_eq!(u.determinant(), 8.0);
-    // 8.0
 
     let u = Matrix::from(vec![
         vec![8., 5., -2.],
@@ -25,7 +23,6 @@ fn f32_determinant_tests() {
         vec![7., 6., 1.],
     ]).unwrap();
     assert_eq!(u.determinant(), -174.0);
-    // -174.0
  
     let u = Matrix::from(vec![
         vec![ 8., 5., -2., 4.],
@@ -34,7 +31,34 @@ fn f32_determinant_tests() {
         vec![28., -4., 17., 1.],
     ]).unwrap();
     assert_eq!(u.determinant(), 1032.0);
-    // 1032
+
+    let u = Matrix::from(vec![
+        vec![ 3., -2.],
+        vec![-2., 4.],
+    ]).unwrap();
+    assert_eq!(u.determinant(), 8.0);
+
+    let u = Matrix::from(vec![
+        vec![1., 2., 3.],
+        vec![0., 4., 5.],
+        vec![1., 0., 6.],
+    ]).unwrap();
+    assert_eq!(u.determinant(), 22.0);
+
+    let u = Matrix::from(vec![
+        vec![12., 11., 10.],
+        vec![9., 8., 7.],
+        vec![6., 5., 4.],
+    ]).unwrap();
+    assert_eq!(u.determinant(), 0.0);
+
+    let u = Matrix::from(vec![
+        vec![ 1., 2., 3., 4.],
+        vec![ 5., 6., 7., 8.],
+        vec![ 9., 10., 11., 12.],
+        vec![13., 14., 15., 16.],
+    ]).unwrap();
+    assert_eq!(u.determinant(), 0.0);
 }
 
 #[test]
