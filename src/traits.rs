@@ -20,6 +20,8 @@ pub trait FloatOrComplex {
     fn scale_factor(&self) -> Self;
     fn zero() -> Self;
     fn one() -> Self;
+    fn divide(&self, denominator: f32) -> Self;
+    fn real(&self) -> f32;
 }
 
 // Implement the trait for f32 and Complex types
@@ -55,6 +57,14 @@ impl FloatOrComplex for Complex<f32>
         Complex::new(1.0, 0.0)
     }
 
+    fn divide(&self, denominator: f32) -> Self {
+        self / denominator
+    }
+    
+    fn real(&self) -> f32 {
+        self.re
+    }
+
 }  // Complex numbers
 
 impl FloatOrComplex for f32 {
@@ -86,6 +96,14 @@ impl FloatOrComplex for f32 {
     /// Returns one.
     fn one() -> Self {
         1.0
+    }
+
+    fn divide(&self, denominator: f32) -> Self {
+        self / denominator
+    }
+
+    fn real(&self) -> f32 {
+        *self
     }
 
 }  // Float numbers
