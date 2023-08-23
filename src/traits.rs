@@ -15,7 +15,6 @@ pub trait AddSubScl<T, K> {
 /// A trait to be implemented for the f32 or Complex type
 pub trait FloatOrComplex {
     fn norm_value(&self) -> f32;
-    fn squares(&self) -> Self;
     fn close_to_one(&self) -> bool;
     fn close_to_zero(&self) -> bool;
     fn scale_factor(&self) -> Self;
@@ -29,11 +28,6 @@ impl FloatOrComplex for Complex<f32>
     /// Returns the normed value of the complex number.
     fn norm_value(&self) -> f32 {
         self.norm()
-    }
-
-    /// Squares the complex number and returns it.
-    fn squares(&self) -> Self {
-        self * self
     }
 
     /// Returns true if the float is close to `one`.
@@ -67,11 +61,6 @@ impl FloatOrComplex for f32 {
     /// Returns the absolute value of the number.
     fn norm_value(&self) -> f32 {
         self.abs()
-    }
-  
-    /// Squares the number and returns it.
-    fn squares(&self) -> Self {
-        self * self
     }
 
     /// Returns true if the float is close to one.
