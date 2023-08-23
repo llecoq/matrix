@@ -1,5 +1,5 @@
 use core::fmt;
-use std::{ops::{Index, RangeBounds}, iter::Sum};
+use std::ops::{Index, RangeBounds};
 
 use crate::{traits::{AddSubScl, FloatOrComplex, MathDisplay}, MatrixError, Matrix};
 
@@ -218,7 +218,7 @@ where
 
 impl<K> Vector<K>
 where
-    K: FloatOrComplex + Clone, f32: Sum<K>
+    K: FloatOrComplex + Clone
 {
     /// Returns the L1 norm (Taxicab or Manhattan norm) of `Vector<K>`.
     pub fn norm_1(&mut self) -> f32 {
@@ -232,7 +232,7 @@ where
     pub fn norm(&mut self) -> f32 {
         let squared_sum: f32 = self.clone()
             .into_iter()
-            .map(|elem| elem.squares())
+            .map(|elem| elem.norm_value() * elem.norm_value())
             .sum();
 
         squared_sum.sqrt()
