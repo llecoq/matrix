@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["cfg_if","getrandom","libc","matrix","num_complex","num_traits","ppv_lite86","proc_macro2","quote","rand","rand_chacha","rand_core","syn","thiserror_impl","unicode_ident"];
