@@ -47,7 +47,26 @@ matrix is a 42school project targeting to write a simple linear algebra library 
 
 ## Usage
 
-Read the doc [here](https://llecoq.github.io/matrix).
+### Cloning
+
+Clone this repository into a local directory using the following command:
+
+```
+git clone https://github.com/llecoq/matrix
+``` 
+
+### Adding as a Local Dependency
+
+Add the library as a local dependency in your `Cargo.toml`:
+
+```
+[dependencies]
+matrix = { path = "path/to/cloned/repo" }
+```
+
+### Documentation
+
+Read the full documentation [here](https://llecoq.github.io/matrix).
 
 ## What's included
 
