@@ -52,6 +52,49 @@ Read the doc [here](https://llecoq.github.io/matrix).
 ## What's included
 
 ```
+matrix
+├── assets
+│   ├── en.subject.pdf
+│   ├── final_grade.png
+│   └── matrix_display
+│       ├── assets
+│       │   ├── logo.png
+│       │   └── model.obj
+│       ├── display
+│       ├── proj
+│       └── README.md
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+└── src
+    ├── lib.rs
+    ├── matrix.rs
+    ├── operations
+    │   ├── cosine.rs
+    │   ├── cross_product.rs
+    │   ├── linear_combination.rs
+    │   ├── linear_interpolation.rs
+    │   ├── mod.rs
+    │   └── projection_matrix.rs
+    ├── tests
+    │   ├── ex00_tests.rs
+    │   ├── ex01_tests.rs
+    │   ├── ex02_tests.rs
+    │   ├── ex03_tests.rs
+    │   ├── ex04_tests.rs
+    │   ├── ex05_tests.rs
+    │   ├── ex06_tests.rs
+    │   ├── ex07_tests.rs
+    │   ├── ex08_tests.rs
+    │   ├── ex09_tests.rs
+    │   ├── ex10_tests.rs
+    │   ├── ex11_tests.rs
+    │   ├── ex12_tests.rs
+    │   ├── ex13_tests.rs
+    │   ├── ex14_tests.rs
+    │   └── test_utils.rs
+    ├── traits.rs
+    └── vector.rs
 
 ```
 
