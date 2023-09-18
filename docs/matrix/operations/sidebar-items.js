@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["cosine","cross_product","linear_combination","linear_interpolation","projection_matrix"]};
